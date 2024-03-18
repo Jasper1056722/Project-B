@@ -3,7 +3,6 @@
     static void Main()
     {
         // Console.WriteLine("Hello, World!");
-        // Mail.Mailsender("Pet", "joeyzwinkels@gmail.com");
-        Flightinfo.Getinfo("24885645");
+        Mail.Mailsender("Joey", "joeyzwinkels@gmail.com", "24885645");
     }
 }

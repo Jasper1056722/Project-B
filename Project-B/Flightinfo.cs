@@ -6,40 +6,29 @@ using Newtonsoft.Json;
 
 public class Flightinfo
 {
-    public static void Getinfo(string number)
+    public static Dictionary<string, string> Getinfo(string number)
     {
 
-        try
-        {
-            // Read the JSON file synchronously
-            string jsonString = File.ReadAllText("flights.json");
+        // Read the JSON file synchronously
+        string jsonString = File.ReadAllText("flights.json");
 
-            // Deserialize the JSON directly into a nested dictionary
-            Dictionary<string, Dictionary<string, string>> nestedDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(jsonString);
+        // Deserialize the JSON directly into a nested dictionary
+        Dictionary<string, Dictionary<string, string>> nestedDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(jsonString);
 
-            try
-            {
-                var flightinfo = nestedDictionary[number];
-                //Use the data stored in the nested dictionary
-                foreach (var innerKvp in flightinfo)
-                {
-                    Console.WriteLine($"{innerKvp.Key}: {innerKvp.Value}");
-                }
-            }
-            catch
-            {
-                Console.WriteLine($"Flight {number} does not exist");
-            }
-        }
-        catch (JsonReaderException e)
+        var flightinfo = nestedDictionary[number];
+        return flightinfo;
+
+    }
+
+    public static string Printinfo(Dictionary<string,string> flight)
+    {
+        string text = "";
+        foreach (var innerKvp in flight)
         {
-            // Handle any JSON parsing errors
-            Console.WriteLine($"Error parsing JSON: {e.Message}");
+            string tekst = $"{innerKvp.Key}: {innerKvp.Value}/n";
+            text = text + tekst;
         }
-        catch (FileNotFoundException e)
-        {
-            // Handle file not found error
-            Console.WriteLine($"File not found: {e.Message}");
-        }
+
+        return text;
     }
 }
