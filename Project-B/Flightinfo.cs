@@ -6,14 +6,11 @@ using Newtonsoft.Json;
 
 public class Flightinfo
 {
+
+    public static string jsonString = File.ReadAllText("flights.json");
+    public static Dictionary<string, Dictionary<string, string>> nestedDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(jsonString);
     public static Dictionary<string, string> Getinfo(string number)
     {
-
-        // Read the JSON file synchronously
-        string jsonString = File.ReadAllText("flights.json");
-
-        // Deserialize the JSON directly into a nested dictionary
-        Dictionary<string, Dictionary<string, string>> nestedDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(jsonString);
 
         var flightinfo = nestedDictionary[number];
         return flightinfo;
@@ -34,8 +31,6 @@ public class Flightinfo
 
     public static void UpdateInfo(string flightNumber)
     {
-        string jsonString = File.ReadAllText("flights.json");
-        Dictionary<string, Dictionary<string, string>> nestedDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(jsonString);
         if (nestedDictionary.ContainsKey(flightNumber))
         {
             Console.WriteLine("Current flight data: "); //print current flight info,  maybe redundant? remove?
@@ -113,6 +108,68 @@ public class Flightinfo
         {
             Console.WriteLine($"Flight with number {flightNumber} not found.");
         }
+    }
+
+    public static void FlightAdd()
+    {
+        Console.WriteLine("Please enter the date(DD-MM-YYYY)");
+        string date = Console.ReadLine();
+        while (string.IsNullOrEmpty(date))
+        {
+            Console.WriteLine("Please enter the date(DD-MM-YYYY)");
+            date = Console.ReadLine();
+        }
+
+        Console.WriteLine("Please enter the Destination");
+        string Destination = Console.ReadLine();
+        while (string.IsNullOrEmpty(Destination))
+        {
+            Console.WriteLine("Please enter the Destination");
+            Destination = Console.ReadLine();
+        }
+
+        Console.WriteLine("Please enter the Country");
+        string Country = Console.ReadLine();
+        while (string.IsNullOrEmpty(Country))
+        {
+            Console.WriteLine("Please enter the Country");
+            Country = Console.ReadLine();
+        }
+
+        Console.WriteLine("Please enter the Airplane");
+        string Airplane = Console.ReadLine();
+        while (string.IsNullOrEmpty(Airplane))
+        {
+            Console.WriteLine("Please enter the Airplane");
+            Airplane = Console.ReadLine();
+        }
+
+        Console.WriteLine("Please enter the Departure Time (HH:MM:SS)");
+        string DepartureTime = Console.ReadLine();
+        while (string.IsNullOrEmpty(DepartureTime))
+        {
+            Console.WriteLine("Please enter the Departure Time (HH:MM:SS)");
+            DepartureTime = Console.ReadLine();
+        }
+
+        Console.WriteLine("Please enter the Estimated Time of Arrival (HH:MM:SS)");
+        string ArrivalTime = Console.ReadLine();
+        while (string.IsNullOrEmpty(ArrivalTime))
+        {
+            Console.WriteLine("Please enter the Estimated Time of Arrival (HH:MM:SS)");
+            ArrivalTime = Console.ReadLine();
+        }
+
+        Dictionary<string, string> flight = new Dictionary<string, string>();
+        flight.Add("Destination", Destination);
+        flight.Add("Country", Country);
+        flight.Add("Airplane", Airplane);
+        flight.Add("Departing from", "Rotterdam");
+        flight.Add("Date", date);
+        flight.Add("Departure time", DepartureTime);
+        flight.Add("Estimated time of Arrival", ArrivalTime);
+
+        nestedDictionary.Add("12345678", flight);
     }
 
 
