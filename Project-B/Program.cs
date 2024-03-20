@@ -3,6 +3,10 @@
     static void Main()
     {
         // Console.WriteLine("Hello, World!");
-        Mail.Mailsender("Joey", "joeyzwinkels@gmail.com", "24885645");
+        Plane plane = new Plane("Boeing 737");
+        foreach(Seat seat in plane.Seats)
+        {
+            Console.WriteLine(seat.ID);
+        }
     }
 }
