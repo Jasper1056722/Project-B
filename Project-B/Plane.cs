@@ -56,6 +56,108 @@ public class Plane
     public void CreateSeatsAirbus330()
     {
         char[] rows = { 'A', 'B', 'C', 'D', 'F' , 'G', 'H', 'J', 'K'};
+
+        foreach(char row in rows)
+        {
+            for (int i = 1; i <= 50; i++)
+            {
+                if ((row == 'A' || row == 'C' || row == 'D' || row == 'G' || row == 'H' || row == 'K') && (i == 1 || i == 2))
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Club Class";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if (i == 4)
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Economy Extra Legroom";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if ((row == 'A' || row == 'B' || row == 'C' || row == 'H' || row == 'J' || row == 'K') && (i >= 5 && i <= 7))
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Economy class in front of cabin";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if (i == 14)
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Economy Extra Legroom";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if ((row == 'A' || row == 'B' || row == 'C' || row == 'H' || row == 'J' || row == 'K') && (i >= 15 && i <= 32))
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Economy";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if (i == 36)
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Economy Extra Legroom";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if(i >= 37 && i <= 43)
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Economy";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if ((row == 'A' || row == 'C' || row == 'H' || row == 'K') && ( i >= 44 && i <= 49))
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Double seats";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if ((row == 'D' || row == 'F' || row == 'G') && ( i >= 45 && i <= 50))
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Economy";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if ((row == 'D' || row == 'F' || row == 'G') && ( i >= 15 && i <= 33))
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Economy";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if ((row == 'D' || row == 'F' || row == 'G') && i == 10)
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Economy";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+
+                if ((row == 'D' || row == 'F' || row == 'G') && (i >= 6 && i <= 9))
+                {
+                    string seatId = row.ToString() + i;
+                    string seatClass = "Economy class in front of cabin";
+                    Seat seat = new Seat(seatId, seatClass);
+                    Seats.Add(seat);
+                }
+            }
+        }
     }
 
     public void CreateSeatsBoeing787()
