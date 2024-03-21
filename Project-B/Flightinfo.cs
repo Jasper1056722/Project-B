@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Bcpg;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 public class Flightinfo
@@ -168,8 +170,36 @@ public class Flightinfo
         flight.Add("Date", date);
         flight.Add("Departure time", DepartureTime);
         flight.Add("Estimated time of Arrival", ArrivalTime);
-
         nestedDictionary.Add("12345678", flight);
+
+        // Step 4: Serialize the modified object back to JSON
+        string updatedJsonString = JsonConvert.SerializeObject(nestedDictionary, Formatting.Indented);
+
+        // Step 5: Write the JSON data back to the file
+        File.WriteAllText("flights.json", updatedJsonString);
+
+        Console.WriteLine("Data added to JSON file successfully.");
+    }
+
+    public static void FlightDelete()
+    {
+        Console.WriteLine("Please enter the flightnumber for the flight you want to cancel.");
+        string flightnr = Console.ReadLine();
+        while (flightnr.Length != 8) 
+        {
+            Console.WriteLine("Please enter a valid flightnumber.(99999999)");
+            flightnr = Console.ReadLine();
+        }
+
+        if (nestedDictionary.ContainsKey(flightnr))
+        {
+            nestedDictionary.Remove(flightnr);
+            Console.WriteLine($"\nFlight {flightnr} removed.");
+        }
+        else
+        {
+            Console.WriteLine($"\n'{flightnr}' does not exist in the dictionary.");
+        }
     }
 
 
