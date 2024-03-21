@@ -14,6 +14,7 @@ public class Flight
         Destination = destination;
         Country = country;
         Airplane = airplane;
+        DepartingFrom = departingFrom;
         DepartureDate = DateTime.ParseExact(departureDate, "dd-MM-yyyy HH:mm:ss", null);
         EstimatedTimeofArrival = DateTime.ParseExact(estimatedTimeOfArrival, "dd-MM-yyyy HH:mm:ss", null);
     }
