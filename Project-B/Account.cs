@@ -2,6 +2,7 @@ using System.Data.SQLite;
 public class Account
 {
     public bool IsLoggedIn { get; private set; }
+    public bool IsAdminbool {get; private set;}
     public int Primkey {get; set; } //autoincrement key of account that was logged into
 
     public void Addtodb(string email, string password)
@@ -32,7 +33,7 @@ public class Account
         {
             connection.Open();
             string selectAccountQuery = @"
-                SELECT Id
+                SELECT Id, IsAdmin
                 FROM Accounts
                 WHERE Username = @Username AND Password = @Password";
 
@@ -42,19 +43,27 @@ public class Account
                 command.Parameters.AddWithValue("@Username", email);
                 command.Parameters.AddWithValue("@Password", password);
 
-                object result = command.ExecuteScalar();
-                if (result != null)
+                    using (var reader = command.ExecuteReader())
                 {
-                    Primkey = Convert.ToInt32(result);
-                    IsLoggedIn = true;
-                    return true;
-                }
-                else
-                {
-                    IsLoggedIn = false;
-                    return false;
+                    if (reader.Read())
+                    {
+                        Primkey = reader.GetInt32(0);
+                        IsAdminbool = reader.GetBoolean(1);
+                        IsLoggedIn = true;
+
+                        if(IsAdminbool)
+                        {
+                            Console.WriteLine("You are an admin.");
+                        }
+                        
+                        return true;
+                    }
                 }
             }
+
+            // If no matching account found
+            IsLoggedIn = false;
+            return false;
         }
     }
 
