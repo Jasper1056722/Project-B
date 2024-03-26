@@ -1,12 +1,12 @@
 public class Flight
 {
-    public int FlightNumber;
-    public string Destination;
-    public string Country;
-    public Plane Airplane;
-    public string DepartingFrom;
-    public DateTime DepartureDate;
-    public DateTime EstimatedTimeofArrival;
+    public int FlightNumber { get; set; }
+    public string Destination { get; set; }
+    public string Country { get; set; }
+    public Plane Airplane { get; set; }
+    public string DepartingFrom { get; set; }
+    public DateTime DepartureDate { get; set; }
+    public DateTime EstimatedTimeofArrival { get; set; }
 
     public Flight(int flightNumber, string destination, string country, Plane airplane, string departingFrom, string departureDate, string estimatedTimeOfArrival)
     {

@@ -1,6 +1,6 @@
 public class Plane
 {
-    public string Model;
+    public string Model { get; set; }
     public List<Seat> Seats = new List<Seat>{};
 
     public Plane(string model)
