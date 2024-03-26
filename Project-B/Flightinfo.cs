@@ -197,11 +197,11 @@ public class Flightinfo
     public static void FlightFilter()
     {
         // Example filter criteria
-        string destination = "Sao Paulo";
-        string country = "Brazil";
+        string destination = "Mumbai";
+        string country = "India";
 
         string startDate = "13-03-2024 00:00:00";
-        string endDate = "14-07-2024 00:00:00";
+        string endDate = "14-02-2025 00:00:00";
 
         // Filter flights based on criteria
         var filteredFlights = FilterFlights(nestedDictionary, destination, country, startDate, endDate);
