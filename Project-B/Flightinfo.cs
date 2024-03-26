@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Bcpg;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -19,7 +20,7 @@ public class Flightinfo
 
     }
 
-    public static string Printinfo(Dictionary<string,string> flight)
+    public static string Printinfo(Dictionary<string, string> flight)
     {
         string text = "";
         foreach (var innerKvp in flight)
@@ -56,50 +57,50 @@ public class Flightinfo
             switch (choice)
             {
                 case 1:
-                Console.WriteLine("Enter new destination: ");
-                string Destination = Console.ReadLine();
-                nestedDictionary[flightNumber]["Destination"] = Destination;
-                Console.WriteLine($"Destination updated to {nestedDictionary[flightNumber]["Destination"]}");
-                break;
-            case 2:
-                Console.WriteLine("Enter new country: ");
-                string Country = Console.ReadLine();
-                nestedDictionary[flightNumber]["Country"] = Country;
-                Console.WriteLine($"Country updated to {nestedDictionary[flightNumber]["Country"]}");
-                break;
-            case 3:
-                Console.WriteLine("Enter new airplane: ");
-                string Airplane = Console.ReadLine();
-                nestedDictionary[flightNumber]["Airplane"] = Airplane;
-                Console.WriteLine($"Airplane updated to {nestedDictionary[flightNumber]["Airplane"]}");
-                break;
-            case 4:
-                Console.WriteLine("Enter new departing from: ");
-                string DepartingFrom = Console.ReadLine();
-                nestedDictionary[flightNumber]["Departing from"] = DepartingFrom;
-                Console.WriteLine($"Departing from updated to {nestedDictionary[flightNumber]["Departing from"]}");
-                break;
-            case 5:
-                Console.WriteLine("Enter new date: ");
-                string Date = Console.ReadLine();
-                nestedDictionary[flightNumber]["Date"] = Date;
-                Console.WriteLine($"Date updated to {nestedDictionary[flightNumber]["Date"]}");
-                break;
-            case 6:
-                Console.WriteLine("Enter new departure time: ");
-                string DepartureTime = Console.ReadLine();
-                nestedDictionary[flightNumber]["Departure time"] = DepartureTime;
-                Console.WriteLine($"Departure time updated to {nestedDictionary[flightNumber]["Departure time"]}");
-                break;
-            case 7:
-                Console.WriteLine("Enter new estimated time of arrival: ");
-                string EstimatedTimeOfArrival = Console.ReadLine();
-                nestedDictionary[flightNumber]["Estimated time of Arrival"] = EstimatedTimeOfArrival;
-                Console.WriteLine($"Estimated time of Arrival updated to {nestedDictionary[flightNumber]["Estimated time of Arrival"]}");
-                break;
-            default:
-                Console.WriteLine("Invalid choice");
-                return;
+                    Console.WriteLine("Enter new destination: ");
+                    string Destination = Console.ReadLine();
+                    nestedDictionary[flightNumber]["Destination"] = Destination;
+                    Console.WriteLine($"Destination updated to {nestedDictionary[flightNumber]["Destination"]}");
+                    break;
+                case 2:
+                    Console.WriteLine("Enter new country: ");
+                    string Country = Console.ReadLine();
+                    nestedDictionary[flightNumber]["Country"] = Country;
+                    Console.WriteLine($"Country updated to {nestedDictionary[flightNumber]["Country"]}");
+                    break;
+                case 3:
+                    Console.WriteLine("Enter new airplane: ");
+                    string Airplane = Console.ReadLine();
+                    nestedDictionary[flightNumber]["Airplane"] = Airplane;
+                    Console.WriteLine($"Airplane updated to {nestedDictionary[flightNumber]["Airplane"]}");
+                    break;
+                case 4:
+                    Console.WriteLine("Enter new departing from: ");
+                    string DepartingFrom = Console.ReadLine();
+                    nestedDictionary[flightNumber]["Departing from"] = DepartingFrom;
+                    Console.WriteLine($"Departing from updated to {nestedDictionary[flightNumber]["Departing from"]}");
+                    break;
+                case 5:
+                    Console.WriteLine("Enter new date: ");
+                    string Date = Console.ReadLine();
+                    nestedDictionary[flightNumber]["Date"] = Date;
+                    Console.WriteLine($"Date updated to {nestedDictionary[flightNumber]["Date"]}");
+                    break;
+                case 6:
+                    Console.WriteLine("Enter new departure time: ");
+                    string DepartureTime = Console.ReadLine();
+                    nestedDictionary[flightNumber]["Departure time"] = DepartureTime;
+                    Console.WriteLine($"Departure time updated to {nestedDictionary[flightNumber]["Departure time"]}");
+                    break;
+                case 7:
+                    Console.WriteLine("Enter new estimated time of arrival: ");
+                    string EstimatedTimeOfArrival = Console.ReadLine();
+                    nestedDictionary[flightNumber]["Estimated time of Arrival"] = EstimatedTimeOfArrival;
+                    Console.WriteLine($"Estimated time of Arrival updated to {nestedDictionary[flightNumber]["Estimated time of Arrival"]}");
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice");
+                    return;
             }
 
             string updatedJson = JsonConvert.SerializeObject(nestedDictionary, Formatting.Indented);
@@ -114,14 +115,6 @@ public class Flightinfo
 
     public static void FlightAdd()
     {
-        Console.WriteLine("Please enter the date(DD-MM-YYYY)");
-        string date = Console.ReadLine();
-        while (string.IsNullOrEmpty(date))
-        {
-            Console.WriteLine("Please enter the date(DD-MM-YYYY)");
-            date = Console.ReadLine();
-        }
-
         Console.WriteLine("Please enter the Destination");
         string Destination = Console.ReadLine();
         while (string.IsNullOrEmpty(Destination))
@@ -146,19 +139,19 @@ public class Flightinfo
             Airplane = Console.ReadLine();
         }
 
-        Console.WriteLine("Please enter the Departure Time (HH:MM:SS)");
+        Console.WriteLine("Please enter the Departure Time (DD-MM-YYYY HH:MM:SS)");
         string DepartureTime = Console.ReadLine();
         while (string.IsNullOrEmpty(DepartureTime))
         {
-            Console.WriteLine("Please enter the Departure Time (HH:MM:SS)");
+            Console.WriteLine("Please enter the Departure Time (DD-MM-YYYY HH:MM:SS)");
             DepartureTime = Console.ReadLine();
         }
 
-        Console.WriteLine("Please enter the Estimated Time of Arrival (HH:MM:SS)");
+        Console.WriteLine("Please enter the Estimated Time of Arrival (DD-MM-YYYY HH:MM:SS)");
         string ArrivalTime = Console.ReadLine();
         while (string.IsNullOrEmpty(ArrivalTime))
         {
-            Console.WriteLine("Please enter the Estimated Time of Arrival (HH:MM:SS)");
+            Console.WriteLine("Please enter the Estimated Time of Arrival (DD-MM-YYYY HH:MM:SS)");
             ArrivalTime = Console.ReadLine();
         }
 
@@ -167,7 +160,6 @@ public class Flightinfo
         flight.Add("Country", Country);
         flight.Add("Airplane", Airplane);
         flight.Add("Departing from", "Rotterdam");
-        flight.Add("Date", date);
         flight.Add("Departure time", DepartureTime);
         flight.Add("Estimated time of Arrival", ArrivalTime);
         nestedDictionary.Add("12345678", flight);
@@ -185,7 +177,7 @@ public class Flightinfo
     {
         Console.WriteLine("Please enter the flightnumber for the flight you want to cancel.");
         string flightnr = Console.ReadLine();
-        while (flightnr.Length != 8) 
+        while (flightnr.Length != 8)
         {
             Console.WriteLine("Please enter a valid flightnumber.(99999999)");
             flightnr = Console.ReadLine();
@@ -202,5 +194,51 @@ public class Flightinfo
         }
     }
 
+    public static void FlightFilter()
+    {
+        // Example filter criteria
+        string destination = "Sao Paulo";
+        string country = "Brazil";
 
+        string startDate = "13-03-2024 00:00:00";
+        string endDate = "14-07-2024 00:00:00";
+
+        // Filter flights based on criteria
+        var filteredFlights = FilterFlights(nestedDictionary, destination, country, startDate, endDate);
+
+        // Display filtered flights
+        Console.WriteLine("Filtered Flights:");
+        foreach (var flight in filteredFlights)
+        {
+            Console.WriteLine(flight);
+        }
+    }
+
+    public static List<string> FilterFlights(Dictionary<string, Dictionary<string, string>> flightsData, string destination, string country, string startDate, string endDate)
+    {
+        List<string> filteredFlights = new List<string>();
+
+        foreach (var flight in flightsData)
+        {
+            var flightInfo = flight.Value;
+
+            // Check if flight matches destination, country, and date range criteria
+            if (flightInfo["Destination"] == destination &&
+                IsDateInRange(flightInfo["Departure time"], startDate, endDate))
+            {
+                filteredFlights.Add($"{flight.Key}: {flightInfo["Destination"]} - {flightInfo["Country"]} - {flightInfo["Departure time"]}");
+            }
+        }
+
+        return filteredFlights;
+    }
+
+    static bool IsDateInRange(string date, string startDate, string endDate)
+    {
+        DateTime flightDate = DateTime.ParseExact(date, "d-M-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        DateTime rangeStartDate = DateTime.ParseExact(startDate, "dd-MM-yyyy HH:mm:ss", null);
+        DateTime rangeEndDate = DateTime.ParseExact(endDate, "dd-MM-yyyy HH:mm:ss", null);
+
+        return flightDate >= rangeStartDate && flightDate <= rangeEndDate;
+    }
 }
