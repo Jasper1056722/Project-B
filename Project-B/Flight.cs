@@ -12,9 +12,10 @@ public class Flight
     public DateTime? EstimatedTimeofArrival { get; set; }
     public Plane Airplane { get; set; }
 
-    public Flight(int flightNumber, string destination, string country, Plane airplane, string departingFrom, string departureDate, string departureTime, string estimatedTimeOfArrival)
+    public Flight(string destination, string country, Plane airplane, string departingFrom, string departureDate, string departureTime, string estimatedTimeOfArrival)
     {
-        FlightNumber = flightNumber;
+        Random random = new Random();
+        FlightNumber = random.Next(100000,999999);
         Destination = destination;
         Country = country;
         Airplane = airplane;
@@ -27,7 +28,7 @@ public class Flight
         }
         catch (FormatException)
         {
-            EstimatedTimeofArrival = null;
+            EstimatedTimeofArrival = DateTime.MinValue;
         }
 
         try
@@ -36,7 +37,7 @@ public class Flight
         }
         catch (FormatException)
         {
-            DepartureTime = null;
+            DepartureTime = DateTime.MinValue;
         }
     }
 

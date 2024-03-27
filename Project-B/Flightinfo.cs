@@ -114,65 +114,67 @@ public static class Flightinfo
     }
     }
 
-    // public static void FlightAdd()
-    // {
-    //     Console.WriteLine("Please enter the Destination");
-    //     string Destination = Console.ReadLine();
-    //     while (string.IsNullOrEmpty(Destination))
-    //     {
-    //         Console.WriteLine("Please enter the Destination");
-    //         Destination = Console.ReadLine();
-    //     }
+    public static void FlightAdd(List<Flight> flights)
+    {
+        Console.WriteLine("Please enter the Destination");
+        string Destination = Console.ReadLine();
+        while (string.IsNullOrEmpty(Destination))
+        {
+            Console.WriteLine("Please enter the Destination");
+            Destination = Console.ReadLine();
+        }
 
-    //     Console.WriteLine("Please enter the Country");
-    //     string Country = Console.ReadLine();
-    //     while (string.IsNullOrEmpty(Country))
-    //     {
-    //         Console.WriteLine("Please enter the Country");
-    //         Country = Console.ReadLine();
-    //     }
+        Console.WriteLine("Please enter the Country");
+        string Country = Console.ReadLine();
+        while (string.IsNullOrEmpty(Country))
+        {
+            Console.WriteLine("Please enter the Country");
+            Country = Console.ReadLine();
+        }
 
-    //     Console.WriteLine("Please enter the Airplane");
-    //     string Airplane = Console.ReadLine();
-    //     while (string.IsNullOrEmpty(Airplane))
-    //     {
-    //         Console.WriteLine("Please enter the Airplane");
-    //         Airplane = Console.ReadLine();
-    //     }
+        Console.WriteLine("Please enter the Airplane");
+        string Airplane = Console.ReadLine();
+        while (string.IsNullOrEmpty(Airplane))
+        {
+            Console.WriteLine("Please enter the Airplane");
+            Airplane = Console.ReadLine();
+        }
 
-    //     Console.WriteLine("Please enter the Departure Time (DD-MM-YYYY HH:MM:SS)");
-    //     string DepartureTime = Console.ReadLine();
-    //     while (string.IsNullOrEmpty(DepartureTime))
-    //     {
-    //         Console.WriteLine("Please enter the Departure Time (DD-MM-YYYY HH:MM:SS)");
-    //         DepartureTime = Console.ReadLine();
-    //     }
+        Console.WriteLine("Please enter the location of Departure");
+        string DepartingFrom = Console.ReadLine();
+        while (string.IsNullOrEmpty(DepartingFrom))
+        {
+            Console.WriteLine("Please enter the location of Departure");
+            DepartingFrom = Console.ReadLine();
+        }
 
-    //     Console.WriteLine("Please enter the Estimated Time of Arrival (DD-MM-YYYY HH:MM:SS)");
-    //     string ArrivalTime = Console.ReadLine();
-    //     while (string.IsNullOrEmpty(ArrivalTime))
-    //     {
-    //         Console.WriteLine("Please enter the Estimated Time of Arrival (DD-MM-YYYY HH:MM:SS)");
-    //         ArrivalTime = Console.ReadLine();
-    //     }
+        Console.WriteLine("Please enter the Departure Date");
+        string DepartureDate = Console.ReadLine();
+        while (string.IsNullOrEmpty(DepartureDate))
+        {
+            Console.WriteLine("Please enter the Departure Date");
+            DepartureDate = Console.ReadLine();
+        }
 
-    //     Dictionary<string, string> flight = new Dictionary<string, string>();
-    //     flight.Add("Destination", Destination);
-    //     flight.Add("Country", Country);
-    //     flight.Add("Airplane", Airplane);
-    //     flight.Add("Departing from", "Rotterdam");
-    //     flight.Add("Departure time", DepartureTime);
-    //     flight.Add("Estimated time of Arrival", ArrivalTime);
-    //     nestedDictionary.Add("12345678", flight);
+        Console.WriteLine("Please enter the Departure Time (DD-MM-YYYY HH:MM:SS)");
+        string DepartureTime = Console.ReadLine();
+        while (string.IsNullOrEmpty(DepartureTime))
+        {
+            Console.WriteLine("Please enter the Departure Time (DD-MM-YYYY HH:MM:SS)");
+            DepartureTime = Console.ReadLine();
+        }
 
-    //     // Step 4: Serialize the modified object back to JSON
-    //     string updatedJsonString = JsonConvert.SerializeObject(nestedDictionary, Formatting.Indented);
+        Console.WriteLine("Please enter the Estimated Time of Arrival (DD-MM-YYYY HH:MM:SS)");
+        string ArrivalTime = Console.ReadLine();
+        while (string.IsNullOrEmpty(ArrivalTime))
+        {
+            Console.WriteLine("Please enter the Estimated Time of Arrival (DD-MM-YYYY HH:MM:SS)");
+            ArrivalTime = Console.ReadLine();
+        }
 
-    //     // Step 5: Write the JSON data back to the file
-    //     File.WriteAllText("flights.json", updatedJsonString);
-
-    //     Console.WriteLine("Data added to JSON file successfully.");
-    // }
+        Plane plane = new Plane("Boeing 787");
+        flights.Add(new Flight(Destination, Country, plane, DepartingFrom, DepartureDate, DepartureTime, ArrivalTime));                                                  
+    }
 
     public static void FlightDelete(List<Flight> flights, string flightNumber)
     {
@@ -188,7 +190,7 @@ public static class Flightinfo
             return;
         }
 
-        foreach (Flight flight in flights)
+        foreach (Flight flight in flights)  
         {
             if (flight.FlightNumber == parsedFlightNumber)
             {
