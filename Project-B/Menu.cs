@@ -5,9 +5,9 @@ public static class Menu
         Console.WriteLine(@"All options
 1. Login
 2. Signup
-3. Search
-4.
-5.
+3. Add a Flight
+4. Remove a Flight
+5. Change a Flight
 Q. Quit Program");
 
         string menuChoice = Console.ReadLine();

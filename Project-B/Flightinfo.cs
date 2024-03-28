@@ -176,7 +176,7 @@ public static class Flightinfo
         flights.Add(new Flight(Destination, Country, plane, DepartingFrom, DepartureDate, DepartureTime, ArrivalTime));                                                  
     }
 
-    public static void FlightDelete(List<Flight> flights, string flightNumber)
+    public static void FlightDelete(string flightNumber, List<Flight> flights)
     {
         if (string.IsNullOrEmpty(flightNumber))
         {

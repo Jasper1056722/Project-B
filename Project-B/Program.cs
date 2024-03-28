@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 public class Program 
 {
     static void Main()
@@ -9,6 +9,7 @@ public class Program
         bool exitRequested = false;
         
         Account account = new Account();
+        List<Flight> flights = Flight.LoadJson();
 
 
 
@@ -52,7 +53,7 @@ public class Program
                     }
                     break;
 
-                case "3":
+                case "?":
                     bool trueNess01 = false;
                     do
                     {
@@ -95,6 +96,22 @@ public class Program
                     exitRequested = true;
                     break;
 
+                case "3":
+                    Flightinfo.FlightAdd(flights);
+                    break;
+
+                case "4":
+                    Console.WriteLine("Enter the flightnumber for the flight u want to change");
+                    string flightnumber = Console.ReadLine();
+                    Flightinfo.UpdateInfo(flightnumber, flights);
+                    break;
+
+                case "5":
+                    Console.WriteLine("Enter the flightnumber for the flight u want to remove");
+                    string flightnumber2 = Console.ReadLine();
+                    Flightinfo.UpdateInfo(flightnumber2, flights);
+                    break;
+
                 default:
                     Console.WriteLine("Invalid choice. Please select a valid option.");
                     break;
@@ -102,6 +119,9 @@ public class Program
         } while (!exitRequested);
 
         Console.WriteLine("Exiting the program...");
+        Flight.WriteToJson(flights);
         Console.ReadKey();
     }
+
+
 }
