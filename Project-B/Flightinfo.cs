@@ -176,7 +176,7 @@ public static class Flightinfo
         flights.Add(new Flight(Destination, Country, plane, DepartingFrom, DepartureDate, DepartureTime, ArrivalTime));                                                  
     }
 
-    public static void FlightDelete(List<Flight> flights, string flightNumber)
+    public static void FlightDelete(string flightNumber, List<Flight> flights)
     {
         if (string.IsNullOrEmpty(flightNumber))
         {
@@ -223,31 +223,31 @@ public static class Flightinfo
     //     }
     // }
 
-    // public static List<string> FilterFlights(Dictionary<string, Dictionary<string, string>> flightsData, string destination, string country, string startDate, string endDate)
-    // {
-    //     List<string> filteredFlights = new List<string>();
+    public static List<string> FilterFlights(Dictionary<string, Dictionary<string, string>> flightsData, string destination, string country, string startDate, string endDate)
+    {
+        List<string> filteredFlights = new List<string>();
 
-    //     foreach (var flight in flightsData)
-    //     {
-    //         var flightInfo = flight.Value;
+        foreach (var flight in flightsData)
+        {
+            var flightInfo = flight.Value;
 
-    //         // Check if flight matches destination, country, and date range criteria
-    //         if (flightInfo["Destination"] == destination &&
-    //             IsDateInRange(flightInfo["Departure time"], startDate, endDate))
-    //         {
-    //             filteredFlights.Add($"{flight.Key}: {flightInfo["Destination"]} - {flightInfo["Country"]} - {flightInfo["Departure time"]}");
-    //         }
-    //     }
+            // Check if flight matches destination, country, and date range criteria
+            if (flightInfo["Destination"] == destination &&
+                IsDateInRange(flightInfo["Departure time"], startDate, endDate))
+            {
+                filteredFlights.Add($"{flight.Key}: {flightInfo["Destination"]} - {flightInfo["Country"]} - {flightInfo["Departure time"]}");
+            }
+        }
 
-    //     return filteredFlights;
-    // }
+        return filteredFlights;
+    }
 
-    // static bool IsDateInRange(string date, string startDate, string endDate)
-    // {
-    //     DateTime flightDate = DateTime.ParseExact(date, "d-M-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
-    //     DateTime rangeStartDate = DateTime.ParseExact(startDate, "dd-MM-yyyy HH:mm:ss", null);
-    //     DateTime rangeEndDate = DateTime.ParseExact(endDate, "dd-MM-yyyy HH:mm:ss", null);
+    static bool IsDateInRange(string date, string startDate, string endDate)
+    {
+        DateTime flightDate = DateTime.ParseExact(date, "d-M-yyyy HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        DateTime rangeStartDate = DateTime.ParseExact(startDate, "dd-MM-yyyy HH:mm:ss", null);
+        DateTime rangeEndDate = DateTime.ParseExact(endDate, "dd-MM-yyyy HH:mm:ss", null);
 
-    //     return flightDate >= rangeStartDate && flightDate <= rangeEndDate;
-    // }
+        return flightDate >= rangeStartDate && flightDate <= rangeEndDate;
+    }
 }

@@ -5,7 +5,7 @@ public class Account
     public bool IsAdminbool {get; private set;}
     public int Primkey {get; set; } //autoincrement key of account that was logged into
 
-    public void Addtodb(string email, string password)
+    public bool Addtodb(string email, string password)
     {   
         string connectionString = @"Data Source=Accounts.db;Version=3;";
         using (var connection = new SQLiteConnection(connectionString))
@@ -22,7 +22,9 @@ public class Account
                 command.Parameters.AddWithValue("@Password", password);
                 
                 command.ExecuteNonQuery();
+                return true;
             }
+
         }
     }
 
@@ -43,7 +45,7 @@ public class Account
                 command.Parameters.AddWithValue("@Username", email);
                 command.Parameters.AddWithValue("@Password", password);
 
-                    using (var reader = command.ExecuteReader())
+                using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
                     {
@@ -67,32 +69,30 @@ public class Account
         }
     }
 
-    public void Login()
+    public string  Login(string email, string password)
     {
-        Console.WriteLine("Fill in Email:\n");
-        string email = Console.ReadLine();
-        Console.WriteLine("Fill in Password");
-        string password = Console.ReadLine();
-
         if(Logintodb(email, password))
         {
-            Console.WriteLine("Login successful!");
+            return "Login successfull";
             // Perform actions after successful login
         }
         else
         {
-            Console.WriteLine("Login failed. Incorrect email or password.");
+            return "Login failed. Incorrect email or password.";
             // Handle failed login attempt
         }
 
     }
 
-    public void signup()
+    public string Signup(string email, string password)
     {
-        Console.WriteLine("Fill in Email:\n");
-        string email = Console.ReadLine();
-        Console.WriteLine("Fill in Password");
-        string password = Console.ReadLine();
-        Addtodb(email, password);
+        if (Addtodb(email, password))
+        {
+            return "Account Created";
+        }
+        else
+        {
+            return "Failed to create account.";
+        }
     }
 }
