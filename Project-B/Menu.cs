@@ -1,12 +1,16 @@
 public static class Menu
 {
-    public static void menus()
+    public static string menus()
     {
-        Console.WriteLine("All options");
-        Console.WriteLine("1. Login");
-        Console.WriteLine("2. signin");
-        Console.WriteLine("3.");
-        Console.WriteLine("4.");
-        Console.WriteLine("5.");
+        Console.WriteLine(@"All options
+1. Login
+2. Signup
+3.
+4.
+5.
+Q. Quit Program");
+
+        string menuChoice = Console.ReadLine();
+        return menuChoice;
     }
 }
