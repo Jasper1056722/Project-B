@@ -69,7 +69,7 @@ public class Account
 
     public void Login()
     {
-        Console.WriteLine("Fill in Email:\n");
+        Console.WriteLine("Fill in Email:");
         string email = Console.ReadLine();
         Console.WriteLine("Fill in Password");
         string password = Console.ReadLine();
@@ -89,7 +89,7 @@ public class Account
 
     public void signup()
     {
-        Console.WriteLine("Fill in Email:\n");
+        Console.WriteLine("Fill in Email:");
         string email = Console.ReadLine();
         Console.WriteLine("Fill in Password");
         string password = Console.ReadLine();
