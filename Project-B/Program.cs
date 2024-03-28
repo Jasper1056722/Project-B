@@ -52,6 +52,45 @@ public class Program
                     }
                     break;
 
+                case "3":
+                    bool trueNess01 = false;
+                    do
+                    {
+                        Console.WriteLine(@"
+            Based on what criteria do you want to search flights?
+            - Destination [D]
+            - Departure Time [T]
+            - Airline [A]
+
+            Or do you want to Exit?
+            - Exit [E]");
+                        string answer01 = Console.ReadLine().ToUpper();
+                        
+                        switch (answer01)
+                        {
+                            case "D":
+                                string destinat = Console.ReadLine().ToLower();
+                                Searching.Destination(destinat);
+                                break;
+                            case "T":
+                                string departureDateInput = Console.ReadLine();
+                                Searching.Time(departureDateInput);
+                                break;
+                            case "A":
+                                string PlaneAnswer = Console.ReadLine().ToLower();
+                                Searching.Airline(PlaneAnswer);
+                                break;
+                            case "E":
+                                trueNess01 = true;
+                                break;
+                            default:
+                                Console.WriteLine("Not a valid input.");
+                                break;
+                        }
+                    }
+                    while (trueNess01 == false);
+                    break;
+
                 case "Q":
                     exitRequested = true;
                     break;
