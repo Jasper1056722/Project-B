@@ -6,21 +6,17 @@ using Newtonsoft.Json.Linq;
 
 public static class Searching
 {
-    public static string jsonString = File.ReadAllText("flights.json");
-    public static Dictionary<string, Dictionary<string, string>> nestedDictionary = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(jsonString);
-    public static void Destination(string destinat)
+    public static void Destination(string destinat, List<Flight> flights)
     {
         Console.WriteLine("Where do you want to travel to?");
 
         List<string> DestinationFlights = new List<string>();
 
-        foreach (var flight in nestedDictionary)
+        foreach (var flight in flights)
         {
-            var flightInfo = flight.Value;
-
-            if (flightInfo["Destination"].ToLower() == destinat)
+            if (flight.Destination.ToLower() == destinat)
             {
-                DestinationFlights.Add($"Flight {flight.Key}:\nDestination: {flightInfo["Destination"]}\nCountry: {flightInfo["Country"]}\nAirplane: {flightInfo["Airplane"]}\nDeparting from: {flightInfo["Departing from"]}\nDeparture time: {flightInfo["Departure time"]}\nEstimated time of Arrival: {flightInfo["Estimated time of Arrival"]}");
+                DestinationFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane}\nDeparting from: {flight.DepartingFrom}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
             }
         }
         if (DestinationFlights.Count > 0){
@@ -36,20 +32,19 @@ public static class Searching
         return;
     }
 
-    public static void Time(string departureDateInput)
+    public static void Time(string departureDateInput, List<Flight> flights)
     {
         Console.WriteLine("Enter the departure date (dd-mm-yyyy):");
 
         List<string> DateFlights = new List<string>();
 
-        foreach (var flight in nestedDictionary)
+        foreach (var flight in flights)
         {
-            var flightInfo = flight.Value;
 
-            string TimeDate = flightInfo["Departure time"].Split(' ')[0];
+            string TimeDate = flight.DepartureDate;
             if (TimeDate == departureDateInput)
             {
-                DateFlights.Add($"Flight {flight.Key}:\nDestination: {flightInfo["Destination"]}\nCountry: {flightInfo["Country"]}\nAirplane: {flightInfo["Airplane"]}\nDeparting from: {flightInfo["Departing from"]}\nDeparture time: {flightInfo["Departure time"]}\nEstimated time of Arrival: {flightInfo["Estimated time of Arrival"]}");
+                DateFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane}\nDeparting from: {flight.DepartingFrom}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
             }
 
             if (DateFlights.Count > 0){
@@ -66,7 +61,7 @@ public static class Searching
         return;
     }
 
-    public static void Airline(string PlaneAnswer)
+    public static void Airline(string PlaneAnswer, List<Flight> flights)
     {
         Console.WriteLine(@"
 Which airplane do you want to travel with?
@@ -76,13 +71,11 @@ Which airplane do you want to travel with?
 
         List<string> PlaneFlights = new List<string>();
 
-        foreach (var flight in nestedDictionary)
+        foreach (var flight in flights)
         {
-            var flightInfo = flight.Value;
-
-            if (flightInfo["Airplane"].ToLower() == PlaneAnswer)
+            if (flight.Airplane.Model == PlaneAnswer)
             {
-                PlaneFlights.Add($"Flight {flight.Key}:\nDestination: {flightInfo["Destination"]}\nCountry: {flightInfo["Country"]}\nAirplane: {flightInfo["Airplane"]}\nDeparting from: {flightInfo["Departing from"]}\nDeparture time: {flightInfo["Departure time"]}\nEstimated time of Arrival: {flightInfo["Estimated time of Arrival"]}");
+                PlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane}\nDeparting from: {flight.DepartingFrom}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
             }
         }
         if (PlaneFlights.Count > 0){
