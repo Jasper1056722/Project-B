@@ -43,7 +43,7 @@ public class Flight
 
     public static List<Flight> LoadJson()
     {
-        string json = File.ReadAllText("Flights.json");
+        string json = File.ReadAllText("flightObject.json");
         List<Flight> flights = JsonConvert.DeserializeObject<List<Flight>>(json);
         return flights;
     }
@@ -51,6 +51,6 @@ public class Flight
     public static void WriteToJson(List<Flight> flights)
     {
         string json = JsonConvert.SerializeObject(flights, Formatting.Indented);
-        File.WriteAllText("Flights.json", json);
+        File.WriteAllText("flightObject.json", json);
     }
 }
