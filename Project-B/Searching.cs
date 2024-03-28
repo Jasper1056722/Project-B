@@ -8,8 +8,6 @@ public static class Searching
 {
     public static void Destination(string destinat, List<Flight> flights)
     {
-        Console.WriteLine("Where do you want to travel to?");
-
         List<string> DestinationFlights = new List<string>();
 
         foreach (var flight in flights)
@@ -40,9 +38,7 @@ public static class Searching
 
         foreach (var flight in flights)
         {
-
-            string TimeDate = flight.DepartureDate;
-            if (TimeDate == departureDateInput)
+            if (flight.DepartureDate == departureDateInput)
             {
                 DateFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane}\nDeparting from: {flight.DepartingFrom}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
             }
@@ -63,17 +59,13 @@ public static class Searching
 
     public static void Airline(string PlaneAnswer, List<Flight> flights)
     {
-        Console.WriteLine(@"
-Which airplane do you want to travel with?
-- Airbus 330
-- Boeing 787
-- Boeing 737");
 
         List<string> PlaneFlights = new List<string>();
 
         foreach (var flight in flights)
         {
-            if (flight.Airplane.Model == PlaneAnswer)
+            Console.WriteLine(flight.Airplane.Model);
+            if (flight.Airplane.Model.ToLower() == PlaneAnswer)
             {
                 PlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane}\nDeparting from: {flight.DepartingFrom}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
             }
