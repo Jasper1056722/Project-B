@@ -45,7 +45,7 @@ public class Account
                 command.Parameters.AddWithValue("@Username", email);
                 command.Parameters.AddWithValue("@Password", password);
 
-                    using (var reader = command.ExecuteReader())
+                using (var reader = command.ExecuteReader())
                 {
                     if (reader.Read())
                     {
