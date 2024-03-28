@@ -53,7 +53,7 @@ public class Program
                     }
                     break;
 
-                case "?":
+                case "6":
                     bool trueNess01 = false;
                     do
                     {
@@ -71,15 +71,15 @@ public class Program
                         {
                             case "D":
                                 string destinat = Console.ReadLine().ToLower();
-                                Searching.Destination(destinat);
+                                Searching.Destination(destinat, flights);
                                 break;
                             case "T":
                                 string departureDateInput = Console.ReadLine();
-                                Searching.Time(departureDateInput);
+                                Searching.Time(departureDateInput, flights);
                                 break;
                             case "A":
                                 string PlaneAnswer = Console.ReadLine().ToLower();
-                                Searching.Airline(PlaneAnswer);
+                                Searching.Airline(PlaneAnswer, flights);
                                 break;
                             case "E":
                                 trueNess01 = true;
@@ -120,7 +120,6 @@ public class Program
 
         Console.WriteLine("Exiting the program...");
         Flight.WriteToJson(flights);
-        Console.ReadKey();
     }
 
 
