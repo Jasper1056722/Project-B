@@ -8,8 +8,8 @@ public class Flight
 
     public string DepartingFrom { get; set; }
     public string DepartureDate { get; set; }
-    public DateTime? DepartureTime { get; set; }
-    public DateTime? EstimatedTimeofArrival { get; set; }
+    public DateTime DepartureTime { get; set; }
+    public DateTime EstimatedTimeofArrival { get; set; }
     public Plane Airplane { get; set; }
 
     public Flight(string destination, string country, Plane airplane, string departingFrom, string departureDate, string departureTime, string estimatedTimeOfArrival)
@@ -24,7 +24,7 @@ public class Flight
 
         try
         {
-            EstimatedTimeofArrival = DateTime.ParseExact(estimatedTimeOfArrival, "dd-MM-yyyy HH:mm:ss", null);
+            EstimatedTimeofArrival = DateTime.ParseExact(estimatedTimeOfArrival, "yyyy-MM-ddTHH:mm:ss", null);
         }
         catch (FormatException)
         {
@@ -33,7 +33,7 @@ public class Flight
 
         try
         {
-            DepartureTime = DateTime.ParseExact(departureTime, "dd-MM-yyyy HH:mm:ss", null);
+            DepartureTime = DateTime.ParseExact(departureTime, "yyyy-MM-ddTHH:mm:ss", null);
         }
         catch (FormatException)
         {

@@ -10,6 +10,7 @@ public class Program
         
         Account account = new Account();
         List<Flight> flights = Flight.LoadJson();
+        Console.WriteLine(flights[0].DepartureTime);
 
 
 
@@ -60,7 +61,7 @@ public class Program
                         Console.WriteLine(@"
             Based on what criteria do you want to search flights?
             - Destination [D]
-            - Departure Time [T]
+            - Departure Date [T]
             - Airline [A]
 
             Or do you want to Exit?
