@@ -29,7 +29,7 @@ public static class Flightinfo
             int Toflightnumber = int.Parse(flightnumber);
             if (flight.FlightNumber == Toflightnumber)
             {
-                Console.WriteLine("Current flight data: "); //print current flight info,  maybe redundant? remove?
+                Console.WriteLine("Current flight data: ");
                 Console.WriteLine($"Destination: {flight.Destination}");
                 Console.WriteLine($"Country: {flight.Country}");
                 Console.WriteLine($"Airplane: {flight.Airplane.Model}");
@@ -37,7 +37,7 @@ public static class Flightinfo
                 Console.WriteLine($"Date: {flight.DepartureDate}");
                 Console.WriteLine($"Departure time: {flight.DepartureTime}");
                 Console.WriteLine($"Estimated time of arrival: {flight.EstimatedTimeofArrival}");
-                Console.WriteLine($"\nSelect the detail you want to edit: "); //edit detail menu
+                Console.WriteLine($"\nSelect the detail you want to edit: ");
                 Console.WriteLine("1. Destination");
                 Console.WriteLine("2. Country");
                 Console.WriteLine("3. Departing from");
