@@ -54,7 +54,11 @@ public class Program
                     }
                     break;
 
+<<<<<<< Updated upstream
                 case "6":
+=======
+                case "3":
+>>>>>>> Stashed changes
                     bool trueNess01 = false;
                     do
                     {
