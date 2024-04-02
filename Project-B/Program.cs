@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.SQLite;
+using System.Runtime.CompilerServices;
 public class Program 
 {
     static void Main()
@@ -12,48 +14,200 @@ public class Program
         List<Flight> flights = Flight.LoadJson();
         Console.WriteLine(flights[0].DepartureTime);
 
-
-
         do
         {
-            string menuChoice = Menu.menus();
-            switch (menuChoice)
+            
+            if (!account.IsLoggedIn)
             {
-                case "1":
-                    if (!account.IsLoggedIn)
-                    {
-                        Console.WriteLine("Fill in Email:");
-                        string email = Console.ReadLine();
-                        Console.WriteLine("Fill in Password:");
-                        string password = Console.ReadLine();
+                string NmenuChoice = NMenu.Nmenus();
+                switch (NmenuChoice)
+                {
+                    case "L":
+                            if (!account.IsLoggedIn)
+                            {
+                                Console.WriteLine("Fill in Email:");
+                                string email = Console.ReadLine();
+                                Console.WriteLine("Fill in Password:");
+                                string password = Console.ReadLine();
 
-                        account.Login(email, password);
+                                account.Login(email, password);
+                                if (account.IsLoggedIn)
+                                {
+                                    Console.WriteLine("Logged in");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("You are already logged in");
+                            }
+                            break;
+
+                        case "S":
+                            if (!account.IsLoggedIn)
+                            {   
+                                Console.WriteLine("Fill in Email:");
+                                string email = Console.ReadLine();
+                                Console.WriteLine("Fill in Password:");
+                                string password = Console.ReadLine();
+                                account.Signup(email, password);
+                            }
+                            else
+                            {
+                                Console.WriteLine("You are already logged in");
+                            }
+                            break;
+                            case "SE":
+                        bool trueNess01 = false;
+                        do
+                        {
+                            Console.WriteLine(@"
+                Based on what criteria do you want to search flights?
+                - Destination [D]
+                - Departure Time [T]
+                - Airline [A]
+
+                Or do you want to Exit?
+                - Exit [E]");
+                            string answer01 = Console.ReadLine().ToUpper();
+                            
+                            switch (answer01)
+                            {
+                                case "D":
+                                    Console.WriteLine("Where do u want to travel to");
+                                    string destinat = Console.ReadLine().ToLower();
+                                    Searching.Destination(destinat, flights);
+                                    break;
+                                case "T":
+                                    Console.WriteLine("What date do u want to look for?");
+                                    string departureDateInput = Console.ReadLine();
+                                    Searching.Time(departureDateInput, flights);
+                                    break;
+                                case "A":
+                                    Console.WriteLine(@"
+    Which airplane do you want to travel with?
+    - Airbus 330
+    - Boeing 787
+    - Boeing 737");
+                                    string PlaneAnswer = Console.ReadLine().ToLower();
+                                    Searching.Airline(PlaneAnswer, flights);
+                                    break;
+                                case "E":
+                                    trueNess01 = true;
+                                    break;
+                                default:
+                                    Console.WriteLine("Not a valid input.");
+                                    break;
+                            }
+                        }
+                        while (trueNess01 == false);
+                        break;
+
+                        case "Q":
+                        exitRequested = true;
+                        break;
+                }
+            }
+            else if (!account.IsAdminbool)
+            {
+                string menuChoice = Menu.menus();
+                switch (menuChoice)
+                {
+                    case "L":
+                        if (!account.IsLoggedIn)
+                        {
+                            Console.WriteLine("Fill in Email:");
+                            string email = Console.ReadLine();
+                            Console.WriteLine("Fill in Password:");
+                            string password = Console.ReadLine();
+
+                            account.Login(email, password);
+                            if (account.IsLoggedIn)
+                            {
+                                Console.WriteLine("Logged in");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("You are already logged in");
+                        }
+                        break;
+
+                    case "S":
+                        if (!account.IsLoggedIn)
+                        {   
+                            Console.WriteLine("Fill in Email:");
+                            string email = Console.ReadLine();
+                            Console.WriteLine("Fill in Password:");
+                            string password = Console.ReadLine();
+                            account.Signup(email, password);
+                        }
+                        else
+                        {
+                            Console.WriteLine("You are already logged in");
+                        }
+                        break;
+
+                    case "SE":
+                        bool trueNess01 = false;
+                        do
+                        {
+                            Console.WriteLine(@"
+                Based on what criteria do you want to search flights?
+                - Destination [D]
+                - Departure Time [T]
+                - Airline [A]
+
+                Or do you want to Exit?
+                - Exit [E]");
+                            string answer01 = Console.ReadLine().ToUpper();
+                            
+                            switch (answer01)
+                            {
+                                case "D":
+                                    Console.WriteLine("Where do u want to travel to");
+                                    string destinat = Console.ReadLine().ToLower();
+                                    Searching.Destination(destinat, flights);
+                                    break;
+                                case "T":
+                                    Console.WriteLine("What date do u want to look for?");
+                                    string departureDateInput = Console.ReadLine();
+                                    Searching.Time(departureDateInput, flights);
+                                    break;
+                                case "A":
+                                    Console.WriteLine(@"
+    Which airplane do you want to travel with?
+    - Airbus 330
+    - Boeing 787
+    - Boeing 737");
+                                    string PlaneAnswer = Console.ReadLine().ToLower();
+                                    Searching.Airline(PlaneAnswer, flights);
+                                    break;
+                                case "E":
+                                    trueNess01 = true;
+                                    break;
+                                default:
+                                    Console.WriteLine("Not a valid input.");
+                                    break;
+                            }
+                        }
+                        while (trueNess01 == false);
+                        break;
+
+                    case "LO":
                         if (account.IsLoggedIn)
                         {
-                            Console.WriteLine("Logged in");
+                            Console.WriteLine("Logging out");
+                            account.logout();
+                            Console.WriteLine("Logged out");
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine("You are already logged in");
-                    }
-                    break;
+                        break;
+                    
+                    case "Q":
+                        exitRequested = true;
+                        break;
 
-                case "2":
-                    if (!account.IsLoggedIn)
-                    {   
-                        Console.WriteLine("Fill in Email:");
-                        string email = Console.ReadLine();
-                        Console.WriteLine("Fill in Password:");
-                        string password = Console.ReadLine();
-                        account.Signup(email, password);
-                    }
-                    else
-                    {
-                        Console.WriteLine("You are already logged in");
-                    }
-                    break;
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
                 case "6":
 =======
@@ -67,71 +221,101 @@ public class Program
             - Destination [D]
             - Departure Date [T]
             - Airline [A]
+=======
+                    default:
+                        Console.WriteLine("Invalid choice. Please select a valid option.");
+                        break;
+                    
+                }
+            }
+            else if (account.IsAdminbool)
+            {
+                string AmenuChoice = MenuAdmin.menusadmin();
+                switch (AmenuChoice)
+                {
+                    case "A":
+                        Flightinfo.FlightAdd(flights);
+                        break;
+>>>>>>> Stashed changes
 
-            Or do you want to Exit?
-            - Exit [E]");
-                        string answer01 = Console.ReadLine().ToUpper();
-                        
-                        switch (answer01)
+                    case "R":
+                        Console.WriteLine("Enter the flightnumber for the flight u want to change");
+                        string flightnumber = Console.ReadLine();
+                        Flightinfo.UpdateInfo(flightnumber, flights);
+                        break;
+                    
+                    case "C":
+                        Console.WriteLine("Enter the flightnumber for the flight u want to remove");
+                        string flightnumber2 = Console.ReadLine();
+                        Flightinfo.UpdateInfo(flightnumber2, flights);
+                        break;
+
+                    case "S":
+                        bool trueNess01 = false;
+                        do
                         {
-                            case "D":
-                                Console.WriteLine("Where do u want to travel to");
-                                string destinat = Console.ReadLine().ToLower();
-                                Searching.Destination(destinat, flights);
-                                break;
-                            case "T":
-                                Console.WriteLine("What date do u want to look for?");
-                                string departureDateInput = Console.ReadLine();
-                                Searching.Time(departureDateInput, flights);
-                                break;
-                            case "A":
-                                Console.WriteLine(@"
-Which airplane do you want to travel with?
-- Airbus 330
-- Boeing 787
-- Boeing 737");
-                                string PlaneAnswer = Console.ReadLine().ToLower();
-                                Searching.Airline(PlaneAnswer, flights);
-                                break;
-                            case "E":
-                                trueNess01 = true;
-                                break;
-                            default:
-                                Console.WriteLine("Not a valid input.");
-                                break;
-                        }
-                    }
-                    while (trueNess01 == false);
-                    break;
+                            Console.WriteLine(@"
+                Based on what criteria do you want to search flights?
+                - Destination [D]
+                - Departure Time [T]
+                - Airline [A]
 
-                case "Q":
-                    exitRequested = true;
-                    break;
+                Or do you want to Exit?
+                - Exit [E]");
+                            string answer01 = Console.ReadLine().ToUpper();
+                            
+                            switch (answer01)
+                            {
+                                case "D":
+                                    Console.WriteLine("Where do u want to travel to");
+                                    string destinat = Console.ReadLine().ToLower();
+                                    Searching.Destination(destinat, flights);
+                                    break;
+                                case "T":
+                                    Console.WriteLine("What date do u want to look for?");
+                                    string departureDateInput = Console.ReadLine();
+                                    Searching.Time(departureDateInput, flights);
+                                    break;
+                                case "A":
+                                    Console.WriteLine(@"
+    Which airplane do you want to travel with?
+    - Airbus 330
+    - Boeing 787
+    - Boeing 737");
+                                    string PlaneAnswer = Console.ReadLine().ToLower();
+                                    Searching.Airline(PlaneAnswer, flights);
+                                    break;
+                                case "E":
+                                    trueNess01 = true;
+                                    break;
+                                default:
+                                    Console.WriteLine("Not a valid input.");
+                                    break;
+                            }
+                        }while (trueNess01 == false);
 
-                case "3":
-                    Flightinfo.FlightAdd(flights);
-                    break;
+                        break;
+                    
+                    case "L":
+                        if (account.IsLoggedIn)
+                            {
+                                Console.WriteLine("Logging out");
+                                account.logout();
+                                Console.WriteLine("Logged out");
+                            }
+                        break;
 
-                case "4":
-                    Console.WriteLine("Enter the flightnumber for the flight u want to change");
-                    string flightnumber = Console.ReadLine();
-                    Flightinfo.UpdateInfo(flightnumber, flights);
-                    break;
-
-                case "5":
-                    Console.WriteLine("Enter the flightnumber for the flight u want to remove");
-                    string flightnumber2 = Console.ReadLine();
-                    Flightinfo.UpdateInfo(flightnumber2, flights);
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid choice. Please select a valid option.");
-                    break;
+                    case "Q":
+                        exitRequested = true;
+                        break;
+                }
             }
         } while (!exitRequested);
-
-        Console.WriteLine("Exiting the program...");
-        Flight.WriteToJson(flights);
+            
+            
+            Console.WriteLine("Exiting the program...");
+            Flight.WriteToJson(flights);
+            Console.ReadKey();
     }
 
 
