@@ -5,7 +5,8 @@ public static class Menu
         Console.WriteLine(@"All options
 SE. Search for a flight
 LO. logout
-Q. Quit Program");
+Q. Quit Program
+");
 
         string menuChoice = Console.ReadLine();
         return menuChoice.ToUpper();

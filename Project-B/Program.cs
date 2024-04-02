@@ -7,8 +7,13 @@ public class Program
     {
         // Console.WriteLine("Hello, World!");
         //Mail.Mailsender("Joey", "joeyzwinkels@gmail.com", "24885645");
+        Console.Title = "Flight Application";
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.BackgroundColor = ConsoleColor.Gray;
+
+        Console.Clear();
+
         bool exitRequested = false;
-        Console.ForegroundColor = ConsoleColor.Green;
         
         Account account = new Account();
         List<Flight> flights = Flight.LoadJson();

@@ -8,7 +8,8 @@ R. Remove a Flight
 C. Change a Flight
 S. Search for a flight
 L. logout
-Q. Quit Program");
+Q. Quit Program
+");
 
         string AmenuChoice = Console.ReadLine();
         return AmenuChoice.ToUpper();
