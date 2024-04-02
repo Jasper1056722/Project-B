@@ -74,14 +74,21 @@ public class Program
                         switch (answer01)
                         {
                             case "D":
+                                Console.WriteLine("Where do u want to travel to");
                                 string destinat = Console.ReadLine().ToLower();
                                 Searching.Destination(destinat, flights);
                                 break;
                             case "T":
+                                Console.WriteLine("What date do u want to look for?");
                                 string departureDateInput = Console.ReadLine();
                                 Searching.Time(departureDateInput, flights);
                                 break;
                             case "A":
+                                Console.WriteLine(@"
+Which airplane do you want to travel with?
+- Airbus 330
+- Boeing 787
+- Boeing 737");
                                 string PlaneAnswer = Console.ReadLine().ToLower();
                                 Searching.Airline(PlaneAnswer, flights);
                                 break;
