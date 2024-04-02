@@ -8,8 +8,7 @@ public class Program
         // Console.WriteLine("Hello, World!");
         //Mail.Mailsender("Joey", "joeyzwinkels@gmail.com", "24885645");
         Console.Title = "Flight Application";
-        Console.ForegroundColor = ConsoleColor.DarkCyan;
-        Console.BackgroundColor = ConsoleColor.Gray;
+        Console.ForegroundColor = ConsoleColor.Cyan;
 
         Console.Clear();
 
@@ -23,7 +22,7 @@ public class Program
             
             if (!account.IsLoggedIn)
             {
-                string NmenuChoice = NMenu.Nmenus();
+                string NmenuChoice = Menu.Nmenus();
                 switch (NmenuChoice)
                 {
                     case "L":
@@ -37,7 +36,7 @@ public class Program
                             account.Login(email, password);
                             if (account.IsLoggedIn)
                             {
-                                Console.WriteLine("Logged in");
+                                Console.WriteLine("Logged in\n");
                             }
                             }
                             else
@@ -165,9 +164,8 @@ public class Program
                     case "LO":
                         if (account.IsLoggedIn)
                         {
-                            Console.WriteLine("Logging out");
                             account.logout();
-                            Console.WriteLine("Logged out");
+                            Console.WriteLine("\nLogged out\n");
                         }
                         break;
                     
@@ -179,7 +177,7 @@ public class Program
             }
             else if (account.IsAdminbool)
             {
-                string AmenuChoice = MenuAdmin.menusadmin();
+                string AmenuChoice = Menu.menusadmin();
                 switch (AmenuChoice)
                 {
                     case "A":

@@ -59,11 +59,6 @@ public class Account
                         Primkey = reader.GetInt32(0);
                         IsAdminbool = reader.GetBoolean(1);
                         IsLoggedIn = true;
-
-                        if(IsAdminbool)
-                        {
-                            Console.WriteLine("You are an admin.");
-                        }
                         
                         return true;
                     }
