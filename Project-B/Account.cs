@@ -8,23 +8,30 @@ public class Account
     public bool Addtodb(string email, string password)
     {   
         string connectionString = @"Data Source=Accounts.db;Version=3;";
-        using (var connection = new SQLiteConnection(connectionString))
+        try
         {
-            connection.Open();
-            string insertAccountQuery = @"
-                INSERT INTO Accounts (Username, Password, IsAdmin)
-                VALUES (@Username, @Password, 0)";
-
-            using (var command = new SQLiteCommand(insertAccountQuery, connection))
+            using (var connection = new SQLiteConnection(connectionString))
             {
-                // Add parameters to the query
-                command.Parameters.AddWithValue("@Username", email);
-                command.Parameters.AddWithValue("@Password", password);
-                
-                command.ExecuteNonQuery();
-                return true;
-            }
+                connection.Open();
+                string insertAccountQuery = @"
+                    INSERT INTO Accounts (Username, Password, IsAdmin)
+                    VALUES (@Username, @Password, 0)";
 
+                using (var command = new SQLiteCommand(insertAccountQuery, connection))
+                {
+                    // Add parameters to the query
+                    command.Parameters.AddWithValue("@Username", email);
+                    command.Parameters.AddWithValue("@Password", password);
+                    
+                    command.ExecuteNonQuery();
+                    return true;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred: " + ex.Message);
+            return false;
         }
     }
 
@@ -95,4 +102,11 @@ public class Account
             return "Failed to create account.";
         }
     }
+    public void logout()
+    {
+        IsAdminbool = false;
+        IsLoggedIn = false;
+        Primkey = 0;
+    }
 }
+
