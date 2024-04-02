@@ -7,12 +7,11 @@ public class Program
     {
         // Console.WriteLine("Hello, World!");
         //Mail.Mailsender("Joey", "joeyzwinkels@gmail.com", "24885645");
-
         bool exitRequested = false;
+        Console.ForegroundColor = ConsoleColor.Green;
         
         Account account = new Account();
         List<Flight> flights = Flight.LoadJson();
-        Console.WriteLine(flights[0].DepartureTime);
 
         do
         {
@@ -23,18 +22,18 @@ public class Program
                 switch (NmenuChoice)
                 {
                     case "L":
-                            if (!account.IsLoggedIn)
-                            {
-                                Console.WriteLine("Fill in Email:");
-                                string email = Console.ReadLine();
-                                Console.WriteLine("Fill in Password:");
-                                string password = Console.ReadLine();
+                        if (!account.IsLoggedIn)
+                        {
+                            Console.WriteLine("Fill in Email:");
+                            string email = Console.ReadLine();
+                            Console.WriteLine("Fill in Password:");
+                            string password = Console.ReadLine();
 
-                                account.Login(email, password);
-                                if (account.IsLoggedIn)
-                                {
-                                    Console.WriteLine("Logged in");
-                                }
+                            account.Login(email, password);
+                            if (account.IsLoggedIn)
+                            {
+                                Console.WriteLine("Logged in");
+                            }
                             }
                             else
                             {
@@ -42,21 +41,21 @@ public class Program
                             }
                             break;
 
-                        case "S":
-                            if (!account.IsLoggedIn)
-                            {   
-                                Console.WriteLine("Fill in Email:");
-                                string email = Console.ReadLine();
-                                Console.WriteLine("Fill in Password:");
-                                string password = Console.ReadLine();
-                                account.Signup(email, password);
-                            }
-                            else
-                            {
-                                Console.WriteLine("You are already logged in");
-                            }
-                            break;
-                            case "SE":
+                    case "S":
+                        if (!account.IsLoggedIn)
+                        {   
+                            Console.WriteLine("Fill in Email:");
+                            string email = Console.ReadLine();
+                            Console.WriteLine("Fill in Password:");
+                            string password = Console.ReadLine();
+                            account.Signup(email, password);
+                        }
+                        else
+                        {
+                            Console.WriteLine("You are already logged in");
+                        }
+                        break;
+                    case "SE":
                         bool trueNess01 = false;
                         do
                         {
@@ -112,41 +111,6 @@ public class Program
                 string menuChoice = Menu.menus();
                 switch (menuChoice)
                 {
-                    case "L":
-                        if (!account.IsLoggedIn)
-                        {
-                            Console.WriteLine("Fill in Email:");
-                            string email = Console.ReadLine();
-                            Console.WriteLine("Fill in Password:");
-                            string password = Console.ReadLine();
-
-                            account.Login(email, password);
-                            if (account.IsLoggedIn)
-                            {
-                                Console.WriteLine("Logged in");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("You are already logged in");
-                        }
-                        break;
-
-                    case "S":
-                        if (!account.IsLoggedIn)
-                        {   
-                            Console.WriteLine("Fill in Email:");
-                            string email = Console.ReadLine();
-                            Console.WriteLine("Fill in Password:");
-                            string password = Console.ReadLine();
-                            account.Signup(email, password);
-                        }
-                        else
-                        {
-                            Console.WriteLine("You are already logged in");
-                        }
-                        break;
-
                     case "SE":
                         bool trueNess01 = false;
                         do
@@ -205,28 +169,8 @@ public class Program
                     case "Q":
                         exitRequested = true;
                         break;
-
-
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-                case "6":
-=======
-                case "3":
->>>>>>> Stashed changes
-                    bool trueNess01 = false;
-                    do
-                    {
-                        Console.WriteLine(@"
-            Based on what criteria do you want to search flights?
-            - Destination [D]
-            - Departure Date [T]
-            - Airline [A]
-=======
-                    default:
-                        Console.WriteLine("Invalid choice. Please select a valid option.");
-                        break;
-                    
                 }
+                    
             }
             else if (account.IsAdminbool)
             {
@@ -236,7 +180,6 @@ public class Program
                     case "A":
                         Flightinfo.FlightAdd(flights);
                         break;
->>>>>>> Stashed changes
 
                     case "R":
                         Console.WriteLine("Enter the flightnumber for the flight u want to change");

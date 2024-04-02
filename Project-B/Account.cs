@@ -30,9 +30,8 @@ public class Account
         }
         catch (Exception ex)
         {
-            // Handle the exception, log it, or throw it further if needed.
             Console.WriteLine("An error occurred: " + ex.Message);
-            return false; // Return false to indicate failure.
+            return false;
         }
     }
 
