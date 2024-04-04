@@ -5,8 +5,26 @@ public class Program
 {
     static void Main()
     {
+        // Add contactinfo test
+        Reservation reservation = new Reservation(123456);
+        int AmountPersons = 2; // 2 people
+        for (int i = 0; i < AmountPersons; i++) // Adds multiple people contactinfo
+        {
+            reservation.AddContactInfo();
+        }
+        
+        foreach (var person in reservation.People)
+        {
+            Console.WriteLine($"First Name: {person.FirstName}");
+            Console.WriteLine($"Last Name: {person.LastName}");
+            Console.WriteLine($"Birth Date: {person.BirthDate}");
+            Console.WriteLine($"Phone Number: {person.PhoneNumber}");
+            Console.WriteLine($"Email Address: {person.EmailAddress}");
+            Console.WriteLine("");
+        }
         // Console.WriteLine("Hello, World!");
         //Mail.Mailsender("Joey", "joeyzwinkels@gmail.com", "24885645");
+        /*
         Console.Title = "Flight Application";
         Console.ForegroundColor = ConsoleColor.Cyan;
 
@@ -261,7 +279,7 @@ public class Program
             
             Console.WriteLine("Exiting the program...");
             Flight.WriteToJson(flights);
-            Console.ReadKey();
+            Console.ReadKey();*/
     }
 
 
