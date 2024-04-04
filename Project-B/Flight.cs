@@ -15,7 +15,7 @@ public class Flight
     public Flight(string destination, string country, Plane airplane, string departingFrom, string departureDate, string departureTime, string estimatedTimeOfArrival)
     {
         Random random = new Random();
-        FlightNumber = random.Next(100000,999999);
+        FlightNumber = random.Next(1000000,9999999);
         Destination = destination;
         Country = country;
         Airplane = airplane;
@@ -24,7 +24,7 @@ public class Flight
 
         try
         {
-            EstimatedTimeofArrival = DateTime.ParseExact(estimatedTimeOfArrival, "yyyy-MM-ddTHH:mm:ss", null);
+            EstimatedTimeofArrival = DateTime.ParseExact(estimatedTimeOfArrival, "dd-MM-yyyyTHH:mm:ss", null);
         }
         catch (FormatException)
         {
@@ -33,7 +33,7 @@ public class Flight
 
         try
         {
-            DepartureTime = DateTime.ParseExact(departureTime, "yyyy-MM-ddTHH:mm:ss", null);
+            DepartureTime = DateTime.ParseExact(departureTime, "dd-MM-yyyyTHH:mm:ss", null);
         }
         catch (FormatException)
         {
