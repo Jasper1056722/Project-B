@@ -113,4 +113,29 @@ public class Reservation
         // Use SeatQual here for further processing
         Console.WriteLine($"You have selected {SeatQual} seat.");
     }
+
+    public void AddContactInfo()
+    {
+        Console.WriteLine("Please enter your contact information:");
+        Console.WriteLine("First Name: ");
+        string firstName = Console.ReadLine();
+        Console.WriteLine("Last Name: ");
+        string lastName = Console.ReadLine();
+        Console.WriteLine("Birth Date (DD-MM-YYYY): ");
+        string birthDate = Console.ReadLine();
+        Console.WriteLine("Phone Number: ");
+        string phoneNumber = Console.ReadLine();
+        Console.WriteLine("Email Address: ");
+        string emailAddress = Console.ReadLine();
+        Person person = new Person
+        {
+            FirstName = firstName,
+            LastName = lastName,
+            BirthDate = birthDate,
+            PhoneNumber = phoneNumber,
+            EmailAddress = emailAddress
+        };
+        People.Add(person);
+    }
+
 }
