@@ -202,4 +202,16 @@ public static class Flightinfo
        
         Console.WriteLine($"Flight with number {parsedFlightNumber} not found");
     }
+
+    public static void DisplayFlights(List<Flight> flights)
+    {
+        string flightsString = "";
+        foreach (Flight flight in flights)
+        {
+            string flightinfo = $"Flightnumber: \u001b[1m{flight.FlightNumber}\u001b[0m | Destination: \u001b[1m{flight.Destination}\u001b[0m | Country: \u001b[1m{flight.Country}\u001b[0m | DepartingFrom: \u001b[1m{flight.DepartingFrom}\u001b[0m | DepartureTime: \u001b[1m{flight.DepartureTime}\u001b[0m | Estimated time of arrival: \u001b[1m{flight.EstimatedTimeofArrival}\u001b[0m\n";
+
+            flightsString += flightinfo;
+        }
+        Console.WriteLine(flightsString);
+    }
 }

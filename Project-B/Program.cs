@@ -5,23 +5,30 @@ public class Program
 {
     static void Main()
     {
-        // Add contactinfo test
-        Reservation reservation = new Reservation(123456);
-        int AmountPersons = 2; // 2 people
-        for (int i = 0; i < AmountPersons; i++) // Adds multiple people contactinfo
+        List<Flight> flights = Flight.LoadJson();
+        foreach (Flight flight in flights)
         {
-            reservation.AddContactInfo();
+            Console.WriteLine(flight.DepartureTime);
         }
+        Flightinfo.DisplayFlights(flights);
+        Flight.WriteToJson(flights);
+        // // Add contactinfo test
+        // Reservation reservation = new Reservation(123456);
+        // int AmountPersons = 2; // 2 people
+        // for (int i = 0; i < AmountPersons; i++) // Adds multiple people contactinfo
+        // {
+        //     reservation.AddContactInfo();
+        // }
         
-        foreach (var person in reservation.People)
-        {
-            Console.WriteLine($"First Name: {person.FirstName}");
-            Console.WriteLine($"Last Name: {person.LastName}");
-            Console.WriteLine($"Birth Date: {person.BirthDate}");
-            Console.WriteLine($"Phone Number: {person.PhoneNumber}");
-            Console.WriteLine($"Email Address: {person.EmailAddress}");
-            Console.WriteLine("");
-        }
+        // foreach (var person in reservation.People)
+        // {
+        //     Console.WriteLine($"First Name: {person.FirstName}");
+        //     Console.WriteLine($"Last Name: {person.LastName}");
+        //     Console.WriteLine($"Birth Date: {person.BirthDate}");
+        //     Console.WriteLine($"Phone Number: {person.PhoneNumber}");
+        //     Console.WriteLine($"Email Address: {person.EmailAddress}");
+        //     Console.WriteLine("");
+        // }
         // Console.WriteLine("Hello, World!");
         //Mail.Mailsender("Joey", "joeyzwinkels@gmail.com", "24885645");
         /*

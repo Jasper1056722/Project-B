@@ -50,7 +50,25 @@ public class Flight
 
     public static void WriteToJson(List<Flight> flights)
     {
-        string json = JsonConvert.SerializeObject(flights, Formatting.Indented);
+        JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            DateFormatString = "dd-MM-yyyyTHH:mm:ss", // Customize the date format here
+            Formatting = Formatting.Indented
+        };
+
+        string json = JsonConvert.SerializeObject(flights, settings);
         File.WriteAllText("flightObject.json", json);
+    }
+
+    public bool IsFlightFull()
+    {
+        foreach (Seat seat in Airplane.Seats)
+        {
+            if (seat.PersonInSeat == null)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
