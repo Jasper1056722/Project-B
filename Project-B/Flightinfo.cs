@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Bcpg;
@@ -205,13 +206,33 @@ public static class Flightinfo
 
     public static void DisplayFlights(List<Flight> flights)
     {
-        string flightsString = "";
+        Console.ForegroundColor = ConsoleColor.White;
+        StringBuilder flightsString = new StringBuilder();
+
+        // Find the maximum length for each component
+        int maxFlightNumberLength = flights.Max(f => f.FlightNumber.ToString().Length);
+        int maxDestinationLength = flights.Max(f => f.Destination.Length);
+        int maxCountryLength = flights.Max(f => f.Country.Length);
+        int maxDepartingFromLength = flights.Max(f => f.DepartingFrom.Length);
+
+        // Calculate the maximum length for DateTime components
+        int maxDepartureTimeLength = flights.Max(f => f.DepartureTime.ToString().Length);
+        int maxEstimatedTimeLength = flights.Max(f => f.EstimatedTimeofArrival.ToString().Length);
+
         foreach (Flight flight in flights)
         {
-            string flightinfo = $"Flightnumber: \u001b[1m{flight.FlightNumber}\u001b[0m | Destination: \u001b[1m{flight.Destination}\u001b[0m | Country: \u001b[1m{flight.Country}\u001b[0m | DepartingFrom: \u001b[1m{flight.DepartingFrom}\u001b[0m | DepartureTime: \u001b[1m{flight.DepartureTime}\u001b[0m | Estimated time of arrival: \u001b[1m{flight.EstimatedTimeofArrival}\u001b[0m\n";
+            string flightinfo = $"\u001b[1;37m| Flightnumber: {flight.FlightNumber.ToString().PadRight(maxFlightNumberLength)} | Destination: {flight.Destination.PadRight(maxDestinationLength)} | Country: {flight.Country.PadRight(maxCountryLength)} | DepartingFrom: {flight.DepartingFrom.PadRight(maxDepartingFromLength)} | DepartureTime: {flight.DepartureTime.ToString().PadRight(maxDepartureTimeLength)} | Estimated time of arrival: {flight.EstimatedTimeofArrival.ToString().PadRight(maxEstimatedTimeLength)} |\u001b[0m\n";
 
-            flightsString += flightinfo;
+            flightsString.Append(flightinfo);
         }
+
+
+        if (flightsString.Length > 0)
+        {
+            flightsString.Length--; // Remove the last character (newline)
+        }
+        Console.WriteLine("+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+");
         Console.WriteLine(flightsString);
+        Console.WriteLine("+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+");
     }
 }
