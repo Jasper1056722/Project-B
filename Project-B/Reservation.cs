@@ -1,13 +1,14 @@
 public class Reservation
 {
     private int _reservationNumber;
+    public Flight FlightForReservation;
     private List<int> _takenNumbers = new List<int>();
     public int ReservationNumber { get; set; }
     public List<Person> People = new List<Person>();
     public int AccountKey { get; set; }
     private static Random random = new Random();
 
-    public Reservation(int accountKey)
+    public Reservation()
     {
         _reservationNumber = random.Next(100000, 999999);
 
@@ -138,4 +139,112 @@ public class Reservation
         People.Add(person);
     }
 
+    static string GetValidFlightNumber()
+    {
+        string flightNum = "";
+
+        while (true)
+        {
+            Console.WriteLine("Select a flight number");
+            string input = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                Console.WriteLine("Flight number cannot be blank. Please try again.");
+                continue;
+            }
+
+            if (!int.TryParse(input, out _))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid flight number (a number).");
+                continue;
+            }
+
+            flightNum = input;
+            break;
+        }
+
+        return flightNum;
+    }
+
+
+    public void SelectFlight(List<Flight> flights)
+    {
+        Flightinfo.DisplayFlights(flights);
+
+        while(true)
+        {
+            string FlightNum = GetValidFlightNumber();
+
+            foreach (Flight flight in flights)
+            {
+                if(FlightNum == flight.FlightNumber.ToString())
+                {
+                    if(!flight.IsFlightFull())
+                    {
+                        Console.WriteLine($"Selected flight {flight.FlightNumber} to {flight.Destination}");
+                        FlightForReservation = flight;
+                        return;
+                    }
+                }
+                
+            }
+            Console.WriteLine("Not a correct flight number");
+            
+        }
+    }
+
+    public void SelectSeat()
+    {
+        if(FlightForReservation.Airplane.Model == "Boeing 737")
+        {
+
+        }
+        else if(FlightForReservation.Airplane.Model == "Airbus 330")
+        {
+            
+        }
+        else if(FlightForReservation.Airplane.Model == "Boeing 787")
+        {
+            
+        }
+
+        foreach(Person person in People)
+        {
+            Console.WriteLine($"Selecting a seat for {person.FirstName} { person.LastName}");
+            string seatID = "";
+
+            while (true)
+            {
+                Console.WriteLine("Select a seat ID");
+                seatID = Console.ReadLine();
+                bool seatExists = FlightForReservation.Airplane.Seats.Any(seat => seat.ID == seatID);
+
+                if (seatExists)
+                {
+                    foreach (Seat seat in FlightForReservation.Airplane.Seats)
+                    {
+                        if (seat.ID == seatID)
+                        {
+                            if (seat.PersonInSeat == null)
+                            {
+                                seat.PersonInSeat = person;
+                                seat.SeatReservationNumber = ReservationNumber;
+                                Console.WriteLine($"Selected seat {seat.ID} for {person.FirstName} {person.LastName}");
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine($"Seat {seat.ID} is already taken. Please select another seat:");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Seat does not exist. Please try again:");
+                }
+            }
+        }
+    }
 }
