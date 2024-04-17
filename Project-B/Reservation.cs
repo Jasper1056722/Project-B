@@ -118,16 +118,69 @@ public class Reservation
     public void AddContactInfo()
     {
         Console.WriteLine("Please enter your contact information:");
-        Console.WriteLine("First Name: ");
-        string firstName = Console.ReadLine();
-        Console.WriteLine("Last Name: ");
-        string lastName = Console.ReadLine();
-        Console.WriteLine("Birth Date (DD-MM-YYYY): ");
-        string birthDate = Console.ReadLine();
-        Console.WriteLine("Phone Number: ");
-        string phoneNumber = Console.ReadLine();
-        Console.WriteLine("Email Address: ");
-        string emailAddress = Console.ReadLine();
+
+        string firstName;
+        do
+        {
+            Console.WriteLine("First Name: ");
+            firstName = Console.ReadLine();
+            if (string.IsNullOrEmpty(firstName) || !firstName.All(char.IsLetter))
+            {
+                Console.WriteLine("Invalid first name.");
+            }
+        } while (string.IsNullOrEmpty(firstName) || !firstName.All(char.IsLetter));
+    
+        string lastName;
+        do
+        {
+            Console.WriteLine("Last Name: ");
+            lastName = Console.ReadLine();
+            if (string.IsNullOrEmpty(lastName) || !lastName.All(char.IsLetter))
+            {
+                Console.WriteLine("Invalid last name.");
+            }
+        } while (string.IsNullOrEmpty(lastName) || !lastName.All(char.IsLetter));
+
+        string birthDate;
+        do
+        {
+            Console.WriteLine("Birth Date (DD-MM-YYYY): ");
+            birthDate = Console.ReadLine();
+            if (birthDate.Length < 8 || !birthDate.Replace("-", "").All(char.IsDigit))
+            {
+                Console.WriteLine("Invalid birth date format.");
+            }
+        } while (birthDate.Length < 8 || !birthDate.Replace("-", "").All(char.IsDigit));
+
+        string phoneNumber;
+        do
+        {
+            Console.WriteLine("Phone Number (7 to 15 digits, optionally starting with '+'): ");
+            phoneNumber = Console.ReadLine();
+            phoneNumber = phoneNumber.TrimStart('+');
+            
+            if (string.IsNullOrEmpty(phoneNumber))
+            {
+                Console.WriteLine("Phone number cannot be empty.");
+            }
+            else if (phoneNumber.Length < 7 || phoneNumber.Length > 15 || !phoneNumber.All(char.IsDigit))
+            {
+                Console.WriteLine("Invalid phone number.");
+            }
+        } while (string.IsNullOrEmpty(phoneNumber) || phoneNumber.Length < 7 || phoneNumber.Length > 15 || !phoneNumber.All(char.IsDigit));
+            
+
+        string emailAddress;
+        do
+        {
+            Console.WriteLine("Email Address: ");
+            emailAddress = Console.ReadLine();
+            if (!emailAddress.Contains("@"))
+            {
+                Console.WriteLine("Invalid email address. Please enter a valid email address.");
+            }
+        } while (!emailAddress.Contains("@"));
+        
         Person person = new Person
         {
             FirstName = firstName,
