@@ -5,30 +5,45 @@ public class Program
 {
     static void Main()
     {
-        List<Flight> flights = Flight.LoadJson();
-        foreach (Flight flight in flights)
-        {
-            Console.WriteLine(flight.DepartureTime);
-        }
-        Flightinfo.DisplayFlights(flights);
-        Flight.WriteToJson(flights);
-        // // Add contactinfo test
-        // Reservation reservation = new Reservation(123456);
-        // int AmountPersons = 2; // 2 people
-        // for (int i = 0; i < AmountPersons; i++) // Adds multiple people contactinfo
-        // {
-        //     reservation.AddContactInfo();
-        // }
         
-        // foreach (var person in reservation.People)
+        // List<Flight> flights = Flight.LoadJson();
+        // foreach (Flight flight in flights)
         // {
-        //     Console.WriteLine($"First Name: {person.FirstName}");
-        //     Console.WriteLine($"Last Name: {person.LastName}");
-        //     Console.WriteLine($"Birth Date: {person.BirthDate}");
-        //     Console.WriteLine($"Phone Number: {person.PhoneNumber}");
-        //     Console.WriteLine($"Email Address: {person.EmailAddress}");
-        //     Console.WriteLine("");
+        //     Console.WriteLine(flight.DepartureTime);
         // }
+        // Flightinfo.DisplayFlights(flights);
+        // Flight.WriteToJson(flights);
+        // Console.ReadKey();
+        // Add contactinfo test
+        Reservation reservation = new Reservation();
+        List<Flight> flights = Flight.LoadJson();
+        reservation.SelectFlight(flights);
+
+        Console.WriteLine("How many seats do you want to reserve?");
+        int AmountPersons = Convert.ToInt32(Console.ReadLine());
+        if (AmountPersons == 1)
+        {
+            reservation.ReserveRandomSeat(reservation.FlightForReservation);
+        }
+
+        else if (AmountPersons > 1)
+        {
+            for (int i = 0; i < AmountPersons; i++)
+            {
+                reservation.AddContactInfo(); // Adds a person object to list and adds contactinfo for each
+                reservation.SelectSeat();
+            }
+        }
+        
+        foreach (var person in reservation.People)
+        {
+            Console.WriteLine($"First Name: {person.FirstName}");
+            Console.WriteLine($"Last Name: {person.LastName}");
+            Console.WriteLine($"Birth Date: {person.BirthDate}");
+            Console.WriteLine($"Phone Number: {person.PhoneNumber}");
+            Console.WriteLine($"Email Address: {person.EmailAddress}");
+            Console.WriteLine("");
+        }
         // Console.WriteLine("Hello, World!");
         //Mail.Mailsender("Joey", "joeyzwinkels@gmail.com", "24885645");
         /*
