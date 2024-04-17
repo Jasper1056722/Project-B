@@ -5,8 +5,8 @@
     "Country": "India",
     "DepartingFrom": "Ameland",
     "DepartureDate": "28-04-2024",
-    "DepartureTime": "0001-01-01T00:00:00",
-    "EstimatedTimeofArrival": "0001-01-01T00:00:00",
+    "DepartureTime": "01-12-2003T11:30:00",
+    "EstimatedTimeofArrival": "01-12-2003T22:30:00",
     "Airplane": {
       "Seats": [
         {

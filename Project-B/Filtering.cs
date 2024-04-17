@@ -3,6 +3,7 @@ using MimeKit.Cryptography;
 using Org.BouncyCastle.Asn1.Cms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 public static class Filtering
 {
@@ -39,17 +40,18 @@ public static class Filtering
 
     public static void Time(DateTime departureDateInput01, DateTime departureDateInput02, List<Flight> flights)
     {
-        Console.WriteLine("Enter the departure date (dd-mm-yyyy):");
-
         List<string> FilterDateFlights = new List<string>();
 
         foreach (var flight in flights)
-        {
-            DateTime DatetimeDate = Convert.ToDateTime(flight.DepartureDate);
-
-            if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02)
+        {   
+            DateTime DatetimeDate;
+            string input = flight.DepartureDate;
+            if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
             {
-                FilterDateFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\n Departure date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
+                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02)
+                {
+                    FilterDateFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\n Departure date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
+                }
             }
         }
         if (FilterDateFlights.Count > 0){
