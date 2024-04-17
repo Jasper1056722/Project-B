@@ -6,6 +6,14 @@ public class Program
     static void Main()
     {
         
+        // // Add contactinfo test
+        // Reservation reservation = new Reservation(123456);
+        // int AmountPersons = 2; // 2 people
+        // for (int i = 0; i < AmountPersons; i++) // Adds multiple people contactinfo
+        // {
+        //     reservation.AddContactInfo();
+        // }
+        
         // List<Flight> flights = Flight.LoadJson();
         // foreach (Flight flight in flights)
         // {
@@ -18,6 +26,8 @@ public class Program
         Reservation reservation = new Reservation();
         List<Flight> flights = Flight.LoadJson();
         reservation.SelectFlight(flights);
+
+        
 
         Console.WriteLine("How many seats do you want to reserve?");
         int AmountPersons = Convert.ToInt32(Console.ReadLine());
