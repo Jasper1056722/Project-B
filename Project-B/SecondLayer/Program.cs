@@ -5,48 +5,9 @@ public class Program
 {
     static void Main()
     {
-        
-        // List<Flight> flights = Flight.LoadJson();
-        // foreach (Flight flight in flights)
-        // {
-        //     Console.WriteLine(flight.DepartureTime);
-        // }
-        // Flightinfo.DisplayFlights(flights);
-        // Flight.WriteToJson(flights);
-        // Console.ReadKey();
-        // Add contactinfo test
-        // Reservation reservation = new Reservation();
+        Reservation reservation = new Reservation();
         List<Flight> flights = Flight.LoadJson();
-        // reservation.SelectFlight(flights);
-
-        // Console.WriteLine("How many seats do you want to reserve?");
-        // int AmountPersons = Convert.ToInt32(Console.ReadLine());
-        // if (AmountPersons == 1)
-        // {
-        //     reservation.ReserveRandomSeat(reservation.FlightForReservation);
-        // }
-
-        // else if (AmountPersons > 1)
-        // {
-        //     for (int i = 0; i < AmountPersons; i++)
-        //     {
-        //         reservation.AddContactInfo(); // Adds a person object to list and adds contactinfo for each
-        //     }
-        //     reservation.SelectSeat();
-        // }
-        
-        // foreach (var person in reservation.People)
-        // {
-        //     Console.WriteLine($"First Name: {person.FirstName}");
-        //     Console.WriteLine($"Last Name: {person.LastName}");
-        //     Console.WriteLine($"Birth Date: {person.BirthDate}");
-        //     Console.WriteLine($"Phone Number: {person.PhoneNumber}");
-        //     Console.WriteLine($"Email Address: {person.EmailAddress}");
-        //     Console.WriteLine("");
-        // }
-        // Console.WriteLine("Hello, World!");
-        //Mail.Mailsender("Joey", "joeyzwinkels@gmail.com", "24885645");
-        
+       
         Console.Title = "Flight Application";
         Console.ForegroundColor = ConsoleColor.Cyan;
 
@@ -208,6 +169,48 @@ public class Program
                     
                     case "Q":
                         exitRequested = true;
+                        break;
+
+                    case "MR":
+                        reservation.SelectFlight(flights);
+
+                        Console.WriteLine("How many seats do you want to reserve?");
+                        int AmountPersons = Convert.ToInt32(Console.ReadLine());
+                        if (AmountPersons == 1)
+                        {
+                            reservation.AddContactInfo();
+
+                            bool isValidChoice = false;
+                            while (!isValidChoice)
+                            {
+                                Console.WriteLine("You have 2 options: \n1.Reserve random seat \n2.Select seat");
+                                int choice2 = Convert.ToInt32(Console.ReadLine());
+                                switch (choice2)
+                                {
+                                    case 1:
+                                        Console.WriteLine("You chose: Reserve random seat");
+                                        reservation.ReserveRandomSeat(reservation.FlightForReservation);
+                                        isValidChoice = true;
+                                        break;
+                                    case 2:
+                                        Console.WriteLine("You chose: Select seat");
+                                        isValidChoice = true;
+                                        break;
+                                    default:
+                                        Console.WriteLine("Invalid choice. Please enter 1 or 2.");
+                                        break;
+                                }   
+                            }
+                        }
+
+                        else if (AmountPersons > 1)
+                        {
+                            for (int i = 0; i < AmountPersons; i++)
+                            {
+                                reservation.AddContactInfo();
+                            }
+                            reservation.SelectSeat();
+                        }
                         break;
                 }
                     

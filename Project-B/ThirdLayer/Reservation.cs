@@ -267,8 +267,9 @@ public class Reservation
         {
             Console.WriteLine($"Selecting a seat for {person.FirstName} { person.LastName}");
             string seatID = "";
+            bool InLoop = true;
 
-            while (true)
+            while (InLoop)
             {
                 Console.WriteLine("Select a seat ID");
                 seatID = Console.ReadLine();
@@ -285,7 +286,7 @@ public class Reservation
                                 seat.PersonInSeat = person;
                                 seat.SeatReservationNumber = ReservationNumber;
                                 Console.WriteLine($"Selected seat {seat.ID} for {person.FirstName} {person.LastName}");
-                                break;
+                                InLoop = false;
                             }
                             else
                             {
