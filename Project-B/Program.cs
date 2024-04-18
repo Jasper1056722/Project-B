@@ -31,8 +31,8 @@ public class Program
             for (int i = 0; i < AmountPersons; i++)
             {
                 reservation.AddContactInfo(); // Adds a person object to list and adds contactinfo for each
-                reservation.SelectSeat();
             }
+            reservation.SelectSeat();
         }
         
         foreach (var person in reservation.People)

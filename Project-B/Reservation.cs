@@ -117,7 +117,8 @@ public class Reservation
 
     public void AddContactInfo()
     {
-        Console.WriteLine("Please enter your contact information:");
+        int count = People.Count + 1;
+        Console.WriteLine($"Please enter contact information for person {count}:");
 
         string firstName;
         do
