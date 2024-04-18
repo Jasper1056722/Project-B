@@ -47,12 +47,12 @@ public static class Searching
 
                 Console.WriteLine($"Found {DateFlights.Count} flights departing on: {departureDateInput}:");
 
-            foreach (var pettington in DateFlights)
-            {
-                Console.WriteLine(pettington);
-                Console.WriteLine("");
             }
-            }
+        }
+        foreach (var pettington in DateFlights)
+        {
+            Console.WriteLine(pettington);
+            Console.WriteLine("");
         }
         return;
     }
