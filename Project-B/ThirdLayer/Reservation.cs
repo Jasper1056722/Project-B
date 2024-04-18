@@ -252,11 +252,15 @@ public class Reservation
     {
         if(FlightForReservation.Airplane.Model == "Boeing 737")
         {
-
+            //foreach (Seat seat in FlightForReservation.Airplane.Seats)
+            //{
+            //    Console.WriteLine($"{seat.ID}: {seat.PersonInSeat}");
+            //}
+            Flightinfo.PrintPlane("Boeing 737");
         }
         else if(FlightForReservation.Airplane.Model == "Airbus 330")
         {
-            
+            Flightinfo.PrintPlane("Airbus 330");
         }
         else if(FlightForReservation.Airplane.Model == "Boeing 787")
         {
