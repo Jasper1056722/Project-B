@@ -15,47 +15,44 @@ public class Program
         // Flight.WriteToJson(flights);
         // Console.ReadKey();
         // Add contactinfo test
-        Reservation reservation = new Reservation();
+        // Reservation reservation = new Reservation();
         List<Flight> flights = Flight.LoadJson();
-        reservation.SelectFlight(flights);
+        // reservation.SelectFlight(flights);
 
-        Console.WriteLine("How many seats do you want to reserve?");
-        int AmountPersons = Convert.ToInt32(Console.ReadLine());
-        if (AmountPersons == 1)
-        {
-            reservation.ReserveRandomSeat(reservation.FlightForReservation);
-        }
+        // Console.WriteLine("How many seats do you want to reserve?");
+        // int AmountPersons = Convert.ToInt32(Console.ReadLine());
+        // if (AmountPersons == 1)
+        // {
+        //     reservation.ReserveRandomSeat(reservation.FlightForReservation);
+        // }
 
-        else if (AmountPersons > 1)
-        {
-            for (int i = 0; i < AmountPersons; i++)
-            {
-                reservation.AddContactInfo(); // Adds a person object to list and adds contactinfo for each
-            }
-            reservation.SelectSeat();
-        }
+        // else if (AmountPersons > 1)
+        // {
+        //     for (int i = 0; i < AmountPersons; i++)
+        //     {
+        //         reservation.AddContactInfo(); // Adds a person object to list and adds contactinfo for each
+        //     }
+        //     reservation.SelectSeat();
+        // }
         
-        foreach (var person in reservation.People)
-        {
-            Console.WriteLine($"First Name: {person.FirstName}");
-            Console.WriteLine($"Last Name: {person.LastName}");
-            Console.WriteLine($"Birth Date: {person.BirthDate}");
-            Console.WriteLine($"Phone Number: {person.PhoneNumber}");
-            Console.WriteLine($"Email Address: {person.EmailAddress}");
-            Console.WriteLine("");
-        }
+        // foreach (var person in reservation.People)
+        // {
+        //     Console.WriteLine($"First Name: {person.FirstName}");
+        //     Console.WriteLine($"Last Name: {person.LastName}");
+        //     Console.WriteLine($"Birth Date: {person.BirthDate}");
+        //     Console.WriteLine($"Phone Number: {person.PhoneNumber}");
+        //     Console.WriteLine($"Email Address: {person.EmailAddress}");
+        //     Console.WriteLine("");
+        // }
         // Console.WriteLine("Hello, World!");
         //Mail.Mailsender("Joey", "joeyzwinkels@gmail.com", "24885645");
-        /*
+        
         Console.Title = "Flight Application";
         Console.ForegroundColor = ConsoleColor.Cyan;
-
-        Console.Clear();
 
         bool exitRequested = false;
         
         Account account = new Account();
-        List<Flight> flights = Flight.LoadJson();
 
         do
         {
@@ -301,7 +298,7 @@ public class Program
             
             Console.WriteLine("Exiting the program...");
             Flight.WriteToJson(flights);
-            Console.ReadKey();*/
+            Console.ReadKey();
     }
 
 
