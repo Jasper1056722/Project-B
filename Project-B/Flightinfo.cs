@@ -1,30 +1,29 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Bcpg;
 using static System.Runtime.InteropServices.JavaScript.JSType;
- 
- 
+
+
 public static class Flightinfo
 {
- 
+
     public static void UpdateInfo(string flightnumber, List<Flight> flights)
     {
-        if(string.IsNullOrEmpty(flightnumber))
+        if (string.IsNullOrEmpty(flightnumber))
         {
             Console.WriteLine("Flight Number cant be empty");
             return;
         }
- 
-        if(!flightnumber.All(char.IsDigit))
+
+        if (!flightnumber.All(char.IsDigit))
         {
             Console.WriteLine("Cant use letters in flight number, only digits");
             return;
         }
- 
+
         foreach (Flight flight in flights)
         {
             int Toflightnumber = int.Parse(flightnumber);
@@ -77,32 +76,32 @@ public static class Flightinfo
                     case 5:
                         Console.WriteLine("Enter new departure time (dd-MM-yyyy HH:mm:ss): ");
                         string newDepartureTimeString = Console.ReadLine();
-                       
+
                         DateTime newDepartureTime;
                         if (!DateTime.TryParseExact(newDepartureTimeString, "dd-MM-yyyy HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out newDepartureTime))
                         {
                             Console.WriteLine("Invalid datetime format. Please enter the departure time in the format dd-MM-yyyy HH:mm:ss.");
                             break;
                         }
- 
+
                         flight.DepartureTime = newDepartureTime;
                         Console.WriteLine($"Departure time updated to {flight.DepartureTime}");
                         break;
                     case 6:
                         Console.WriteLine("Enter new departure time (dd-MM-yyyy HH:mm:ss): ");
                         string EstimatedTimeofArrivalstring = Console.ReadLine();
-                       
+
                         DateTime EstimatedTimeofArrival;
                         if (!DateTime.TryParseExact(EstimatedTimeofArrivalstring, "dd-MM-yyyy HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out EstimatedTimeofArrival))
                         {
                             Console.WriteLine("Invalid datetime format. Please enter the estimated arrival time in the format dd-MM-yyyy HH:mm:ss.");
                             break;
                         }
- 
+
                         flight.EstimatedTimeofArrival = EstimatedTimeofArrival;
                         Console.WriteLine($"Estimated time of arrival updated to {flight.EstimatedTimeofArrival}");
                         break;
- 
+
                     case 7:
                         break;
                     default:
@@ -111,10 +110,10 @@ public static class Flightinfo
                 }
                 return;
             }
-        Console.WriteLine($"{flightnumber} doesn't exist");
+            Console.WriteLine($"{flightnumber} doesn't exist");
+        }
     }
-    }
- 
+
     public static void FlightAdd(List<Flight> flights)
     {
         Console.WriteLine("Please enter the Destination");
@@ -124,7 +123,7 @@ public static class Flightinfo
             Console.WriteLine("Please enter the Destination");
             Destination = Console.ReadLine();
         }
- 
+
         Console.WriteLine("Please enter the Country");
         string Country = Console.ReadLine();
         while (string.IsNullOrEmpty(Country))
@@ -132,7 +131,7 @@ public static class Flightinfo
             Console.WriteLine("Please enter the Country");
             Country = Console.ReadLine();
         }
- 
+
         Console.WriteLine("Please enter the Airplane");
         string Airplane = Console.ReadLine();
         while (string.IsNullOrEmpty(Airplane))
@@ -140,7 +139,7 @@ public static class Flightinfo
             Console.WriteLine("Please enter the Airplane");
             Airplane = Console.ReadLine();
         }
- 
+
         Console.WriteLine("Please enter the location of Departure");
         string DepartingFrom = Console.ReadLine();
         while (string.IsNullOrEmpty(DepartingFrom))
@@ -148,7 +147,7 @@ public static class Flightinfo
             Console.WriteLine("Please enter the location of Departure");
             DepartingFrom = Console.ReadLine();
         }
- 
+
         Console.WriteLine("Please enter the Departure Date");
         string DepartureDate = Console.ReadLine();
         while (string.IsNullOrEmpty(DepartureDate))
@@ -156,7 +155,7 @@ public static class Flightinfo
             Console.WriteLine("Please enter the Departure Date");
             DepartureDate = Console.ReadLine();
         }
- 
+
         Console.WriteLine("Please enter the Departure Time (DD-MM-YYYY HH:MM:SS)");
         string DepartureTime = Console.ReadLine();
         while (string.IsNullOrEmpty(DepartureTime))
@@ -164,7 +163,7 @@ public static class Flightinfo
             Console.WriteLine("Please enter the Departure Time (DD-MM-YYYY HH:MM:SS)");
             DepartureTime = Console.ReadLine();
         }
- 
+
         Console.WriteLine("Please enter the Estimated Time of Arrival (DD-MM-YYYY HH:MM:SS)");
         string ArrivalTime = Console.ReadLine();
         while (string.IsNullOrEmpty(ArrivalTime))
@@ -172,11 +171,11 @@ public static class Flightinfo
             Console.WriteLine("Please enter the Estimated Time of Arrival (DD-MM-YYYY HH:MM:SS)");
             ArrivalTime = Console.ReadLine();
         }
- 
+
         Plane plane = new Plane("Boeing 787");
-        flights.Add(new Flight(Destination, Country, plane, DepartingFrom, DepartureDate, DepartureTime, ArrivalTime));                                                  
+        flights.Add(new Flight(Destination, Country, plane, DepartingFrom, DepartureDate, DepartureTime, ArrivalTime));
     }
- 
+
     public static void FlightDelete(string flightNumber, List<Flight> flights)
     {
         if (string.IsNullOrEmpty(flightNumber))
@@ -184,14 +183,14 @@ public static class Flightinfo
             Console.WriteLine("Flight number cannot be empty");
             return;
         }
- 
+
         if (!int.TryParse(flightNumber, out int parsedFlightNumber))
         {
             Console.WriteLine("Invalid flight number format. Please enter a valid integer flight number.");
             return;
         }
- 
-        foreach (Flight flight in flights)  
+
+        foreach (Flight flight in flights)
         {
             if (flight.FlightNumber == parsedFlightNumber)
             {
@@ -200,40 +199,72 @@ public static class Flightinfo
                 return;
             }
         }
-       
+
         Console.WriteLine($"Flight with number {parsedFlightNumber} not found");
     }
 
     public static void DisplayFlights(List<Flight> flights)
     {
-        Console.ForegroundColor = ConsoleColor.White;
-        StringBuilder flightsString = new StringBuilder();
-
-        // Find the maximum length for each component
-        int maxFlightNumberLength = flights.Max(f => f.FlightNumber.ToString().Length);
-        int maxDestinationLength = flights.Max(f => f.Destination.Length);
-        int maxCountryLength = flights.Max(f => f.Country.Length);
-        int maxDepartingFromLength = flights.Max(f => f.DepartingFrom.Length);
-
-        // Calculate the maximum length for DateTime components
-        int maxDepartureTimeLength = flights.Max(f => f.DepartureTime.ToString().Length);
-        int maxEstimatedTimeLength = flights.Max(f => f.EstimatedTimeofArrival.ToString().Length);
-
+        string flightsString = "";
         foreach (Flight flight in flights)
         {
-            string flightinfo = $"\u001b[1;37m| Flightnumber: {flight.FlightNumber.ToString().PadRight(maxFlightNumberLength)} | Destination: {flight.Destination.PadRight(maxDestinationLength)} | Country: {flight.Country.PadRight(maxCountryLength)} | DepartingFrom: {flight.DepartingFrom.PadRight(maxDepartingFromLength)} | DepartureTime: {flight.DepartureTime.ToString().PadRight(maxDepartureTimeLength)} | Estimated time of arrival: {flight.EstimatedTimeofArrival.ToString().PadRight(maxEstimatedTimeLength)} |\u001b[0m\n";
+            string flightinfo = $"Flightnumber: \u001b[1m{flight.FlightNumber}\u001b[0m | Destination: \u001b[1m{flight.Destination}\u001b[0m | Country: \u001b[1m{flight.Country}\u001b[0m | DepartingFrom: \u001b[1m{flight.DepartingFrom}\u001b[0m | DepartureTime: \u001b[1m{flight.DepartureTime}\u001b[0m | Estimated time of arrival: \u001b[1m{flight.EstimatedTimeofArrival}\u001b[0m\n";
 
-            flightsString.Append(flightinfo);
+            flightsString += flightinfo;
         }
-
-
-        if (flightsString.Length > 0)
-        {
-            flightsString.Length--; // Remove the last character (newline)
-        }
-
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("\u001b[37m+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\u001b[0m");
         Console.WriteLine(flightsString);
-        Console.WriteLine("\u001b[37m+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\u001b[0m");    }
+    }
+
+    public static void PrintPlane(string airplane)
+    {
+        string picture = "";
+
+        if (airplane is "Boeing 737")
+        {
+            picture = @"
+
+                                                               /              |
+                                                              /               |
+                                                             /                |
+                                                            /                 |
+                                                           /                  |
+             ___^_________________________________________/__________^___^____\_________________________________________________
+     _______/	      F    [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] { } { }[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] _ \_^_____
+  __/                 E    [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] { } { }[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]|w|        \
+ /   /--              D    [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] { } { }[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]|c|         |
+|    |        _          1  2  3  4  5  6  7  8  9 10 11 12 13 14 15  16  17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33  _          |
+ \__ \--     |w|      C [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] { } { }[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]|w|         |
+    \_______ |c|      B [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] { } { }[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]|c| _______/
+            \________ A [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] { } { }[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]___/ !
+                !    \_______________________________________________!___!__________________________________________________/
+                                                          \                   /
+                                                           \                  |
+                                                            \                 |
+                                                             \                |
+                                                              \               |
+                                                               \              |
+";
+
+        }
+        else if (airplane is "Airbus 330")
+        {
+            picture = @"          
+                    __^_______________________________^_____________________________________________________________________^____________________________
+              _____/    |K [ ] [ ]  [ ][ ][ ][ ] |w|	 | K [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] |w| |   K [ ][ ][ ][ ][ ][ ][ ][ ]\____________________^_
+         ____/|         |J          [ ][ ][ ][ ] |c|     | J [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] |c| |   J [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]     |
+        /     |         |H [ ] [ ]  [ ][ ][ ][ ]         | H [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]     |   H [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]     |
+     __/  /   |             1   2    4  5  6  7  8  9 10     14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33   _     36 37 38 39 40 41 42 43 44 45 46 47 48 49 50   |
+    /    /    |         |G [ ] [ ]     [ ][ ][ ][ ][ ][ ]  G [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] |c| G [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]|  |
+   |	|     |         |F             [ ][ ][ ][ ][ ][ ]  F [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] |w| F [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]|  |
+    \__	 \    |         |D [ ] [ ]     [ ][ ][ ][ ][ ][ ]  D [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] |c| D [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]|  |
+       \  \   |	 _                                                                                                                                                              |
+        \____ | |w|     |C [ ] [ ]  [ ][ ][ ][ ]  _      | C [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]  _  |   C [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]     |
+             \| |c|     |B          [ ][ ][ ][ ] |w|     | B [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] |w| |   B [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]     |
+                  \___!_|A [ ] [ ]  [ ][ ][ ][ ] |c|     | A [ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ][ ] |c| |   A [ ][ ][ ][ ][ ][ ][ ][ ]_____________________!_|
+                        \______________________________!____________________________________________________________________!___________________________/
+";
+        }
+
+        Console.WriteLine(picture);
+    }
 }
