@@ -4,6 +4,7 @@ public static class Menu
     {
         Console.WriteLine(@"All options
 SE. Search for a flight
+MR. Make a reservation
 LO. logout
 Q. Quit Program
 ");
