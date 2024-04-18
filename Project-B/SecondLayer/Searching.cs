@@ -32,8 +32,6 @@ public static class Searching
 
     public static void Time(string departureDateInput, List<Flight> flights)
     {
-        Console.WriteLine("Enter the departure date (dd-mm-yyyy):");
-
         List<string> DateFlights = new List<string>();
 
         foreach (var flight in flights)
@@ -42,17 +40,12 @@ public static class Searching
             {
                 DateFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\n Departure date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
             }
-
-            if (DateFlights.Count > 0){
-
-                Console.WriteLine($"Found {DateFlights.Count} flights departing on: {departureDateInput}:");
-
-            foreach (var pettington in DateFlights)
-            {
-                Console.WriteLine(pettington);
-                Console.WriteLine("");
-            }
-            }
+        }
+        Console.WriteLine($"Found {DateFlights.Count} flights departing on: {departureDateInput}:");
+        foreach (var pettington in DateFlights)
+        {
+            Console.WriteLine(pettington);
+            Console.WriteLine("");
         }
         return;
     }
@@ -64,7 +57,6 @@ public static class Searching
 
         foreach (var flight in flights)
         {
-            Console.WriteLine(flight.Airplane.Model);
             if (flight.Airplane.Model.ToLower() == PlaneAnswer)
             {
                 PlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");

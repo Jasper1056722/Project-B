@@ -64,7 +64,7 @@ public class Program
                             Console.WriteLine(@"
                 Based on what criteria do you want to search flights?
                 - Destination [D]
-                - Departure Time [T]
+                - Departure Date [T]
                 - Airline [A]
 
                 Or do you want to Exit?
@@ -120,7 +120,7 @@ public class Program
                             Console.WriteLine(@"
                 Based on what criteria do you want to search flights?
                 - Destination [D]
-                - Departure Time [T]
+                - Departure Date [T]
                 - Airline [A]
 
                 Or do you want to Exit?
@@ -243,7 +243,7 @@ public class Program
                             Console.WriteLine(@"
                 Based on what criteria do you want to search flights?
                 - Destination [D]
-                - Departure Time [T]
+                - Departure Date [T]
                 - Airline [A]
 
                 Or do you want to Exit?
