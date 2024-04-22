@@ -250,17 +250,26 @@ public class Reservation
 
     public void SelectSeat()
     {
+        Dictionary<string, string> Seats = new Dictionary<string, string>();
+
         if(FlightForReservation.Airplane.Model == "Boeing 737")
         {
-            //foreach (Seat seat in FlightForReservation.Airplane.Seats)
-            //{
-            //    Console.WriteLine($"{seat.ID}: {seat.PersonInSeat}");
-            //}
-            Flightinfo.PrintPlane("Boeing 737");
+            foreach (Seat seat in FlightForReservation.Airplane.Seats)
+            {
+                if (seat.PersonInSeat is null)
+                {
+                    Seats.Add(seat.ID," ");
+                }
+                else
+                {
+                    Seats.Add(seat.ID,"X");
+                }
+            }
+            Flightinfo.PrintPlane("Boeing 737", Seats);
         }
         else if(FlightForReservation.Airplane.Model == "Airbus 330")
         {
-            Flightinfo.PrintPlane("Airbus 330");
+            Flightinfo.PrintPlane("Airbus 330", Seats);
         }
         else if(FlightForReservation.Airplane.Model == "Boeing 787")
         {
