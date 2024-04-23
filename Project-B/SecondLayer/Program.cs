@@ -5,6 +5,7 @@ public class Program
 {
     static void Main()
     {
+        Menu.StartMenu();
         Reservation reservation = new Reservation();
         List<Flight> flights = Flight.LoadJson();
        
