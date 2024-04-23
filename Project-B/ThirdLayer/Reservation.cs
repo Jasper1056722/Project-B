@@ -297,7 +297,18 @@ public class Reservation
         }
         else if(FlightForReservation.Airplane.Model == "Boeing 787")
         {
-            
+            foreach (Seat seat in FlightForReservation.Airplane.Seats)
+            {
+                if (seat.PersonInSeat is null)
+                {
+                    Seats.Add(seat.ID," ");
+                }
+                else
+                {
+                    Seats.Add(seat.ID,"X");
+                }
+            }
+            Flightinfo.PrintPlane("Boeing 787", Seats);
         }
 
         foreach(Person person in People)
