@@ -20,6 +20,19 @@ public class Reservation
         ReservationNumber = _reservationNumber;
     }
 
+    public Reservation(Flight flight)
+    {
+        _reservationNumber = random.Next(100000, 999999);
+
+        while (_takenNumbers.Contains(_reservationNumber))
+        {
+            _reservationNumber = random.Next(100000, 999999);
+        }
+
+        ReservationNumber = _reservationNumber;
+        FlightForReservation = flight;
+    }
+
     public void ReserveRandomSeat(Flight flight)
     {
         string SeatQual = "";
@@ -313,6 +326,20 @@ public class Reservation
                     Console.WriteLine("Seat does not exist. Please try again:");
                 }
             }
+        }
+    }
+
+    public static void DisplayReservations(List<Reservation> reservations)
+    {
+        string CYAN = Console.IsOutputRedirected ? "" : "\x1b[96m";
+        string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
+        foreach(Reservation reservation in reservations)
+        {
+            Console.WriteLine("+--------------------------------------------------------------------------------+");
+            Console.WriteLine($"| {CYAN}Reservation number: {reservation.ReservationNumber.ToString().PadRight(19)}{NORMAL} | {CYAN}Destination: {reservation.FlightForReservation.Destination.PadRight(23)}{NORMAL} |");
+            Console.WriteLine($"| {CYAN}Flightnumber:      {reservation.FlightForReservation.FlightNumber.ToString().PadRight(20)}{NORMAL} | {CYAN}Departure time: {reservation.FlightForReservation.DepartureTime.ToString("yyyy-MM-dd HH:mm:ss").PadRight(20)}{NORMAL} |");
+            Console.WriteLine($"| {CYAN}Airplane model:    {reservation.FlightForReservation.Airplane.Model.PadRight(20)}{NORMAL} | {CYAN}ETA:            {reservation.FlightForReservation.EstimatedTimeofArrival.ToString("yyyy-MM-dd HH:mm:ss").PadRight(20)}{NORMAL} |");
+            Console.WriteLine("+--------------------------------------------------------------------------------+\n");
         }
     }
 }
