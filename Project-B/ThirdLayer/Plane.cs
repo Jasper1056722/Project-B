@@ -125,7 +125,7 @@ public class Plane
                     Seats.Add(seat);
                 }
 
-                if ((row == 'D' || row == 'F' || row == 'G') && ( i >= 45 && i <= 50))
+                if ((row == 'D' || row == 'F' || row == 'G') && ( i >= 44 && i <= 50))
                 {
                     string seatId = row.ToString() + i;
                     string seatClass = "Economy";

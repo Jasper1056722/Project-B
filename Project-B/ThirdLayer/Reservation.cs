@@ -282,6 +282,17 @@ public class Reservation
         }
         else if(FlightForReservation.Airplane.Model == "Airbus 330")
         {
+            foreach (Seat seat in FlightForReservation.Airplane.Seats)
+            {
+                if (seat.PersonInSeat is null)
+                {
+                    Seats.Add(seat.ID," ");
+                }
+                else
+                {
+                    Seats.Add(seat.ID,"X");
+                }
+            }
             Flightinfo.PrintPlane("Airbus 330", Seats);
         }
         else if(FlightForReservation.Airplane.Model == "Boeing 787")
