@@ -263,6 +263,9 @@ public class Reservation
 
     public void SelectSeat()
     {
+        string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
+        string RED = Console.IsOutputRedirected ? "" : "\x1b[91m";    
+
         Dictionary<string, string> Seats = new Dictionary<string, string>();
 
         if(FlightForReservation.Airplane.Model == "Boeing 737")
@@ -275,7 +278,7 @@ public class Reservation
                 }
                 else
                 {
-                    Seats.Add(seat.ID,"X");
+                    Seats.Add(seat.ID,$"{RED}X{NORMAL}");
                 }
             }
             Flightinfo.PrintPlane("Boeing 737", Seats);
@@ -290,7 +293,7 @@ public class Reservation
                 }
                 else
                 {
-                    Seats.Add(seat.ID,"X");
+                    Seats.Add(seat.ID,$"{RED}X{NORMAL}");
                 }
             }
             Flightinfo.PrintPlane("Airbus 330", Seats);
@@ -305,7 +308,7 @@ public class Reservation
                 }
                 else
                 {
-                    Seats.Add(seat.ID,"X");
+                    Seats.Add(seat.ID,$"{RED}X{NORMAL}");
                 }
             }
             Flightinfo.PrintPlane("Boeing 787", Seats);
