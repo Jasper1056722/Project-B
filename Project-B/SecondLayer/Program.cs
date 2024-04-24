@@ -6,6 +6,13 @@ public class Program
     static void Main()
     {
         Menu.StartMenu();
+        Thread.Sleep(4000);
+        int selectedNum = Menu.MenuPanel("Login menu", "Here u can login", ["Login", "Signup", "Search Flight", "Quit Program"]);
+        switch(selectedNum)
+        {
+            case 999:
+                break;
+        }
         Reservation reservation = new Reservation();
         List<Flight> flights = Flight.LoadJson();
        

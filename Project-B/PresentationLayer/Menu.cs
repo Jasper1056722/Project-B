@@ -41,6 +41,56 @@ Q. Quit Program
         return AmenuChoice.ToUpper();
     }
 
+    public static int MenuPanel(string Title, string SubTitle, string[] options)
+    {
+        string CYAN = Console.IsOutputRedirected ? "" : "\x1b[96m";
+        string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
+        int selectedOptionIndex = 0;
+        while (true)
+        {
+            Console.Clear();
+
+            // Draw box around options
+            Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
+            Console.WriteLine($"│     {Title.PadRight(56)} |");
+            Console.WriteLine($"│                                                              | ");
+            Console.WriteLine($"│     {SubTitle.PadRight(56)} |");
+            Console.WriteLine($"│                                                              | ");
+            for (int i = 0; i < options.Length; i++)
+            {
+                if (i == selectedOptionIndex)
+                {
+                    Console.Write("│ ");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Write($" > {CYAN}{options[i]}{NORMAL}");
+                    Console.ResetColor();
+                    Console.WriteLine(new string(' ', 48 - options[i].Length) + "│");
+                }
+                else
+                {
+                    Console.WriteLine($"│ > {CYAN}{options[i]}{NORMAL}{new string(' ', 49 - options[i].Length)}│");
+                }
+            }
+            Console.WriteLine($"│                                                              | ");
+            Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
+
+            // Handle user input
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            switch (keyInfo.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    selectedOptionIndex = Math.Max(0, selectedOptionIndex - 1);
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedOptionIndex = Math.Min(options.Length - 1, selectedOptionIndex + 1);
+                    break;
+                case ConsoleKey.Enter:
+                    // User has selected an option
+                    return selectedOptionIndex;
+            }
+        }
+    }
+
     public static void StartMenu()
     {   
         string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
