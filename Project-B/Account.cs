@@ -38,35 +38,43 @@ public class Account
    public bool Logintodb(string email, string password)
     {
         string connectionString = @"Data Source=Accounts.db;Version=3;";
-        using (var connection = new SQLiteConnection(connectionString))
+        try
         {
-            connection.Open();
-            string selectAccountQuery = @"
-                SELECT Id, IsAdmin
-                FROM Accounts
-                WHERE Username = @Username AND Password = @Password";
-
-            using (var command = new SQLiteCommand(selectAccountQuery, connection))
+            using (var connection = new SQLiteConnection(connectionString))
             {
-                // Add parameters to the query
-                command.Parameters.AddWithValue("@Username", email);
-                command.Parameters.AddWithValue("@Password", password);
+                connection.Open();
+                string selectAccountQuery = @"
+                    SELECT Id, IsAdmin
+                    FROM Accounts
+                    WHERE Username = @Username AND Password = @Password";
 
-                using (var reader = command.ExecuteReader())
+                using (var command = new SQLiteCommand(selectAccountQuery, connection))
                 {
-                    if (reader.Read())
+                    // Add parameters to the query
+                    command.Parameters.AddWithValue("@Username", email);
+                    command.Parameters.AddWithValue("@Password", password);
+
+                    using (var reader = command.ExecuteReader())
                     {
-                        Primkey = reader.GetInt32(0);
-                        IsAdminbool = reader.GetBoolean(1);
-                        IsLoggedIn = true;
-                        
-                        return true;
+                        if (reader.Read())
+                        {
+                            Primkey = reader.GetInt32(0);
+                            IsAdminbool = reader.GetBoolean(1);
+                            IsLoggedIn = true;
+                            
+                            return true;
+                        }
                     }
                 }
-            }
 
-            // If no matching account found
-            IsLoggedIn = false;
+                // If no matching account found
+                IsLoggedIn = false;
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred: " + ex.Message);
             return false;
         }
     }
