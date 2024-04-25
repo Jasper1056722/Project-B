@@ -79,37 +79,49 @@ public class Account
         }
     }
 
-    public string  Login(string email, string password)
-    {
-        if(Logintodb(email, password))
-        {
-            return "Login successfull";
-            // Perform actions after successful login
-        }
-        else
-        {
-            return "Login failed. Incorrect email or password.";
-            // Handle failed login attempt
-        }
-
-    }
-
-    public string Signup(string email, string password)
-    {
-        if (Addtodb(email, password))
-        {
-            return "Account Created";
-        }
-        else
-        {
-            return "Failed to create account.";
-        }
-    }
     public void logout()
     {
         IsAdminbool = false;
         IsLoggedIn = false;
         Primkey = 0;
+    }
+
+    public static bool IsValidEmail(string email)
+    {
+        // Split the email address into two parts
+        string[] parts = email.Split('@');
+
+        // Check if there are exactly two parts
+        if (parts.Length != 2)
+        {
+            return false;
+        }
+
+        // Check if the part before the '@' contains at least one letter
+        string localPart = parts[0];
+        if (!localPart.Any(char.IsLetter))
+        {
+            return false;
+        }
+
+        // Check if the part after the '@' contains a period
+        string domainPart = parts[1];
+        if (!domainPart.Contains('.'))
+        {
+            return false;
+        }
+
+        // Email is valid
+        return true;
+    }
+
+    public static bool IsNotNull(string WordToCheck)
+    {
+        if(WordToCheck == null || WordToCheck.Trim() == "")
+        {
+            return false;
+        }
+        return true;
     }
 }
 

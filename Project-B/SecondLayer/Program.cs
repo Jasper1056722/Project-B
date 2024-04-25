@@ -37,9 +37,7 @@ public class Program
                     
                     switch (selectedOptionIndex)
                     {
-                        case 0:
-                            
-                            
+                        case 0:  
                             string email = Menu.GetString("ENTER email: ");
                             string password = Menu.GetString("ENTER PASSWORD: ");
 
@@ -137,8 +135,28 @@ public class Program
                             
                             break;
                         case 1:
-                            Console.WriteLine("2");
+                            string newUserEmail = Menu.GetString("ENTER A NEW EMAIL: ");
+
+                            while(!Account.IsValidEmail(newUserEmail))
+                            {
+                                Console.WriteLine("Invalid email, Try again");
+                                newUserEmail = Menu.GetString("ENTER A NEW EMAIL: ");
+                                Console.Clear();
+                            }
+                            string newUserPassword = Menu.GetString("ENTER A PASSWORD: ");
+                            
+                            while(!Account.IsNotNull(newUserPassword))
+                            {
+                                Console.WriteLine("Password cant be empty!");
+                                newUserPassword = Menu.GetString("ENTER A PASSWORD: ");
+                                Console.Clear();
+                            }
+
+                            Console.Clear();
+                            account.Addtodb(newUserEmail, newUserPassword);
+                            Menu.LoadingBar("Adding account to database", TimeSpan.FromSeconds(2));
                             break;
+                            
                         case 2:
                         Console.Clear();
                             Flightinfo.DisplayFlights(flights);
