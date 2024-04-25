@@ -10,9 +10,9 @@ public static class Searching
     {
         List<string> DestinationFlights = new List<string>();
 
-        foreach (var flight in flights)
+        foreach (Flight flight in flights)
         {
-            if (flight.Destination.ToLower() == destinat)
+            if (flight.Destination.ToLower() == destinat.ToLower());
             {
                 DestinationFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
             }

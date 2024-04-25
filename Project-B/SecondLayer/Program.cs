@@ -32,7 +32,7 @@ public class Program
         Console.CursorVisible = false;
         while(state)
         {
-            int selectedOptionIndex = Menu.MenuPanel("Login Menu", "Here u can login", ["Login", "Sign up", "Search Flight", "Quit Program"]);
+            int selectedOptionIndex = Menu.MenuPanel("Login Menu", "Here u can login", ["Login", "Sign up", "Search Flight", "Show all flights", "Quit Program"]);
         
                     
                     switch (selectedOptionIndex)
@@ -49,7 +49,7 @@ public class Program
                                 bool AdminPanelState = true;
                                 while (AdminPanelState)
                                 {
-                                    int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Log out", "Quit Program"]);
+                                    int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Show all flights", "Log out", "Quit Program"]);
 
                                     switch(AdminPanelIndex)
                                     {
@@ -74,12 +74,21 @@ public class Program
                                             break;
                                         
                                         case 4:
+                                            Console.Clear();
+                                            Menu.LoadingBar("Loading flights", TimeSpan.FromSeconds(1));
+                                            Console.Clear();
+                                            Flightinfo.DisplayFlights(flights);
+                                            Console.WriteLine("Enter a key to go back to the menu");
+                                            Console.ReadKey();
+                                            break;
+
+                                        case 5:
                                             Menu.LoadingBar("Logging out", TimeSpan.FromSeconds(2));
                                             account.logout();
                                             AdminPanelState = false;
                                             break;
                                         
-                                        case 5:
+                                        case 6:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Environment.Exit(1);
@@ -92,13 +101,35 @@ public class Program
                                 bool UserPanelState = true;
                                 while(UserPanelState)
                                 {
-                                    int UserPanelIndex = Menu.MenuPanel("Guest Menu","Here u can", ["Search for a flight", "Make a reservation","Change reservation", "logout", "Quit Program"]);
+                                    int UserPanelIndex = Menu.MenuPanel("Guest Menu","Here u can", ["Search for a flight", "Make a reservation","Change reservation", "Display all flights", "logout", "Quit Program"]);
 
                                     switch(UserPanelIndex)
                                     {
                                         case 0:
-                                            Console.WriteLine("Search for a flight");
-                                            Console.ReadKey();
+                                            Console.Clear();
+                                            bool SearchingState = true;
+                                            while(SearchingState)
+                                            {
+                                                int SearchingOptionIndex = Menu.MenuPanel("Searching options", "Choose between these 3 options", ["Destination", "Departure Date", "Airplane Model", "Back to admin panel"]);
+                                                    
+                                                    switch(SearchingOptionIndex)
+                                                    {
+                                                        case 0:
+                                                            Console.Clear();
+                                                            string DestAnswer = Menu.GetString("Enter a destination to look for: ");
+                                                            Console.Clear();
+                                                            Menu.LoadingBar("Looking for result with correct desitnation", TimeSpan.FromSeconds(1));
+                                                            Searching.Destination(DestAnswer, flights);
+                                                            Console.WriteLine("Enter a key to go back to the searching menu");
+                                                            Console.ReadKey();
+                                                            break;
+
+                                                        case 3:
+                                                            Console.Clear();
+                                                            SearchingState = false;
+                                                            break;
+                                                    }                     
+                                            }
                                             break;
 
                                         case 1:
@@ -110,14 +141,23 @@ public class Program
                                             Console.WriteLine("Change reservation");
                                             Console.ReadKey();
                                             break;
-                                        
+
                                         case 3:
+                                            Console.Clear();
+                                            Menu.LoadingBar("Loading flights", TimeSpan.FromSeconds(1));
+                                            Console.Clear();
+                                            Flightinfo.DisplayFlights(flights);
+                                            Console.WriteLine("Enter a key to go back to the menu");
+                                            Console.ReadKey();
+                                            break;
+                                        
+                                        case 4:
                                             Menu.LoadingBar("Logging out", TimeSpan.FromSeconds(2));
                                             account.logout();
                                             UserPanelState = false;
                                             break;
 
-                                        case 4:
+                                        case 5:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Environment.Exit(1);
@@ -156,19 +196,29 @@ public class Program
                             account.Addtodb(newUserEmail, newUserPassword);
                             Menu.LoadingBar("Adding account to database", TimeSpan.FromSeconds(2));
                             break;
-                            
+                        
                         case 2:
-                        Console.Clear();
-                            Flightinfo.DisplayFlights(flights);
-                            Console.WriteLine("Enter a key to continue to the menu");
+                            Console.Clear();
+                            Console.WriteLine("Search a flight");
+                            Console.ReadKey();
                             break;
+                            
                         case 3:
+                            Console.Clear();
+                            Menu.LoadingBar("Loading flights", TimeSpan.FromSeconds(1));
+                            Console.Clear();
+                            Flightinfo.DisplayFlights(flights);
+                            Console.WriteLine("Enter a key to go back to the menu");
+                            Console.ReadKey();
+                            break;
+
+                        case 4:
                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                             Thread.Sleep(1000);
                             Environment.Exit(1);
                             break;
                     }
-                    // Exit the program after executing the selected option
+                    
         }
             
     }
