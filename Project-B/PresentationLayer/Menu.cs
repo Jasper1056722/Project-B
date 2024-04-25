@@ -52,9 +52,9 @@ Q. Quit Program
 
             // Draw box around options
             Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
-            Console.WriteLine($"│     {Title.PadRight(56)} |");
+            Console.WriteLine($"│     {CYAN}{Title.PadRight(56)}{NORMAL} |");
             Console.WriteLine($"│                                                              | ");
-            Console.WriteLine($"│     {SubTitle.PadRight(56)} |");
+            Console.WriteLine($"│     {CYAN}{SubTitle.PadRight(56)}{NORMAL} |");
             Console.WriteLine($"│                                                              | ");
             for (int i = 0; i < options.Length; i++)
             {
@@ -64,11 +64,11 @@ Q. Quit Program
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.Write($" > {CYAN}{options[i]}{NORMAL}");
                     Console.ResetColor();
-                    Console.WriteLine(new string(' ', 48 - options[i].Length) + "│");
+                    Console.WriteLine(new string(' ', 58 - options[i].Length) + "│");
                 }
                 else
                 {
-                    Console.WriteLine($"│ > {CYAN}{options[i]}{NORMAL}{new string(' ', 49 - options[i].Length)}│");
+                    Console.WriteLine($"│ > {CYAN}{options[i]}{NORMAL}{new string(' ', 59 - options[i].Length)}│");
                 }
             }
             Console.WriteLine($"│                                                              | ");
@@ -86,6 +86,7 @@ Q. Quit Program
                     break;
                 case ConsoleKey.Enter:
                     // User has selected an option
+                    Console.Clear();
                     return selectedOptionIndex;
             }
         }
@@ -112,5 +113,55 @@ Q. Quit Program
         ██║░░██║╚█████╔╝░░░██║░░░░░░██║░░░███████╗██║░░██║██████╔╝██║░░██║██║░╚═╝░██║
         ╚═╝░░╚═╝░╚════╝░░░░╚═╝░░░░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═════╝░╚═╝░░╚═╝╚═╝░░░░░╚═╝
        {NORMAL} ");
+    }
+
+    public static string GetString(string prompt)
+    {
+        Console.Write(prompt);
+
+        string password = "";
+        ConsoleKeyInfo key;
+
+        do
+        {
+            key = Console.ReadKey(true);
+
+            if (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Backspace)
+            {
+                password += key.KeyChar;
+                Console.Write(key.KeyChar); // Echo the character
+            }
+            else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+            {
+                // Remove the last character from the password
+                password = password.Substring(0, password.Length - 1);
+
+                // Move the cursor back one position and write a space to "erase" the character
+                Console.Write("\b \b");
+            }
+        } while (key.Key != ConsoleKey.Enter);
+
+        Console.WriteLine(); // Move to the next line after the input
+
+        return password;
+    }
+
+    public static void LoadingBar(string loadingString, TimeSpan duration)
+    {
+        int maxDots = 5; // Maximum number of dots
+        int interval = (int)(duration.TotalMilliseconds / (maxDots + 1)); // Calculate interval between dots
+        DateTime startTime = DateTime.Now;
+
+        while (DateTime.Now - startTime < duration)
+        {
+            for (int i = 0; i <= maxDots && DateTime.Now - startTime < duration; i++)
+            {
+                Console.Write($"{loadingString}{new string('.', i)}\r");
+                Thread.Sleep(interval);
+            }
+
+            // Clear the line
+            Console.Write(new string(' ', Console.WindowWidth - 1) + "\r");
+        }
     }
 }
