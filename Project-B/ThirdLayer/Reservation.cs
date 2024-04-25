@@ -1,3 +1,5 @@
+using System.Xml.Serialization;
+
 public class Reservation
 {
     private int _reservationNumber;
@@ -264,9 +266,11 @@ public class Reservation
     public void SelectSeat()
     {
         string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
-        string RED = Console.IsOutputRedirected ? "" : "\x1b[91m";    
+        string RED = Console.IsOutputRedirected ? "" : "\x1b[91m";
+        string CYAN = Console.IsOutputRedirected ? "" : "\x1b[96m"; 
 
         Dictionary<string, string> Seats = new Dictionary<string, string>();
+        List<string> ChosenSeat = new List<string>();
 
         if(FlightForReservation.Airplane.Model == "Boeing 737")
         {
@@ -337,6 +341,7 @@ public class Reservation
                                 seat.PersonInSeat = person;
                                 seat.SeatReservationNumber = ReservationNumber;
                                 Console.WriteLine($"Selected seat {seat.ID} for {person.FirstName} {person.LastName}");
+                                ChosenSeat.Add(seat.ID);
                                 InLoop = false;
                             }
                             else
@@ -353,6 +358,102 @@ public class Reservation
                 }
             }
         }
+
+        Console.WriteLine($"These are your chosen seats {CYAN}O{NORMAL}.");
+        Dictionary<string, string> TSeats = new Dictionary<string, string>();
+        if(FlightForReservation.Airplane.Model == "Boeing 737")
+        {
+            foreach (string seat in ChosenSeat)
+            {
+                TSeats.Add(seat, $"{CYAN}O{NORMAL}");
+            }
+
+            foreach (Seat seat in FlightForReservation.Airplane.Seats)
+            {
+                if(TSeats.ContainsKey(seat.ID))
+                {
+
+                }
+                else if (seat.PersonInSeat is null)
+                {
+                    TSeats.Add(seat.ID," ");
+                }
+                else
+                {
+                    TSeats.Add(seat.ID,$"{RED}X{NORMAL}");
+                }
+            }
+            Flightinfo.PrintPlane("Boeing 737", TSeats);
+        }
+        else if(FlightForReservation.Airplane.Model == "Airbus 330")
+        {
+            foreach (string seat in ChosenSeat)
+            {
+                TSeats.Add(seat, $"{CYAN}O{NORMAL}");
+            }
+
+            foreach (Seat seat in FlightForReservation.Airplane.Seats)
+            {
+                if(TSeats.ContainsKey(seat.ID))
+                {
+
+                }
+                else if (seat.PersonInSeat is null)
+                {
+                    TSeats.Add(seat.ID," ");
+                }
+                else
+                {
+                    TSeats.Add(seat.ID,$"{RED}X{NORMAL}");
+                }
+            }
+            Flightinfo.PrintPlane("Airbus 330", TSeats);
+        }
+        else if(FlightForReservation.Airplane.Model == "Boeing 787")
+        {
+            foreach (string seat in ChosenSeat)
+            {
+                TSeats.Add(seat, $"{CYAN}O{NORMAL}");
+            }
+
+            foreach (Seat seat in FlightForReservation.Airplane.Seats)
+            {
+                if(TSeats.ContainsKey(seat.ID))
+                {
+
+                }
+                else if (seat.PersonInSeat is null)
+                {
+                    TSeats.Add(seat.ID," ");
+                }
+                else
+                {
+                    TSeats.Add(seat.ID,$"{RED}X{NORMAL}");
+                }
+            }
+            Flightinfo.PrintPlane("Boeing 787", TSeats);
+        }
+
+        Console.WriteLine("Please confirm for these seats");
+        string choice = Console.ReadLine();
+        if (choice is "no")
+        {
+            foreach (string seat in ChosenSeat)
+            {
+                foreach (Seat tseat in FlightForReservation.Airplane.Seats)
+                    {
+                        if (tseat.ID == seat)
+                        {
+                            tseat.PersonInSeat = null;
+                            tseat.SeatReservationNumber = 0;
+                        }
+                    }
+
+            }
+            
+            SelectSeat();
+        }
+        
     }
 
     public static void DisplayReservations(List<Reservation> reservations)
