@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.Runtime.CompilerServices;
+using System.Globalization;
 public class Program 
 {
     static void Main()
@@ -59,21 +60,174 @@ public class Program
                                             break;
                                         
                                         case 1:
-                                            Console.WriteLine("Remove a flight");
-                                            Console.ReadKey();
+                                            Console.Clear();
+                                            string FlightNumAnswerDel = Menu.GetString("Enter a flight number to delete: ").Trim();
+                                            while(!Account.IsNotNull(FlightNumAnswerDel) || !Account.IsAllDigits(FlightNumAnswerDel))
+                                            { 
+                                                Console.WriteLine("cant be null!, and needs to be a number!");
+                                                FlightNumAnswerDel = Menu.GetString("Enter a flight number to delete: ").Trim();
+                                                Console.Clear();
+                                            }
+                                            Flight flightToRem = flights.FirstOrDefault(flight => flight.FlightNumber.ToString() == FlightNumAnswerDel);
+                                            if (flightToRem != null)
+                                            {
+                                                flights.Remove(flightToRem);
+                                                Console.Clear();
+                                                Menu.LoadingBar($"Removing flight {FlightNumAnswerDel}", TimeSpan.FromSeconds(1));
+                                                Console.Clear();
+                                                Console.WriteLine($"Succelfully removed flight {FlightNumAnswerDel}");
+                                                Thread.Sleep(1400);
+                                                break;
+                                            }
+                                            else
+                                            {
+                                            Console.WriteLine($"Flight {FlightNumAnswerDel} does not exist");
+                                            Console.WriteLine("Returning back to the menu");
+                                            Thread.Sleep(1400);
                                             break;
+                                            }
                                         
                                         case 2:
-                                            Console.WriteLine("Change a flight");
-                                            Console.ReadKey();
-                                            break;
+                                            Console.Clear();
+                                            string FlightNumAnswer = Menu.GetString("Enter a flight number to look for: ").Trim();
+                                            while(!Account.IsNotNull(FlightNumAnswer) || !Account.IsAllDigits(FlightNumAnswer))
+                                            { 
+                                                Console.WriteLine("cant be null!, and needs to be a number!");
+                                                FlightNumAnswer = Menu.GetString("Enter a flight number to look for: ").Trim();
+                                                Console.Clear();
+                                            }
+                                            Console.Clear();
+                                            bool FlightChangeState = true;
+                                            while (FlightChangeState)
+                                            {
+                                                Flight flight = flights.FirstOrDefault(flight => flight.FlightNumber.ToString().Contains(FlightNumAnswer));
+                    
+                                                if (flight != null)
+                                                {
+                                                    int ChangeFlightIndex = Menu.MenuPanel("Changing Flight", $"Changing flight {flight.FlightNumber}, What do u want to change", ["Destination", "Country", "Location of departure" ,"Departure date (DD-MM-YYYY)", "Departure Time (dd-MM-yyyyTHH:mm:ss)", "Estimated Time of Arrival (dd-MM-yyyyTHH:mm:ss)", "Go back and save changes"]);
+
+                                                    switch(ChangeFlightIndex)
+                                                    {
+                                                        case 0:
+                                                            Console.Clear();
+                                                            string newDestination = Menu.GetString("Enter a new destination: ").Trim();
+    
+                                                            while(!Account.IsAllLetters(newDestination.Trim()) || string.IsNullOrEmpty(newDestination.Trim()))
+                                                            {
+                                                                Console.WriteLine("Destination can oly include letters, and cannot be null");
+                                                                newDestination = Menu.GetString("Enter a new destination: ").Trim();
+                                                                Console.Clear();
+                                                            }
+
+                                                            flight.Destination = newDestination;
+                                                            Console.WriteLine($"set flights country to {flight.Destination}");
+                                                            Thread.Sleep(1400);
+                                                            break;
+
+                                                        case 1:
+                                                            Console.Clear();
+                                                            string newCountry = Menu.GetString("Enter a new country: ").Trim();
+    
+                                                            while(!Account.IsAllLetters(newCountry.Trim()) || string.IsNullOrEmpty(newCountry.Trim()))
+                                                            {
+                                                                Console.WriteLine("Country can oly include letters, and cannot be null");
+                                                                newCountry = Menu.GetString("Enter a new country: ").Trim();
+                                                                Console.Clear();
+                                                            }
+
+                                                            flight.Country = newCountry;
+                                                            Console.WriteLine($"set flights country to {flight.Country}");
+                                                            Thread.Sleep(1400);
+                                                            break;
+
+                                                        case 2:
+                                                            Console.Clear();
+                                                            string newLocationOfDeparture = Menu.GetString("Enter a new location of departure: ").Trim();
+    
+                                                            while(!Account.IsAllLetters(newLocationOfDeparture.Trim()) || string.IsNullOrEmpty(newLocationOfDeparture.Trim()))
+                                                            {
+                                                                Console.WriteLine("Location of departure can oly include letters, and cannot be null");
+                                                                newLocationOfDeparture = Menu.GetString("Enter a new location of departure: ").Trim();
+                                                                Console.Clear();
+                                                            }
+
+                                                            flight.DepartingFrom = newLocationOfDeparture;
+                                                            Console.WriteLine($"set flights location of departure to {flight.DepartingFrom}");
+                                                            Thread.Sleep(1400);
+                                                            break;
+
+                                                        case 3:
+                                                            Console.Clear();
+                                                            string newDepartureDateString = Menu.GetString("Enter a new departure date: ").Trim();
+    
+                                                            while(!Account.IsDate(newDepartureDateString))
+                                                            {
+                                                                Console.WriteLine("Invalid input, enter a date (dd-MM-yyyy)");
+                                                                newDepartureDateString = Menu.GetString("Enter a new departure date: ").Trim();
+                                                                Console.Clear();
+                                                            }
+
+                                                            flight.DepartureDate = newDepartureDateString;
+                                                            Console.WriteLine($"set flights location of departure to {flight.DepartureDate}");
+                                                            Thread.Sleep(1400);
+                                                            break;
+
+                                                        case 4:
+                                                            Console.Clear();
+                                                            string newDepartureTimeString = Menu.GetString("Enter a new departure time: ");
+    
+                                                            while(!Account.IsTime(newDepartureTimeString))
+                                                            {
+                                                                Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
+                                                                newDepartureTimeString = Menu.GetString("Enter a new departure time: ");
+                                                                Console.Clear();
+                                                            }
+                                                            DateTime dateDepartureTime = DateTime.ParseExact(newDepartureTimeString, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+
+                                                            flight.DepartureTime = dateDepartureTime;
+                                                            Console.WriteLine($"set flights departure time to {flight.DepartureTime}");
+                                                            Thread.Sleep(1400);
+                                                            break;
+
+                                                        case 5:
+                                                            Console.Clear();
+                                                            string newEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival: ");
+    
+                                                            while(!Account.IsTime(newEstimatedTimeString))
+                                                            {
+                                                                Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
+                                                                newEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival: ");
+                                                                Console.Clear();
+                                                            }
+                                                            DateTime dateETATime = DateTime.ParseExact(newEstimatedTimeString, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+
+                                                            flight.EstimatedTimeofArrival = dateETATime;
+                                                            Console.WriteLine($"set flights estimated time of arrival to {flight.EstimatedTimeofArrival}");
+                                                            Thread.Sleep(1400);
+                                                            break;
+
+                                                        case 6:
+                                                            Console.Clear();
+                                                            Menu.LoadingBar("Saving Changes", TimeSpan.FromSeconds(2));
+                                                            FlightChangeState = false;
+                                                            break;
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine($"Flight {FlightNumAnswer} not found");
+                                                    Thread.Sleep(1400);
+                                                    break;
+                                                }
+                                        }
+                                        break;
 
                                         case 3:
                                             Console.Clear();
                                             bool AdminSearchingState = true;
                                             while(AdminSearchingState)
                                             {
-                                                int SearchingOptionIndex = Menu.MenuPanel("Searching options", "Choose between these 3 options", ["Destination", "Departure Date", "Airplane Model", "Flight number", "Back to admin panel"]);
+                                                int SearchingOptionIndex = Menu.MenuPanel("Searching options", "Choose between these 3 options", ["Destination", "Departure Date", "Airplane Model", "Flight number", "Back to menu"]);
                                                     
                                                     switch(SearchingOptionIndex)
                                                     {
@@ -147,6 +301,7 @@ public class Program
                                         case 6:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
+                                            Flight.WriteToJson(flights);
                                             Environment.Exit(1);
                                             break;
                                     }
@@ -166,7 +321,7 @@ public class Program
                                             bool UserSearchingState = true;
                                             while(UserSearchingState)
                                             {
-                                                int SearchingOptionIndex = Menu.MenuPanel("Searching options", "Choose between these 3 options", ["Destination", "Departure Date", "Airplane Model", "Flight number", "Back to admin panel"]);
+                                                int SearchingOptionIndex = Menu.MenuPanel("Searching options", "Choose between these 3 options", ["Destination", "Departure Date", "Airplane Model", "Flight number", "Back to menu"]);
                                                     
                                                     switch(SearchingOptionIndex)
                                                     {
@@ -243,6 +398,7 @@ public class Program
                                         
                                         case 4:
                                             Console.Clear();
+                                            Menu.LoadingBar("Loading Reservations", TimeSpan.FromSeconds(1));
                                             Flightinfo.DisplayReservations(account.AccountReservations);
                                             Console.WriteLine("Enter a key to go back to the menu");
                                             Console.ReadKey();
@@ -258,6 +414,7 @@ public class Program
                                         case 6:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
+                                            Flight.WriteToJson(flights);
                                             Environment.Exit(1);
                                             break;
                                     }
@@ -368,6 +525,7 @@ public class Program
                         case 4:
                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                             Thread.Sleep(1000);
+                            Flight.WriteToJson(flights);
                             Environment.Exit(1);
                             break;
                     }

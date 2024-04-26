@@ -1,4 +1,5 @@
 using System.Data.SQLite;
+using System.Globalization;
 public class Account
 {
     public bool IsLoggedIn { get; private set; }
@@ -123,6 +124,52 @@ public class Account
             return false;
         }
         return true;
+    }
+
+    public static bool IsAllDigits(string WordToCheck)
+    {
+    foreach (char letter in WordToCheck)
+    {
+        if (!char.IsDigit(letter))
+        {
+            return false;
+        }
+    }
+    return true;
+    }
+
+    public static bool IsAllLetters(string str)
+    {
+        foreach (char c in str)
+        {
+            if (!char.IsLetter(c) && c != ' ')
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static bool IsDate(string str)
+    {
+        DateTime date;
+        if (DateTime.TryParseExact(str, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    
+
+    public static bool IsTime(string str)
+    {
+        DateTime date;
+        if (DateTime.TryParseExact(str, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+        {
+            return true;
+        }
+        return false;
     }
 }
 

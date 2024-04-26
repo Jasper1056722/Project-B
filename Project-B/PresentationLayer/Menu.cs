@@ -43,7 +43,7 @@ Q. Quit Program
 
     public static int MenuPanel(string Title, string SubTitle, string[] options)
     {
-        string NL = Environment.NewLine; // shortcut
+        string NL = Environment.NewLine;
         string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
         string RED = Console.IsOutputRedirected ? "" : "\x1b[91m";
         string GREEN = Console.IsOutputRedirected ? "" : "\x1b[92m";
@@ -63,7 +63,6 @@ Q. Quit Program
         {
             Console.Clear();
 
-            // Draw box around options
             Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
             Console.WriteLine($"│     {CYAN}{Title.PadRight(56)}{NORMAL} |");
             Console.WriteLine($"│                                                              | ");
@@ -87,7 +86,6 @@ Q. Quit Program
             Console.WriteLine($"│                                                              | ");
             Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
 
-            // Handle user input
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
             switch (keyInfo.Key)
             {
@@ -98,7 +96,6 @@ Q. Quit Program
                     selectedOptionIndex = Math.Min(options.Length - 1, selectedOptionIndex + 1);
                     break;
                 case ConsoleKey.Enter:
-                    // User has selected an option
                     Console.Clear();
                     return selectedOptionIndex;
             }
@@ -143,19 +140,17 @@ Q. Quit Program
             if (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Backspace)
             {
                 password += key.KeyChar;
-                Console.Write(key.KeyChar); // Echo the character
+                Console.Write(key.KeyChar);
             }
             else if (key.Key == ConsoleKey.Backspace && password.Length > 0)
             {
-                // Remove the last character from the password
                 password = password.Substring(0, password.Length - 1);
 
-                // Move the cursor back one position and write a space to "erase" the character
                 Console.Write("\b \b");
             }
         } while (key.Key != ConsoleKey.Enter);
 
-        Console.WriteLine(); // Move to the next line after the input
+        Console.WriteLine();
 
         return password;
     }
