@@ -55,10 +55,112 @@ public class Program
                                     switch(AdminPanelIndex)
                                     {
                                         case 0:
-                                            Console.WriteLine("Add a flight");
+                                            Console.Clear();
+                                            int AirplaneSelectorIndex = Menu.MenuPanel("Airplane Model Selector", "What plane model should be used for the flight", ["Boeing 737", "Boeing 787", "Airbus 330"]);
+                                            Console.Clear();
+                                            Plane plane;
+
+                                            switch (AirplaneSelectorIndex)
+                                            {
+                                                case 0:
+                                                    plane = new Plane("Boeing 737");
+                                                    Console.WriteLine("Selected Boeing 737!");
+                                                    Thread.Sleep(1000);
+                                                    break;
+
+                                                case 1:
+                                                    plane = new Plane("Boeing 787");
+                                                    Console.WriteLine("Selected Boeing 787!");
+                                                    Thread.Sleep(1000);
+                                                    break;
+
+                                                case 2:
+                                                    plane = new Plane("Airbus 330");
+                                                    Console.WriteLine("Selected Airbus 330");
+                                                    Thread.Sleep(1000);
+                                                    break;
+                                                
+                                                default:
+                                                    plane = new Plane("Boeing 737");
+                                                    break;
+                                            }
+                                            
+                                            Console.Clear();
+                                            string AddDestination = Menu.GetString("Enter a destination for the flight: ").Trim();
+                                            while(!Account.IsAllLetters(AddDestination.Trim()) || string.IsNullOrEmpty(AddDestination.Trim()))
+                                            {
+                                                Console.WriteLine("Destination can oly include letters, and cannot be null");
+                                                AddDestination = Menu.GetString("Enter a destination for the flight: ").Trim();
+                                                Console.Clear();
+                                            }
+                                            Console.Clear();
+
+                                            string AddCountry = Menu.GetString("Enter a country for the flight: ").Trim();
+                                            while(!Account.IsAllLetters(AddCountry.Trim()) || string.IsNullOrEmpty(AddCountry.Trim()))
+                                            {
+                                                Console.WriteLine("Country can oly include letters, and cannot be null");
+                                                AddCountry = Menu.GetString("Enter a country for the flight ").Trim();
+                                                Console.Clear();
+                                            }
+                                            Console.Clear();
+
+                                            string AddLocationOfDeparture = Menu.GetString("Enter a location of departure for the flight: ").Trim();
+                                            while(!Account.IsAllLetters(AddLocationOfDeparture.Trim()) || string.IsNullOrEmpty(AddLocationOfDeparture.Trim()))
+                                            {
+                                                Console.WriteLine("Location of departure can oly include letters, and cannot be null");
+                                                AddLocationOfDeparture = Menu.GetString("Enter a location of departure for the flight: ").Trim();
+                                                Console.Clear();
+                                            }
+                                            Console.Clear();
+
+                                            string AddDepartureDateString = Menu.GetString("Enter a departure date for the flight: ").Trim();
+                                            while(!Account.IsDate(AddDepartureDateString))
+                                            {
+                                                Console.WriteLine("Invalid input, enter a date (dd-MM-yyyy)");
+                                                AddDepartureDateString = Menu.GetString("Enter a departure date for the flight: ").Trim();
+                                                Console.Clear();
+                                            }
+                                            Console.Clear();
+
+                                            string AddnewDepartureTimeString = Menu.GetString("Enter a new departure time (dd-MM-yyyy HH:mm:ss): ");
+                                            while(!Account.IsTime(AddnewDepartureTimeString))
+                                            {
+                                                Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
+                                                AddnewDepartureTimeString = Menu.GetString("Enter a new departure time: ");
+                                                Console.Clear();
+                                            }
+                                            DateTime AdddateDepartureTime = DateTime.ParseExact(AddnewDepartureTimeString, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                                            Console.Clear();
+
+                                            string AddEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival (dd-MM-yyyy HH:mm:ss): ");
+                                            while(!Account.IsTime(AddEstimatedTimeString))
+                                            {
+                                                Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
+                                                AddEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival: ");
+                                                Console.Clear();
+                                            }
+                                            DateTime AdddateETATime = DateTime.ParseExact(AddEstimatedTimeString, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                                            
+                                            Console.Clear();
+                                            Flight FlightToAdd = new(AddDestination, AddCountry, plane, AddLocationOfDeparture, AddDepartureDateString, "00-00-0000T00:00:00", "00-00-0000T00:00:00");
+                                            FlightToAdd.DepartureTime = AdddateDepartureTime;
+                                            FlightToAdd.EstimatedTimeofArrival = AdddateETATime;
+                                            flights.Add(FlightToAdd);
+                                            Menu.LoadingBar("Adding flight to data structure", TimeSpan.FromSeconds(1));
+                                            Console.Clear();
+                                            Console.WriteLine("New Flight Data:");
+                                            Console.WriteLine($"Flightnumber: {FlightToAdd.FlightNumber}");
+                                            Console.WriteLine($"Destination: {FlightToAdd.Destination}");
+                                            Console.WriteLine($"Country: {FlightToAdd.Country}");
+                                            Console.WriteLine($"Airplane Model: {FlightToAdd.Airplane.Model}");
+                                            Console.WriteLine($"Location of Departure: {FlightToAdd.DepartingFrom}");
+                                            Console.WriteLine($"Departure Date: {FlightToAdd.DepartureDate}");
+                                            Console.WriteLine($"Departure Time: {FlightToAdd.DepartureTime}");
+                                            Console.WriteLine($"Estimated Time of Arrival: {FlightToAdd.EstimatedTimeofArrival}\n");
+                                            Console.WriteLine("Press a key to continue");
                                             Console.ReadKey();
                                             break;
-                                        
+
                                         case 1:
                                             Console.Clear();
                                             string FlightNumAnswerDel = Menu.GetString("Enter a flight number to delete: ").Trim();
@@ -120,7 +222,7 @@ public class Program
                                                             }
 
                                                             flight.Destination = newDestination;
-                                                            Console.WriteLine($"set flights country to {flight.Destination}");
+                                                            Console.WriteLine($"set flights destination to {flight.Destination}");
                                                             Thread.Sleep(1400);
                                                             break;
 
