@@ -276,8 +276,8 @@ public static class Flightinfo
         {
             picture = @$"
                                                                     ______________
-                              [ ] = Economy Class                  /              |
-                              {BLUE}[ ]{NORMAL} = Economy extra leg room        /               |
+                            [ ] = Economy Class                    /              |
+                            {BLUE}[ ]{NORMAL} = Economy extra leg room          /               |
                                                                  /                |
                                                                 /                 |
                                                                /                  |
@@ -291,9 +291,9 @@ public static class Flightinfo
                 \________ A [{Seats["A1"]}][{Seats["A2"]}][{Seats["A3"]}][{Seats["A4"]}][{Seats["A5"]}][{Seats["A6"]}][{Seats["A7"]}][{Seats["A8"]}][{Seats["A9"]}][{Seats["A10"]}][{Seats["A11"]}][{Seats["A12"]}][{Seats["A13"]}][{Seats["A14"]}][{Seats["A15"]}] {BLUE}[{Seats["A16"]}{BLUE}] [{Seats["A17"]}]{NORMAL}[{Seats["A18"]}][{Seats["A19"]}][{Seats["A20"]}][{Seats["A21"]}][{Seats["A22"]}][{Seats["A23"]}][{Seats["A24"]}][{Seats["A25"]}][{Seats["A26"]}][{Seats["A27"]}][{Seats["A28"]}][{Seats["A29"]}][{Seats["A30"]}][{Seats["A31"]}][{Seats["A32"]}][{Seats["A33"]}]___/ !
                     !    \_______________________________________________!___!__________________________________________________/
                                                               \                   /
-                                                               \                  |
-                                                                \                 |
-                                                                 \                |
+                            [ ] = empty seats                  \                  |
+                            [{RED}X{NORMAL}] = taken seats                   \                 |
+                            [{CYAN}O{NORMAL}] = chosen seats                   \                |
                                                                   \               |
                                                                    \              |
 ";
@@ -319,6 +319,11 @@ public static class Flightinfo
              \|_|c|     |B          [{Seats["B4"]}][{Seats["B5"]}][{Seats["B6"]}][{Seats["B7"]}] |w|     | B {BLUE}[{Seats["B14"]}]{NORMAL}[{Seats["B15"]}][{Seats["B16"]}][{Seats["B17"]}][{Seats["B18"]}][{Seats["B19"]}][{Seats["B20"]}][{Seats["B21"]}][{Seats["B22"]}][{Seats["B23"]}][{Seats["B24"]}][{Seats["B25"]}][{Seats["B26"]}][{Seats["B27"]}][{Seats["B28"]}][{Seats["B29"]}][{Seats["B30"]}][{Seats["B31"]}][{Seats["B32"]}] |w| |   B {BLUE}[{Seats["B36"]}{BLUE}]{NORMAL}[{Seats["B37"]}][{Seats["B38"]}][{Seats["B39"]}][{Seats["B40"]}][{Seats["B41"]}][{Seats["B42"]}][{Seats["B43"]}]{GREEN}[{Seats["A44"]}{GREEN}][{Seats["A45"]}{GREEN}][{Seats["A46"]}{GREEN}][{Seats["A47"]}{GREEN}][{Seats["A48"]}{GREEN}][{Seats["A49"]}{GREEN}]{NORMAL}     |
                   \___!_|A {YELLOW}[{Seats["A1"]}{YELLOW}] [{Seats["A2"]}{YELLOW}]{NORMAL}  [{Seats["A4"]}][{Seats["A5"]}][{Seats["A6"]}][{Seats["A7"]}] |c|     | A {BLUE}[{Seats["A14"]}{BLUE}]{NORMAL}[{Seats["A15"]}][{Seats["A16"]}][{Seats["A17"]}][{Seats["A18"]}][{Seats["A19"]}][{Seats["A20"]}][{Seats["A21"]}][{Seats["A22"]}][{Seats["A23"]}][{Seats["A24"]}][{Seats["A25"]}][{Seats["A26"]}][{Seats["A27"]}][{Seats["A28"]}][{Seats["A29"]}][{Seats["A30"]}][{Seats["A31"]}][{Seats["A32"]}] |c| |   A {BLUE}[{Seats["A36"]}{BLUE}]{NORMAL}[{Seats["A37"]}][{Seats["A38"]}][{Seats["A39"]}][{Seats["A40"]}][{Seats["A41"]}][{Seats["A42"]}][{Seats["A43"]}]_____________________!_|
                         \______________________________!____________________________________________________________________!___________________________/
+                                                                                \                                  /  
+                            [ ] = empty seat                                     \                                 |
+                            [{RED}X{NORMAL}] = taken seat                                      \                                |
+                            [{CYAN}O{NORMAL}] = chosen seat                                      \                               |
+                                                                                    \______________________________|
 ";
         }
         else if (airplane is "Boeing 787") 
@@ -342,8 +347,9 @@ public static class Flightinfo
            \__|_      | A {YELLOW}[{Seats["A1"]}]  [{Seats["A2"]}]  [{Seats["A3"]}]{NORMAL}  | C |   | {YELLOW}[{Seats["A4"]}]  [{Seats["A5"]}]  [{Seats["A6"]}]{NORMAL}| A {BLUE}[{Seats["A16"]}][{Seats["A17"]}][{Seats["A18"]}][{Seats["A19"]}][{Seats["A20"]}][{Seats["A21"]}][{Seats["A22"]}]{NORMAL}[{Seats["A23"]}][{Seats["A24"]}][{Seats["A25"]}]|c|      [{Seats["A27"]}][{Seats["A28"]}][{Seats["A29"]}][{Seats["A30"]}][{Seats["A31"]}][{Seats["A32"]}][{Seats["A33"]}][{Seats["A34"]}][{Seats["A35"]}][{Seats["A36"]}]| |c|      |      /
                 \_!________1____2____3________!_____4____5____6______16_17_18_19_20_21_22_23_24_25______!__27_28_29_30_31_32_33_34_35_36_37_38____!_|_____/
                                                        \                                            \  
-                                                        \                                            \
-                                                         \____________________________________________\            
+                [ ] = empty seats                       \                                            \
+                [{RED}X{NORMAL}] = taken seats                        \____________________________________________\            
+                [{CYAN}O{NORMAL}] = chosen seats
 ";
         }
 
