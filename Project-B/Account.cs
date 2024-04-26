@@ -4,6 +4,7 @@ public class Account
     public bool IsLoggedIn { get; private set; }
     public bool IsAdminbool {get; private set;}
     public int Primkey {get; set; } //autoincrement key of account that was logged into
+    public List<Reservation> AccountReservations { get; set; } = new List<Reservation>();
 
     public bool Addtodb(string email, string password)
     {   
