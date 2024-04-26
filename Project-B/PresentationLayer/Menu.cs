@@ -41,78 +41,69 @@ Q. Quit Program
         return AmenuChoice.ToUpper();
     }
 
-public static int MenuPanel(string Title, string SubTitle, string[] options)
-{
-    string NL = Environment.NewLine; // shortcut
-    string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
-    string CYAN = Console.IsOutputRedirected ? "" : "\x1b[96m";
-    int selectedOptionIndex = 0;
-
-    // Calculate center position
-    int consoleWidth = Console.WindowWidth;
-    int consoleHeight = Console.WindowHeight;
-    int titleLength = Title.Length;
-    int subTitleLength = SubTitle.Length;
-    int optionsCount = options.Length;
-
-    int titleStartPos = (consoleWidth - titleLength) / 2;
-    int subTitleStartPos = (consoleWidth - subTitleLength) / 2;
-
-    // Clear the console
-    Console.Clear();
-
-    // Print the menu panel
-    Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
-    Console.WriteLine($"│{new string(' ', consoleWidth - 2)}│");
-    Console.WriteLine($"│{new string(' ', titleStartPos)}{CYAN}{Title}{NORMAL}{new string(' ', consoleWidth - titleStartPos - titleLength - 2)}│");
-    Console.WriteLine($"│{new string(' ', consoleWidth - 2)}│");
-    Console.WriteLine($"│{new string(' ', subTitleStartPos)}{CYAN}{SubTitle}{NORMAL}{new string(' ', consoleWidth - subTitleStartPos - subTitleLength - 2)}│");
-    Console.WriteLine($"│{new string(' ', consoleWidth - 2)}│");
-    for (int i = 0; i < optionsCount; i++)
+    public static int MenuPanel(string Title, string SubTitle, string[] options)
     {
-        if (i == selectedOptionIndex)
+        string NL = Environment.NewLine; // shortcut
+        string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
+        string RED = Console.IsOutputRedirected ? "" : "\x1b[91m";
+        string GREEN = Console.IsOutputRedirected ? "" : "\x1b[92m";
+        string YELLOW = Console.IsOutputRedirected ? "" : "\x1b[93m";
+        string BLUE = Console.IsOutputRedirected ? "" : "\x1b[94m";
+        string MAGENTA = Console.IsOutputRedirected ? "" : "\x1b[95m";
+        string CYAN = Console.IsOutputRedirected ? "" : "\x1b[96m";
+        string GREY = Console.IsOutputRedirected ? "" : "\x1b[97m";
+        string BOLD = Console.IsOutputRedirected ? "" : "\x1b[1m";
+        string NOBOLD = Console.IsOutputRedirected ? "" : "\x1b[22m";
+        string UNDERLINE = Console.IsOutputRedirected ? "" : "\x1b[4m";
+        string NOUNDERLINE = Console.IsOutputRedirected ? "" : "\x1b[24m";
+        string REVERSE = Console.IsOutputRedirected ? "" : "\x1b[7m";
+        string NOREVERSE = Console.IsOutputRedirected ? "" : "\x1b[27m";
+        int selectedOptionIndex = 0;
+        while (true)
         {
-            Console.Write($"│ > {CYAN}{options[i]}{NORMAL}{new string(' ', consoleWidth - options[i].Length - 7)}│");
-        }
-        else
-        {
-            Console.WriteLine($"│ > {CYAN}{options[i]}{NORMAL}{new string(' ', consoleWidth - options[i].Length - 7)}│");
-        }
-    }
-    Console.WriteLine($"│{new string(' ', consoleWidth - 2)}│");
-    Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
+            Console.Clear();
 
-    while (true)
-    {
-        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-        switch (keyInfo.Key)
-        {
-            case ConsoleKey.UpArrow:
-                selectedOptionIndex = Math.Max(0, selectedOptionIndex - 1);
-                break;
-            case ConsoleKey.DownArrow:
-                selectedOptionIndex = Math.Min(optionsCount - 1, selectedOptionIndex + 1);
-                break;
-            case ConsoleKey.Enter:
-                Console.Clear();
-                return selectedOptionIndex;
-        }
-
-        // Update the menu panel with the new selection
-        Console.SetCursorPosition(0, 3); // Set cursor position to the beginning of the menu panel content
-        for (int i = 0; i < optionsCount; i++)
-        {
-            if (i == selectedOptionIndex)
+            // Draw box around options
+            Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
+            Console.WriteLine($"│     {CYAN}{Title.PadRight(56)}{NORMAL} |");
+            Console.WriteLine($"│                                                              | ");
+            Console.WriteLine($"│     {CYAN}{SubTitle.PadRight(56)}{NORMAL} |");
+            Console.WriteLine($"│                                                              | ");
+            for (int i = 0; i < options.Length; i++)
             {
-                Console.Write($"│ > {CYAN}{options[i]}{NORMAL}{new string(' ', consoleWidth - options[i].Length - 7)}│");
+                if (i == selectedOptionIndex)
+                {
+                    Console.Write("│ ");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Write($" > {CYAN}{options[i]}{NORMAL}");
+                    Console.ResetColor();
+                    Console.WriteLine(new string(' ', 58 - options[i].Length) + "│");
+                }
+                else
+                {
+                    Console.WriteLine($"│ > {CYAN}{options[i]}{NORMAL}{new string(' ', 59 - options[i].Length)}│");
+                }
             }
-            else
+            Console.WriteLine($"│                                                              | ");
+            Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
+
+            // Handle user input
+            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+            switch (keyInfo.Key)
             {
-                Console.WriteLine($"│ > {CYAN}{options[i]}{NORMAL}{new string(' ', consoleWidth - options[i].Length - 7)}│");
+                case ConsoleKey.UpArrow:
+                    selectedOptionIndex = Math.Max(0, selectedOptionIndex - 1);
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedOptionIndex = Math.Min(options.Length - 1, selectedOptionIndex + 1);
+                    break;
+                case ConsoleKey.Enter:
+                    // User has selected an option
+                    Console.Clear();
+                    return selectedOptionIndex;
             }
         }
     }
-}
 
 
     public static void StartMenu()
