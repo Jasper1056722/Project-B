@@ -480,11 +480,54 @@ public class Program
 
                                         case 1:
                                             Console.WriteLine("Make a reservation");
+                                            Reservation reservation = new Reservation();
+                                            reservation.SelectFlight(flights);
+                                            Console.WriteLine("How many seats do you want to reserve?");
+                                            int AmountPersons = Convert.ToInt32(Console.ReadLine());
+                                            if (AmountPersons == 1)
+                                            {
+                                                reservation.AddContactInfo();
+
+                                                bool isValidChoice = false;
+                                                while (!isValidChoice)
+                                                {
+                                                    Console.WriteLine("You have 2 options: \n1.Reserve random seat \n2.Select seat");
+                                                    int choice2 = Convert.ToInt32(Console.ReadLine());
+                                                    switch (choice2)
+                                                    {
+                                                        case 1:
+                                                            Console.WriteLine("You chose: Reserve random seat");
+                                                            reservation.ReserveRandomSeat(reservation.FlightForReservation);
+                                                            isValidChoice = true;
+                                                            break;
+                                                        case 2:
+                                                            Console.WriteLine("You chose: Select seat");
+                                                            reservation.SelectSeat();
+                                                            isValidChoice = true;
+                                                            break;
+                                                        default:
+                                                            Console.WriteLine("Invalid choice. Please enter 1 or 2.");
+                                                            break;
+                                                    }   
+                                                }
+                                            }
+
+                                            else if (AmountPersons > 1)
+                                            {
+                                                for (int i = 0; i < AmountPersons; i++)
+                                                {
+                                                    reservation.AddContactInfo();
+                                                }
+                                                reservation.SelectSeat();
+                                            }
                                             Console.ReadKey();
                                             break;
 
                                         case 2:
                                             Console.WriteLine("Change reservation");
+                                            Console.WriteLine("What is the flightnumber of the flight you want to change?");
+                                            string flightNumber = Console.ReadLine();
+                                            Flightinfo.UpdateInfo(flightNumber, flights);
                                             Console.ReadKey();
                                             break;
 
@@ -506,7 +549,6 @@ public class Program
                                             Console.ReadKey();
                                             break;
 
-                                        
                                         case 5:
                                             Menu.LoadingBar("Logging out", TimeSpan.FromSeconds(2));
                                             account.logout();
