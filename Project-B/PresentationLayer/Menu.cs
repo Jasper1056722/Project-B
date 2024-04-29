@@ -1,6 +1,6 @@
 public static class Menu
 {
-    public static int MenuPanel(string Title, string SubTitle, string[] options)
+    public static int MenuPanel(string Title, string SubTitle, string[] options, string Towrite = "")
     {
         string NL = Environment.NewLine;
         string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
@@ -21,6 +21,8 @@ public static class Menu
         while (true)
         {
             Console.Clear();
+
+            Console.WriteLine(Towrite);
 
             Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
             Console.WriteLine($"│     {CYAN}{Title.PadRight(56)}{NORMAL} |");
