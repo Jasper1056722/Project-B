@@ -479,7 +479,7 @@ public class Program
                                             break;
 
                                         case 1:
-                                            Console.WriteLine("Make a reservation");
+                                            Menu.LoadingBar("Making a reservation", TimeSpan.FromSeconds(3));
                                             Reservation reservation = new Reservation();
                                             reservation.SelectFlight(flights);
                                             Console.WriteLine("How many seats do you want to reserve?");
@@ -491,22 +491,16 @@ public class Program
                                                 bool isValidChoice = false;
                                                 while (!isValidChoice)
                                                 {
-                                                    Console.WriteLine("You have 2 options: \n1.Reserve random seat \n2.Select seat");
-                                                    int choice2 = Convert.ToInt32(Console.ReadLine());
-                                                    switch (choice2)
+                                                    int SearchingOptionIndex = Menu.MenuPanel("Seat options", "Do you want to select your seat or get it random?",["Random seat","Select seat"]);
+                                                    switch (SearchingOptionIndex)
                                                     {
-                                                        case 1:
-                                                            Console.WriteLine("You chose: Reserve random seat");
+                                                        case 0:
                                                             reservation.ReserveRandomSeat(reservation.FlightForReservation);
                                                             isValidChoice = true;
                                                             break;
-                                                        case 2:
-                                                            Console.WriteLine("You chose: Select seat");
+                                                        case 1:
                                                             reservation.SelectSeat();
                                                             isValidChoice = true;
-                                                            break;
-                                                        default:
-                                                            Console.WriteLine("Invalid choice. Please enter 1 or 2.");
                                                             break;
                                                     }   
                                                 }
