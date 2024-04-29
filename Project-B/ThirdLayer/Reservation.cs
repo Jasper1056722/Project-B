@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using System.Xml.Serialization;
 
 public class Reservation
@@ -38,85 +39,64 @@ public class Reservation
             {
                 if (flight.Airplane.Model == "Boeing 737")
                 {
-                    Console.WriteLine("What seat quality:\n[1] - Economy\n[2] - Economy Extra Legroom");
-                    string input = Console.ReadLine();
-                    if (input == "1")
+                    int selectedOptionIndex = Menu.MenuPanel("Seat Options","Please select your desired seat.",["Economy","Economy Extra Legroom"]);
+                    switch(selectedOptionIndex)
                     {
-                        SeatQual = "Economy";
-                        isValidInput = true;
-                    }
-                    else if (input == "2")
-                    {
-                        SeatQual = "Economy Extra Legroom";
-                        isValidInput = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input. Please enter 1 or 2.");
+                        case 0:
+                            SeatQual = "Economy";
+                            isValidInput = true;
+                            break;
+                        case 1:
+                            SeatQual = "Economy Extra Legroom";
+                            isValidInput = true;
+                            break;
                     }
                 }
                 else if (flight.Airplane.Model == "Boeing 787")
                 {
-                    Console.WriteLine("What seat quality:\n[1] - Economy\n[2] - Business\n[3] - Economy Extra Legroom");
-                    string input = Console.ReadLine();
-                    if (input == "1")
+                    int selectedOptionIndex = Menu.MenuPanel("Seat Options","Please select your desired seat.",["Economy","Economy Extra Legroom", "Business"]);
+                    switch(selectedOptionIndex)
                     {
-                        SeatQual = "Economy";
-                        isValidInput = true;
-                    }
-                    else if (input == "2")
-                    {
-                        SeatQual = "Business";
-                        isValidInput = true;
-                    }
-                    else if (input == "3")
-                    {
-                        SeatQual = "Economy Extra Legroom";
-                        isValidInput = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input. Please enter 1, 2, or 3.");
+                        case 0:
+                            SeatQual = "Economy";
+                            isValidInput = true;
+                            break;
+                        case 1:
+                            SeatQual = "Economy Extra Legroom";
+                            isValidInput = true;
+                            break;
+                        case 2:
+                            SeatQual = "Business";
+                            isValidInput = true;
+                            break;
                     }
                 }
                 else if (flight.Airplane.Model == "Airbus 330")
                 {
-                    Console.WriteLine("What seat quality:\n[1] - Economy\n[2] - Economy Extra Legroom\n[3] - Double seats\n[4] - Economy class in front of cabin\n[5] - Club Class");
-                    string input = Console.ReadLine();
-                    if (input == "1")
+                    int selectedOptionIndex = Menu.MenuPanel("Seat Options","Please select your desired seat.",["Economy","Economy Extra Legroom", "Business"]);
+                    switch(selectedOptionIndex)
                     {
-                        SeatQual = "Economy";
-                        isValidInput = true;
+                        case 0:
+                            SeatQual = "Economy";
+                            isValidInput = true;
+                            break;
+                        case 1:
+                            SeatQual = "Economy Extra Legroom";
+                            isValidInput = true;
+                            break;
+                        case 2:
+                            SeatQual = "Double seats";
+                            isValidInput = true;
+                            break;
+                        case 3:
+                            SeatQual = "Economy class in front of cabin";
+                            isValidInput = true;
+                            break;
+                        case 4:
+                            SeatQual = "Club Class";
+                            isValidInput = true;
+                            break;
                     }
-                    else if (input == "2")
-                    {
-                        SeatQual = "Economy Extra Legroom";
-                        isValidInput = true;
-                    }
-                    else if (input == "3")
-                    {
-                        SeatQual = "Double seats";
-                        isValidInput = true;
-                    }
-                    else if (input == "4")
-                    {
-                        SeatQual = "Economy class in front of cabin";
-                        isValidInput = true;
-                    }
-                    else if (input == "5")
-                    {
-                        SeatQual = "Club Class";
-                        isValidInput = true;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid input. Please enter a number between 1 and 5.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Invalid airplane model.");
-                    return;
                 }
 
             // Use SeatQual here for further processing
@@ -372,7 +352,7 @@ public class Reservation
                 }
             }
         }
-
+        Menu.LoadingBar("Reserving seats",TimeSpan.FromSeconds(3));
         Console.WriteLine($"These are your chosen seats {CYAN}O{NORMAL}.");
         Dictionary<string, string> TSeats = new Dictionary<string, string>();
         if(FlightForReservation.Airplane.Model == "Boeing 737")
@@ -448,33 +428,30 @@ public class Reservation
             Flightinfo.PrintPlane("Boeing 787", TSeats);
         }
 
-        Console.WriteLine("Please confirm for these seats");
-        string choice = Console.ReadLine();
-        if (choice is "no")
+        int SearchingOptionIndex = Menu.MenuPanel("Confirmation", "Enter yes if you are happy with your chosen seats", ["Yes","No"], Flightinfo.GetPlane(FlightForReservation.Airplane.Model, TSeats));
+        switch (SearchingOptionIndex)
         {
-            foreach (string seat in ChosenSeat)
-            {
-                foreach (Seat tseat in FlightForReservation.Airplane.Seats)
-                    {
-                        if (tseat.ID == seat)
-                        {
-                            tseat.PersonInSeat = null;
-                            tseat.SeatReservationNumber = 0;
-                        }
-                    }
-
-            }
+            case 0:
+                Console.Clear();
+                Console.WriteLine("We have recieved your reservation");
+                Console.WriteLine("Press any key to return to the menu panel");
+                break;
             
-            SelectSeat();
+            case 1:
+                foreach (string seat in ChosenSeat)
+                {
+                    foreach (Seat tseat in FlightForReservation.Airplane.Seats)
+                        {
+                            if (tseat.ID == seat)
+                            {
+                                tseat.PersonInSeat = null;
+                                tseat.SeatReservationNumber = 0;
+                            }
+                        }
+
+                }
+                SelectSeat();
+                break;
         }
-        else
-        {
-            Console.Clear();
-            Console.WriteLine("We have recieved your reservation");
-            Console.WriteLine("Press any key to return to the menu panel");
-        }
-        
     }
-
-
 }
