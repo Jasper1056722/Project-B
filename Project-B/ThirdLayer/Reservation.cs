@@ -7,10 +7,10 @@ public class Reservation
     private List<int> _takenNumbers = new List<int>();
     public int ReservationNumber { get; set; }
     public List<Person> People = new List<Person>();
-    public int AccountKey { get; set; }
     private static Random random = new Random();
+    public int AccountKey { get; set; }
 
-    public Reservation()
+    public Reservation(int accountKey)
     {
         _reservationNumber = random.Next(100000, 999999);
 
@@ -20,20 +20,12 @@ public class Reservation
         }
 
         ReservationNumber = _reservationNumber;
+        FlightForReservation = null;
+        AccountKey = accountKey;
+
     }
 
-    public Reservation(Flight flight)
-    {
-        _reservationNumber = random.Next(100000, 999999);
 
-        while (_takenNumbers.Contains(_reservationNumber))
-        {
-            _reservationNumber = random.Next(100000, 999999);
-        }
-
-        ReservationNumber = _reservationNumber;
-        FlightForReservation = flight;
-    }
 
     public void ReserveRandomSeat(Flight flight)
     {

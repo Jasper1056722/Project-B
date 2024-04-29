@@ -8,7 +8,10 @@ public class Program
     {
         Menu.StartMenu();
         List<Flight> flights = Flight.LoadJson();
+        List<Reservation> reservations = ReservationManager.LoadReservations();
+
         Account account = new();
+        
        
         Console.Title = "Flight Application";
         Thread.Sleep(2000);
@@ -39,6 +42,7 @@ public class Program
                     switch (selectedOptionIndex)
                     {
                         case 0:  
+                        
                             string email = Menu.GetString("ENTER email: ");
                             string password = Menu.GetString("ENTER PASSWORD: ");
 
@@ -87,7 +91,7 @@ public class Program
                                             
                                             Console.Clear();
                                             string AddDestination = Menu.GetString("Enter a destination for the flight: ").Trim();
-                                            while(!Account.IsAllLetters(AddDestination.Trim()) || string.IsNullOrEmpty(AddDestination.Trim()))
+                                            while(!Validator.IsAllLetters(AddDestination.Trim()) || string.IsNullOrEmpty(AddDestination.Trim()))
                                             {
                                                 Console.WriteLine("Destination can oly include letters, and cannot be null");
                                                 AddDestination = Menu.GetString("Enter a destination for the flight: ").Trim();
@@ -96,7 +100,7 @@ public class Program
                                             Console.Clear();
 
                                             string AddCountry = Menu.GetString("Enter a country for the flight: ").Trim();
-                                            while(!Account.IsAllLetters(AddCountry.Trim()) || string.IsNullOrEmpty(AddCountry.Trim()))
+                                            while(!Validator.IsAllLetters(AddCountry.Trim()) || string.IsNullOrEmpty(AddCountry.Trim()))
                                             {
                                                 Console.WriteLine("Country can oly include letters, and cannot be null");
                                                 AddCountry = Menu.GetString("Enter a country for the flight ").Trim();
@@ -105,7 +109,7 @@ public class Program
                                             Console.Clear();
 
                                             string AddLocationOfDeparture = Menu.GetString("Enter a location of departure for the flight: ").Trim();
-                                            while(!Account.IsAllLetters(AddLocationOfDeparture.Trim()) || string.IsNullOrEmpty(AddLocationOfDeparture.Trim()))
+                                            while(!Validator.IsAllLetters(AddLocationOfDeparture.Trim()) || string.IsNullOrEmpty(AddLocationOfDeparture.Trim()))
                                             {
                                                 Console.WriteLine("Location of departure can oly include letters, and cannot be null");
                                                 AddLocationOfDeparture = Menu.GetString("Enter a location of departure for the flight: ").Trim();
@@ -114,7 +118,7 @@ public class Program
                                             Console.Clear();
 
                                             string AddDepartureDateString = Menu.GetString("Enter a departure date for the flight: ").Trim();
-                                            while(!Account.IsDate(AddDepartureDateString))
+                                            while(!Validator.IsDate(AddDepartureDateString))
                                             {
                                                 Console.WriteLine("Invalid input, enter a date (dd-MM-yyyy)");
                                                 AddDepartureDateString = Menu.GetString("Enter a departure date for the flight: ").Trim();
@@ -123,7 +127,7 @@ public class Program
                                             Console.Clear();
 
                                             string AddnewDepartureTimeString = Menu.GetString("Enter a new departure time (dd-MM-yyyy HH:mm:ss): ");
-                                            while(!Account.IsTime(AddnewDepartureTimeString))
+                                            while(!Validator.IsTime(AddnewDepartureTimeString))
                                             {
                                                 Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
                                                 AddnewDepartureTimeString = Menu.GetString("Enter a new departure time: ");
@@ -133,7 +137,7 @@ public class Program
                                             Console.Clear();
 
                                             string AddEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival (dd-MM-yyyy HH:mm:ss): ");
-                                            while(!Account.IsTime(AddEstimatedTimeString))
+                                            while(!Validator.IsTime(AddEstimatedTimeString))
                                             {
                                                 Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
                                                 AddEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival: ");
@@ -164,7 +168,7 @@ public class Program
                                         case 1:
                                             Console.Clear();
                                             string FlightNumAnswerDel = Menu.GetString("Enter a flight number to delete: ").Trim();
-                                            while(!Account.IsNotNull(FlightNumAnswerDel) || !Account.IsAllDigits(FlightNumAnswerDel))
+                                            while(!Validator.IsNotNull(FlightNumAnswerDel) || !Validator.IsAllDigits(FlightNumAnswerDel))
                                             { 
                                                 Console.WriteLine("cant be null!, and needs to be a number!");
                                                 FlightNumAnswerDel = Menu.GetString("Enter a flight number to delete: ").Trim();
@@ -192,7 +196,7 @@ public class Program
                                         case 2:
                                             Console.Clear();
                                             string FlightNumAnswer = Menu.GetString("Enter a flight number to look for: ").Trim();
-                                            while(!Account.IsNotNull(FlightNumAnswer) || !Account.IsAllDigits(FlightNumAnswer))
+                                            while(!Validator.IsNotNull(FlightNumAnswer) || !Validator.IsAllDigits(FlightNumAnswer))
                                             { 
                                                 Console.WriteLine("cant be null!, and needs to be a number!");
                                                 FlightNumAnswer = Menu.GetString("Enter a flight number to look for: ").Trim();
@@ -214,7 +218,7 @@ public class Program
                                                             Console.Clear();
                                                             string newDestination = Menu.GetString("Enter a new destination: ").Trim();
     
-                                                            while(!Account.IsAllLetters(newDestination.Trim()) || string.IsNullOrEmpty(newDestination.Trim()))
+                                                            while(!Validator.IsAllLetters(newDestination.Trim()) || string.IsNullOrEmpty(newDestination.Trim()))
                                                             {
                                                                 Console.WriteLine("Destination can oly include letters, and cannot be null");
                                                                 newDestination = Menu.GetString("Enter a new destination: ").Trim();
@@ -230,7 +234,7 @@ public class Program
                                                             Console.Clear();
                                                             string newCountry = Menu.GetString("Enter a new country: ").Trim();
     
-                                                            while(!Account.IsAllLetters(newCountry.Trim()) || string.IsNullOrEmpty(newCountry.Trim()))
+                                                            while(!Validator.IsAllLetters(newCountry.Trim()) || string.IsNullOrEmpty(newCountry.Trim()))
                                                             {
                                                                 Console.WriteLine("Country can oly include letters, and cannot be null");
                                                                 newCountry = Menu.GetString("Enter a new country: ").Trim();
@@ -246,7 +250,7 @@ public class Program
                                                             Console.Clear();
                                                             string newLocationOfDeparture = Menu.GetString("Enter a new location of departure: ").Trim();
     
-                                                            while(!Account.IsAllLetters(newLocationOfDeparture.Trim()) || string.IsNullOrEmpty(newLocationOfDeparture.Trim()))
+                                                            while(!Validator.IsAllLetters(newLocationOfDeparture.Trim()) || string.IsNullOrEmpty(newLocationOfDeparture.Trim()))
                                                             {
                                                                 Console.WriteLine("Location of departure can oly include letters, and cannot be null");
                                                                 newLocationOfDeparture = Menu.GetString("Enter a new location of departure: ").Trim();
@@ -262,7 +266,7 @@ public class Program
                                                             Console.Clear();
                                                             string newDepartureDateString = Menu.GetString("Enter a new departure date: ").Trim();
     
-                                                            while(!Account.IsDate(newDepartureDateString))
+                                                            while(!Validator.IsDate(newDepartureDateString))
                                                             {
                                                                 Console.WriteLine("Invalid input, enter a date (dd-MM-yyyy)");
                                                                 newDepartureDateString = Menu.GetString("Enter a new departure date: ").Trim();
@@ -278,7 +282,7 @@ public class Program
                                                             Console.Clear();
                                                             string newDepartureTimeString = Menu.GetString("Enter a new departure time: ");
     
-                                                            while(!Account.IsTime(newDepartureTimeString))
+                                                            while(!Validator.IsTime(newDepartureTimeString))
                                                             {
                                                                 Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
                                                                 newDepartureTimeString = Menu.GetString("Enter a new departure time: ");
@@ -295,7 +299,7 @@ public class Program
                                                             Console.Clear();
                                                             string newEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival: ");
     
-                                                            while(!Account.IsTime(newEstimatedTimeString))
+                                                            while(!Validator.IsTime(newEstimatedTimeString))
                                                             {
                                                                 Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
                                                                 newEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival: ");
@@ -404,6 +408,7 @@ public class Program
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Flight.WriteToJson(flights);
+                                            ReservationManager.WriteReservations(reservations);
                                             Environment.Exit(1);
                                             break;
                                     }
@@ -411,6 +416,7 @@ public class Program
                             }
                             else if(account.IsLoggedIn)
                             {
+                                List<Reservation> reservationaccountlistflights = account.LoadAccountsReservations(reservations);
                                 bool UserPanelState = true;
                                 while(UserPanelState)
                                 {
@@ -480,7 +486,7 @@ public class Program
 
                                         case 1:
                                             Console.WriteLine("Make a reservation");
-                                            Reservation reservation = new Reservation();
+                                            Reservation reservation = new Reservation(account.Primkey);
                                             reservation.SelectFlight(flights);
                                             Console.WriteLine("How many seats do you want to reserve?");
                                             int AmountPersons = Convert.ToInt32(Console.ReadLine());
@@ -510,6 +516,7 @@ public class Program
                                                             break;
                                                     }   
                                                 }
+                                                reservations.Add(reservation);
                                             }
 
                                             else if (AmountPersons > 1)
@@ -519,12 +526,15 @@ public class Program
                                                     reservation.AddContactInfo();
                                                 }
                                                 reservation.SelectSeat();
+
+                                                reservations.Add(reservation);
                                             }
                                             Console.ReadKey();
                                             break;
 
                                         case 2:
                                             Console.WriteLine("Change reservation");
+                                            ReservationManager.DisplayReservations(reservationaccountlistflights);
                                             Console.WriteLine("What is the flightnumber of the flight you want to change?");
                                             string flightNumber = Console.ReadLine();
                                             Flightinfo.UpdateInfo(flightNumber, flights);
@@ -535,6 +545,7 @@ public class Program
                                             Console.Clear();
                                             Menu.LoadingBar("Loading flights", TimeSpan.FromSeconds(1));
                                             Console.Clear();
+                                            
                                             Flightinfo.DisplayFlights(flights);
                                             Console.WriteLine("Enter a key to go back to the menu");
                                             Console.ReadKey();
@@ -544,7 +555,8 @@ public class Program
                                         case 4:
                                             Console.Clear();
                                             Menu.LoadingBar("Loading Reservations", TimeSpan.FromSeconds(1));
-                                            Flightinfo.DisplayReservations(account.AccountReservations);
+
+                                            ReservationManager.DisplayReservations(reservationaccountlistflights);
                                             Console.WriteLine("Enter a key to go back to the menu");
                                             Console.ReadKey();
                                             break;
@@ -559,6 +571,7 @@ public class Program
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Flight.WriteToJson(flights);
+                                            ReservationManager.WriteReservations(reservations);
                                             Environment.Exit(1);
                                             break;
                                     }
@@ -576,7 +589,7 @@ public class Program
                         case 1:
                             string newUserEmail = Menu.GetString("ENTER A NEW EMAIL: ");
 
-                            while(!Account.IsValidEmail(newUserEmail))
+                            while(!Validator.IsValidEmail(newUserEmail))
                             {
                                 Console.WriteLine("Invalid email, Try again");
                                 newUserEmail = Menu.GetString("ENTER A NEW EMAIL: ");
@@ -584,7 +597,7 @@ public class Program
                             }
                             string newUserPassword = Menu.GetString("ENTER A PASSWORD: ");
                             
-                            while(!Account.IsNotNull(newUserPassword))
+                            while(!Validator.IsNotNull(newUserPassword))
                             {
                                 Console.WriteLine("Password cant be empty!");
                                 newUserPassword = Menu.GetString("ENTER A PASSWORD: ");
@@ -670,6 +683,7 @@ public class Program
                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                             Thread.Sleep(1000);
                             Flight.WriteToJson(flights);
+                            ReservationManager.WriteReservations(reservations);
                             Environment.Exit(1);
                             break;
                     }
@@ -677,4 +691,5 @@ public class Program
         }
             
     }
+
 }
