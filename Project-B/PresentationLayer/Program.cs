@@ -54,7 +54,7 @@ public class Program
                                 bool AdminPanelState = true;
                                 while (AdminPanelState)
                                 {
-                                    int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Show all flights", "Log out", "Quit Program"]);
+                                    int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Show all flights", "Log out", "See all reservations", "Quit Program"]);
 
                                     switch(AdminPanelIndex)
                                     {
@@ -403,8 +403,15 @@ public class Program
                                             account.logout();
                                             AdminPanelState = false;
                                             break;
-                                        
+
                                         case 6:
+                                            Console.Clear();
+                                            ReservationManager.DisplayReservations(reservations);
+                                            Console.ReadKey();
+                                            break;
+                                            
+                                        
+                                        case 7:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Flight.WriteToJson(flights);
@@ -510,6 +517,7 @@ public class Program
                                                             break;
                                                     }   
                                                 }
+                                                reservationaccountlistflights.Add(reservation);
                                                 reservations.Add(reservation);
                                             }
 

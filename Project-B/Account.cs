@@ -87,94 +87,11 @@ public class Account
         Primkey = 0;
     }
 
-    public static bool IsValidEmail(string email)
-    {
-        // Split the email address into two parts
-        string[] parts = email.Split('@');
-
-        // Check if there are exactly two parts
-        if (parts.Length != 2)
-        {
-            return false;
-        }
-
-        // Check if the part before the '@' contains at least one letter
-        string localPart = parts[0];
-        if (!localPart.Any(char.IsLetter))
-        {
-            return false;
-        }
-
-        // Check if the part after the '@' contains a period
-        string domainPart = parts[1];
-        if (!domainPart.Contains('.'))
-        {
-            return false;
-        }
-
-        // Email is valid
-        return true;
-    }
-
-    public static bool IsNotNull(string WordToCheck)
-    {
-        if(WordToCheck == null || WordToCheck.Trim() == "")
-        {
-            return false;
-        }
-        return true;
-    }
-
-    public static bool IsAllDigits(string WordToCheck)
-    {
-    foreach (char letter in WordToCheck)
-    {
-        if (!char.IsDigit(letter))
-        {
-            return false;
-        }
-    }
-    return true;
-    }
-
-    public static bool IsAllLetters(string str)
-    {
-        foreach (char c in str)
-        {
-            if (!char.IsLetter(c) && c != ' ')
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static bool IsDate(string str)
-    {
-        DateTime date;
-        if (DateTime.TryParseExact(str, "dd-MM-yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    
-
-    public static bool IsTime(string str)
-    {
-        DateTime date;
-        if (DateTime.TryParseExact(str, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-        {
-            return true;
-        }
-        return false;
-    }
-
-
     public List<Reservation> LoadAccountsReservations(List<Reservation> reservations)
     {
-        List<Reservation> PrivateRes = new List<Reservation>();
+    List<Reservation> PrivateRes = new List<Reservation>();
+    try
+    {
         foreach (Reservation reservation in reservations)
         {
             if(reservation.AccountKey == Primkey)
@@ -182,8 +99,12 @@ public class Account
                 PrivateRes.Add(reservation);
             }
         }
-        return PrivateRes;
     }
-
+    catch (Exception ex)
+    {
+        Console.WriteLine("An error occurred while loading reservations: " + ex.Message);
+    }
+    return PrivateRes;
+    }
 }
 

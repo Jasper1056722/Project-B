@@ -9,6 +9,12 @@ public static class ReservationManager
     public static List<Reservation> LoadReservations()
     {
         string json = File.ReadAllText("Reservations.json");
+
+        if (string.IsNullOrEmpty(json))
+        {
+            return new List<Reservation>();
+        }
+
         List<Reservation> reservations = JsonConvert.DeserializeObject<List<Reservation>>(json);
         return reservations;
     }
