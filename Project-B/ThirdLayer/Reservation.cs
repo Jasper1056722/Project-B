@@ -127,47 +127,60 @@ public class Reservation
 
     public void AddContactInfo()
     {
+        Console.Clear();
         int count = People.Count + 1;
-        Console.WriteLine($"Please enter contact information for person {count}:");
+        Console.WriteLine($"Please enter contact information for person {count}: ");
+        Thread.Sleep(2500);
 
         string firstName;
         do
         {
-            Console.WriteLine("First Name: ");
-            firstName = Console.ReadLine();
+            firstName = Menu.GetString("First name: ");
+
+            if(!string.IsNullOrEmpty(firstName))
+            {
+                firstName = char.ToUpper(firstName[0]) + firstName.Substring(1).ToLower();
+            }
+
             if (string.IsNullOrEmpty(firstName) || !firstName.All(char.IsLetter))
             {
                 Console.WriteLine("Invalid first name.");
             }
         } while (string.IsNullOrEmpty(firstName) || !firstName.All(char.IsLetter));
-    
+
+        Console.Clear();
         string lastName;
         do
         {
-            Console.WriteLine("Last Name: ");
-            lastName = Console.ReadLine();
+            lastName = Menu.GetString("Last name: ");
+
+            if (!string.IsNullOrEmpty(lastName))
+            {
+                lastName = char.ToUpper(lastName[0]) + lastName.Substring(1).ToLower();
+            }
+            
             if (string.IsNullOrEmpty(lastName) || !lastName.All(char.IsLetter))
             {
                 Console.WriteLine("Invalid last name.");
             }
         } while (string.IsNullOrEmpty(lastName) || !lastName.All(char.IsLetter));
 
+        Console.Clear();
         string birthDate;
         do
         {
-            Console.WriteLine("Birth Date (DD-MM-YYYY): ");
-            birthDate = Console.ReadLine();
-            if (birthDate.Length < 8 || !birthDate.Replace("-", "").All(char.IsDigit))
+            birthDate = Menu.GetString("Birth Date (DD-MM-YYYY): ");
+            if (!Validator.IsDate(birthDate))
             {
                 Console.WriteLine("Invalid birth date format.");
             }
-        } while (birthDate.Length < 8 || !birthDate.Replace("-", "").All(char.IsDigit));
+        } while (!Validator.IsDate(birthDate));
 
+        Console.Clear();
         string phoneNumber;
         do
         {
-            Console.WriteLine("Phone Number (7 to 15 digits, optionally starting with '+'): ");
-            phoneNumber = Console.ReadLine();
+            phoneNumber = Menu.GetString("Phone Number (7 to 15 digits, optionally starting with '+'): ");
             phoneNumber = phoneNumber.TrimStart('+');
             
             if (string.IsNullOrEmpty(phoneNumber))
@@ -180,12 +193,11 @@ public class Reservation
             }
         } while (string.IsNullOrEmpty(phoneNumber) || phoneNumber.Length < 7 || phoneNumber.Length > 15 || !phoneNumber.All(char.IsDigit));
             
-
+        Console.Clear();
         string emailAddress;
         do
         {
-            Console.WriteLine("Email Address: ");
-            emailAddress = Console.ReadLine();
+            emailAddress = Menu.GetString("Email Address: ");
             if (!emailAddress.Contains("@"))
             {
                 Console.WriteLine("Invalid email address. Please enter a valid email address.");
@@ -201,6 +213,7 @@ public class Reservation
             EmailAddress = emailAddress
         };
         People.Add(person);
+        Console.Clear();
     }
 
     static string GetValidFlightNumber()
@@ -209,8 +222,7 @@ public class Reservation
 
         while (true)
         {
-            Console.WriteLine("Select a flight number");
-            string input = Console.ReadLine();
+            string input = Menu.GetString("Select a flight number: ");
 
             if (string.IsNullOrWhiteSpace(input))
             {

@@ -492,11 +492,20 @@ public class Program
                                             break;
 
                                         case 1:
-                                            Menu.LoadingBar("Making a reservation", TimeSpan.FromSeconds(3));
+                                            Menu.LoadingBar("Preparing reservation", TimeSpan.FromSeconds(1));
                                             Reservation reservation = new Reservation(account.Primkey);
                                             reservation.SelectFlight(flights);
-                                            Console.WriteLine("How many seats do you want to reserve?");
-                                            int AmountPersons = Convert.ToInt32(Console.ReadLine());
+                                            Console.Clear();
+                                            string AmountPersonsString = Menu.GetString("How many seats do you want to reserve: ").Trim();
+
+                                            while(!Validator.IsAllDigits(AmountPersonsString) || string.IsNullOrWhiteSpace(AmountPersonsString))
+                                            {
+                                                Console.Clear();
+                                                Console.WriteLine("Enter a number!");
+                                                AmountPersonsString = Menu.GetString("How many seats do you want to reserve: ").Trim();
+                                            }
+                                            int AmountPersons = Convert.ToInt32(AmountPersonsString);
+                                            
                                             if (AmountPersons == 1)
                                             {
                                                 reservation.AddContactInfo();
@@ -528,10 +537,10 @@ public class Program
                                                     reservation.AddContactInfo();
                                                 }
                                                 reservation.SelectSeat();
-
+                                                reservationaccountlistflights.Add(reservation);
                                                 reservations.Add(reservation);
                                             }
-                                            Console.ReadKey();
+                                            Menu.LoadingBar("Saving reservation", TimeSpan.FromSeconds(1));
                                             break;
 
                                         case 2:
