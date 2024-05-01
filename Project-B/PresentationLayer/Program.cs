@@ -54,7 +54,7 @@ public class Program
                                 bool AdminPanelState = true;
                                 while (AdminPanelState)
                                 {
-                                    int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Show all flights", "Log out", "See all reservations", "Quit Program"]);
+                                    int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Filter for flights", "Show all flights", "Log out", "See all reservations", "Quit Program"]);
 
                                     switch(AdminPanelIndex)
                                     {
@@ -390,6 +390,41 @@ public class Program
                                         
                                         case 4:
                                             Console.Clear();
+                                            bool AdminFilteringState = true;
+                                            while(AdminFilteringState)
+                                            {
+                                                int SearchingOptionIndex = Menu.MenuPanel("Filtering options", "Choose between these 2 options", ["Proceed to filtering", "Back to menu"]);
+                                                    
+                                                    switch(SearchingOptionIndex)
+                                                    {
+                                                        case 0:
+                                                            Console.Clear();
+                                                            Console.WriteLine("Fill in all the filters you want to filter for (leave blank if not):");
+                                                            string destination01 = Menu.GetString("Departing from: ");
+                                                            string destination02 = Menu.GetString("Arriving at: ").ToLower();
+                                                            string input01 = Menu.GetString("First departure date (DD-MM-YYYY): ");
+                                                            string input02 = Menu.GetString("Second date: ");
+                                                            string planeAnswer01 = Menu.GetString("Airplane 1 (Airbus 330, Boeing 787, Boeing 737): ");
+                                                            string planeAnswer02 = Menu.GetString("Airplane 2 (Airbus 330, Boeing 787, Boeing 737): ");
+                                                            string planeAnswer03 = Menu.GetString("Airplane 3 (Airbus 330, Boeing 787, Boeing 737): ");
+                                                            Console.Clear();
+                                                            Menu.LoadingBar("Looking for result with filter", TimeSpan.FromSeconds(1));
+                                                            Console.Clear();
+                                                            Filtering.filtorSort(destination01, destination02, input01, input02, planeAnswer01, planeAnswer02, planeAnswer03, flights);
+                                                            Console.WriteLine("Enter a key to go back to the filtering menu");
+                                                            Console.ReadKey();
+                                                            break;
+
+                                                        case 1:
+                                                            Console.Clear();
+                                                            AdminSearchingState = false;
+                                                            break;
+                                                    }                     
+                                            }
+                                            break;
+                                        
+                                        case 5:
+                                            Console.Clear();
                                             Menu.LoadingBar("Loading flights", TimeSpan.FromSeconds(1));
                                             Console.Clear();
                                             Flightinfo.DisplayFlights(flights);
@@ -398,20 +433,20 @@ public class Program
                                             Console.Clear();
                                             break;
 
-                                        case 5:
+                                        case 6:
                                             Menu.LoadingBar("Logging out", TimeSpan.FromSeconds(2));
                                             account.logout();
                                             AdminPanelState = false;
                                             break;
 
-                                        case 6:
+                                        case 7:
                                             Console.Clear();
                                             ReservationManager.DisplayReservations(reservations);
                                             Console.ReadKey();
                                             break;
                                             
                                         
-                                        case 7:
+                                        case 8:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Flight.WriteToJson(flights);
@@ -427,7 +462,7 @@ public class Program
                                 bool UserPanelState = true;
                                 while(UserPanelState)
                                 {
-                                    int UserPanelIndex = Menu.MenuPanel("User Menu","Here u can", ["Search for a flight", "Make a reservation","Change reservation", "Display all flights", "See reservations", "logout", "Quit Program"]);
+                                    int UserPanelIndex = Menu.MenuPanel("User Menu","Here u can", ["Search for a flight", "Filter for flights", "Make a reservation","Change reservation", "Display all flights", "See reservations", "logout", "Quit Program"]);
 
                                     switch(UserPanelIndex)
                                     {
@@ -492,6 +527,42 @@ public class Program
                                             break;
 
                                         case 1:
+                                            Console.Clear();
+                                            bool AdminFilteringState = true;
+                                            while(AdminFilteringState)
+                                            {
+                                                int SearchingOptionIndex = Menu.MenuPanel("Filtering options", "Choose between these 2 options", ["Proceed to filtering", "Back to menu"]);
+                                                    
+                                                    switch(SearchingOptionIndex)
+                                                    {
+                                                        case 0:
+                                                            Console.Clear();
+                                                            Console.WriteLine("Fill in all the filters you want to filter for (leave blank if not):");
+                                                            string destination01 = Menu.GetString("Departing from: ");
+                                                            string destination02 = Menu.GetString("Arriving at: ");
+                                                            string input01 = Menu.GetString("First departure date (DD-MM-YYYY): ");
+                                                            string input02 = Menu.GetString("Second date: ");
+                                                            string planeAnswer01 = Menu.GetString("Airplane 1 (Airbus 330, Boeing 787, Boeing 737): ");
+                                                            string planeAnswer02 = Menu.GetString("Airplane 2 (Airbus 330, Boeing 787, Boeing 737): ");
+                                                            string planeAnswer03 = Menu.GetString("Airplane 3 (Airbus 330, Boeing 787, Boeing 737): ");
+                                                            Console.Clear();
+                                                            Menu.LoadingBar("Looking for result with filter", TimeSpan.FromSeconds(1));
+                                                            Console.Clear();
+                                                            Filtering.filtorSort(destination01, destination02, input01, input02, planeAnswer01, planeAnswer02, planeAnswer03, flights);
+                                                            Console.WriteLine("Enter a key to go back to the filtering menu");
+                                                            Console.ReadKey();
+                                                            break;
+
+                                                        case 1:
+                                                            Console.Clear();
+                                                            AdminFilteringState = false;
+                                                            break;
+                                                    }                     
+                                            }
+                                            break;
+                                        
+
+                                        case 2:
                                             Menu.LoadingBar("Preparing reservation", TimeSpan.FromSeconds(1));
                                             Reservation reservation = new Reservation(account.Primkey);
                                             reservation.SelectFlight(flights);
@@ -543,7 +614,7 @@ public class Program
                                             Menu.LoadingBar("Saving reservation", TimeSpan.FromSeconds(1));
                                             break;
 
-                                        case 2:
+                                        case 3:
                                             Console.WriteLine("Change reservation");
                                             ReservationManager.DisplayReservations(reservationaccountlistflights);
                                             Console.WriteLine("What is the flightnumber of the flight you want to change?");
@@ -552,7 +623,7 @@ public class Program
                                             Console.ReadKey();
                                             break;
 
-                                        case 3:
+                                        case 4:
                                             Console.Clear();
                                             Menu.LoadingBar("Loading flights", TimeSpan.FromSeconds(1));
                                             Console.Clear();
@@ -563,7 +634,7 @@ public class Program
                                             Console.Clear();
                                             break;
                                         
-                                        case 4:
+                                        case 5:
                                             Console.Clear();
                                             Menu.LoadingBar("Loading Reservations", TimeSpan.FromSeconds(1));
 
@@ -572,13 +643,13 @@ public class Program
                                             Console.ReadKey();
                                             break;
 
-                                        case 5:
+                                        case 6:
                                             Menu.LoadingBar("Logging out", TimeSpan.FromSeconds(2));
                                             account.logout();
                                             UserPanelState = false;
                                             break;
 
-                                        case 6:
+                                        case 7:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Flight.WriteToJson(flights);
