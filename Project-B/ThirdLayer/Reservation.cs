@@ -466,4 +466,17 @@ public class Reservation
                 break;
         }
     }
+
+    public void RemoveReservation(List<Flight> flights, List<Reservation> reservations, int reservationnumber)
+    {
+        foreach (var seat in flights.SelectMany(flight => flight.Airplane.Seats))
+        {
+            if (seat.SeatReservationNumber == reservationnumber)
+            {
+                seat.PersonInSeat = null;
+                seat.SeatReservationNumber = 0;
+            }
+        }
+        reservations.RemoveAll(reservation => reservation.ReservationNumber == reservationnumber);
+    }
 }
