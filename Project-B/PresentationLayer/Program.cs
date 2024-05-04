@@ -407,10 +407,11 @@ public class Program
                                                             string planeAnswer01 = Menu.GetString("Airplane 1 (Airbus 330, Boeing 787, Boeing 737): ");
                                                             string planeAnswer02 = Menu.GetString("Airplane 2 (Airbus 330, Boeing 787, Boeing 737): ");
                                                             string planeAnswer03 = Menu.GetString("Airplane 3 (Airbus 330, Boeing 787, Boeing 737): ");
+                                                            string maxPrice = Menu.GetString("Maximum price of ticket: ");
                                                             Console.Clear();
                                                             Menu.LoadingBar("Looking for result with filter", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Filtering.filtorSort(destination01, destination02, input01, input02, planeAnswer01, planeAnswer02, planeAnswer03, flights);
+                                                            Filtering.filtorSort(destination01, destination02, input01, input02, planeAnswer01, planeAnswer02, planeAnswer03, maxPrice, flights);
                                                             Console.WriteLine("Enter a key to go back to the filtering menu");
                                                             Console.ReadKey();
                                                             break;
@@ -545,10 +546,11 @@ public class Program
                                                             string planeAnswer01 = Menu.GetString("Airplane 1 (Airbus 330, Boeing 787, Boeing 737): ");
                                                             string planeAnswer02 = Menu.GetString("Airplane 2 (Airbus 330, Boeing 787, Boeing 737): ");
                                                             string planeAnswer03 = Menu.GetString("Airplane 3 (Airbus 330, Boeing 787, Boeing 737): ");
+                                                            string maxPrice = Menu.GetString("Maximum price of ticket: ");
                                                             Console.Clear();
                                                             Menu.LoadingBar("Looking for result with filter", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Filtering.filtorSort(destination01, destination02, input01, input02, planeAnswer01, planeAnswer02, planeAnswer03, flights);
+                                                            Filtering.filtorSort(destination01, destination02, input01, input02, planeAnswer01, planeAnswer02, planeAnswer03, maxPrice, flights);
                                                             Console.WriteLine("Enter a key to go back to the filtering menu");
                                                             Console.ReadKey();
                                                             break;
