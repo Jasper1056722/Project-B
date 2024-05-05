@@ -40,15 +40,30 @@ public static class ReservationManager
         string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
         try
         {
+            int ReservationCount = 1;
             foreach(Reservation reservation in reservations)
             {
+                int PersonCount = 0;
+                Console.WriteLine($"RESERVATION {ReservationCount}");
                 Console.WriteLine("+--------------------------------------------------------------------------------+");
-                Console.WriteLine($"| {CYAN}Reservation number: {reservation.ReservationNumber.ToString().PadRight(19)}{NORMAL} | {CYAN}Destination: {reservation.FlightForReservation.Destination.PadRight(23)}{NORMAL} |");
-                Console.WriteLine($"| {CYAN}Flightnumber:      {reservation.FlightForReservation.FlightNumber.ToString().PadRight(20)}{NORMAL} | {CYAN}Departure time: {reservation.FlightForReservation.DepartureTime.ToString("yyyy-MM-dd HH:mm:ss").PadRight(20)}{NORMAL} |");
-                Console.WriteLine($"| {CYAN}Airplane model:    {reservation.FlightForReservation.Airplane.Model.PadRight(20)}{NORMAL} | {CYAN}ETA:            {reservation.FlightForReservation.EstimatedTimeofArrival.ToString("yyyy-MM-dd HH:mm:ss").PadRight(20)}{NORMAL} |");
-                Console.WriteLine(reservation.AccountKey);
-                Console.WriteLine(reservation.People[0].FirstName + " " + reservation.People[0].LastName);
-                Console.WriteLine("+--------------------------------------------------------------------------------+\n");
+                Console.WriteLine($"| {CYAN}Reservation number: {reservation.ReservationNumber.ToString().PadRight(20)}{NORMAL} | {CYAN}Destination:    {reservation.FlightForReservation.Destination.PadRight(19)}{NORMAL} |");
+                Console.WriteLine($"| {CYAN}Flightnumber:       {reservation.FlightForReservation.FlightNumber.ToString().PadRight(20)}{NORMAL} | {CYAN}Departure time: {reservation.FlightForReservation.DepartureTime.ToString("yyyy-MM-dd HH:mm:ss").PadRight(18)}{NORMAL} |");
+                Console.WriteLine($"| {CYAN}Airplane model:     {reservation.FlightForReservation.Airplane.Model.PadRight(20)}{NORMAL} | {CYAN}ETA:            {reservation.FlightForReservation.EstimatedTimeofArrival.ToString("yyyy-MM-dd HH:mm:ss").PadRight(18)}{NORMAL} |");
+                ReservationCount++;
+
+
+                foreach(Person person in reservation.People)
+                {
+                    PersonCount++;
+                    Console.WriteLine("+--------------------------------------------------------------------------------+");
+                    Console.WriteLine("|                                                                                |");
+                    Console.WriteLine($"| {CYAN}PERSON {PersonCount.ToString().PadRight(71)}{NORMAL} |");
+                    Console.WriteLine("+--------------------------------------------------------------------------------+");
+                    Console.WriteLine($"| {CYAN}Name:         {person.FirstName} {person.LastName.PadRight(21)}{NORMAL} | {CYAN}Date of birth: {person.BirthDate.PadRight(20)}{NORMAL} |");
+                    Console.WriteLine($"| {CYAN}Phone number: {person.PhoneNumber.PadRight(26)}{NORMAL} | {CYAN}Email:         {person.EmailAddress.PadRight(20)}{NORMAL} |");
+
+                }
+                Console.WriteLine("+--------------------------------------------------------------------------------+\n\n");
             }
         }
         catch (Exception ex)
@@ -56,6 +71,4 @@ public static class ReservationManager
             Console.WriteLine("You have no Reservations");
         }
     }
-
-
 }

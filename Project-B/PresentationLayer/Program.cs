@@ -54,7 +54,7 @@ public class Program
                                 bool AdminPanelState = true;
                                 while (AdminPanelState)
                                 {
-                                    int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Filter for flights", "Show all flights", "Log out", "See all reservations", "Quit Program"]);
+                                    int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Filter for flights", "Show all flights", "Log out", "See all reservations", "Remove a reservation", "Quit Program"]);
 
                                     switch(AdminPanelIndex)
                                     {
@@ -445,9 +445,24 @@ public class Program
                                             ReservationManager.DisplayReservations(reservations);
                                             Console.ReadKey();
                                             break;
-                                            
-                                        
+
                                         case 8:
+                                            Console.Clear();
+                                            ReservationManager.DisplayReservations(reservations);
+                                            string reservationNumberAdmin = Menu.GetString("Enter reservationnumber: ");
+                                            while (!reservations.Any(reservation => reservation.ReservationNumber.ToString() == reservationNumberAdmin))
+                                            {
+                                                Console.WriteLine("Incorrect input!");
+                                                reservationNumberAdmin = Menu.GetString("Enter reservationnumber: ");
+                                            }
+                                            int reservationNumberAdminInt = int.Parse(reservationNumberAdmin);
+                                            Reservation.RemoveReservation(flights, reservations, reservationNumberAdminInt);
+                                            Console.Clear();
+                                            Menu.LoadingBar("Removing reservation", TimeSpan.FromSeconds(2));
+                                            Console.Clear();
+                                            break;
+                                            
+                                        case 9:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Flight.WriteToJson(flights);
@@ -463,7 +478,7 @@ public class Program
                                 bool UserPanelState = true;
                                 while(UserPanelState)
                                 {
-                                    int UserPanelIndex = Menu.MenuPanel("User Menu","Here u can", ["Search for a flight", "Filter for flights", "Make a reservation","Change reservation", "Display all flights", "See reservations", "logout", "Quit Program"]);
+                                    int UserPanelIndex = Menu.MenuPanel("User Menu","Here u can", ["Search for a flight", "Filter for flights", "Make a reservation","Change reservation", "Display all flights", "See reservations", "Remove reservation", "logout", "Quit Program"]);
 
                                     switch(UserPanelIndex)
                                     {
@@ -644,14 +659,30 @@ public class Program
                                             Console.WriteLine("Enter a key to go back to the menu");
                                             Console.ReadKey();
                                             break;
-
+                                        
                                         case 6:
+                                            Console.Clear();
+                                            ReservationManager.DisplayReservations(reservationaccountlistflights);
+                                            string reservationNumberUser = Menu.GetString("Enter reservationnumber: ");
+                                            while (!reservationaccountlistflights.Any(reservation => reservation.ReservationNumber.ToString() == reservationNumberUser))
+                                            {
+                                                Console.WriteLine("Incorrect input!");
+                                                reservationNumberUser = Menu.GetString("Enter reservationnumber: ");
+                                            }
+                                            int reservationNumberUserInt = int.Parse(reservationNumberUser);
+                                            Reservation.RemoveReservation(flights, reservations, reservationaccountlistflights, reservationNumberUserInt);
+                                            Console.Clear();
+                                            Menu.LoadingBar("Removing reservation", TimeSpan.FromSeconds(2));
+                                            Console.Clear();
+                                            break;
+
+                                        case 7:
                                             Menu.LoadingBar("Logging out", TimeSpan.FromSeconds(2));
                                             account.logout();
                                             UserPanelState = false;
                                             break;
 
-                                        case 7:
+                                        case 8:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Flight.WriteToJson(flights);

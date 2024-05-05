@@ -467,7 +467,7 @@ public class Reservation
         }
     }
 
-    public void RemoveReservation(List<Flight> flights, List<Reservation> reservations, int reservationnumber)
+    public static void RemoveReservation(List<Flight> flights, List<Reservation> reservations, int reservationnumber)
     {
         foreach (var seat in flights.SelectMany(flight => flight.Airplane.Seats))
         {
@@ -478,5 +478,19 @@ public class Reservation
             }
         }
         reservations.RemoveAll(reservation => reservation.ReservationNumber == reservationnumber);
+    }
+
+    public static void RemoveReservation(List<Flight> flights, List<Reservation> reservations, List<Reservation> reservationsUser, int reservationnumber)
+    {
+        foreach (var seat in flights.SelectMany(flight => flight.Airplane.Seats))
+        {
+            if (seat.SeatReservationNumber == reservationnumber)
+            {
+                seat.PersonInSeat = null;
+                seat.SeatReservationNumber = 0;
+            }
+        }
+        reservations.RemoveAll(reservation => reservation.ReservationNumber == reservationnumber);
+        reservationsUser.RemoveAll(reservation => reservation.ReservationNumber == reservationnumber);
     }
 }
