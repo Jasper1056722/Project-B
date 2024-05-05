@@ -7,11 +7,11 @@ using System.Globalization;
 
 public static class Filtering
 {
-    public static void filtorSort(string destination01, string destination02, string input01, string input02, string planeAnswer01, string planeAnswer02, string planeAnswer03, string maxPrice, int maxDurationInHours, List<Flight> flights)
+    public static void filtorSort(string destination01, string destination02, string input01, string input02, string planeAnswer01, string planeAnswer02, string planeAnswer03, string maxPrice, List<Flight> flights)
     {
         DateTime departureDateInput01;
         DateTime departureDateInput02;
-        if (destination02 != "" && input02 != "" && planeAnswer01 != "" && planeAnswer02 == "" && planeAnswer03 == "" && maxPrice == "" && maxDurationInHours != "")
+        if (destination02 != "" && input02 != "" && planeAnswer01 != "" && planeAnswer02 == "" && planeAnswer03 == "" && maxPrice == "")
         {
             if (DateTime.TryParseExact(input01, "dd-MM-yyyy", null, DateTimeStyles.None, out departureDateInput01))
             {
@@ -274,48 +274,33 @@ public static class Filtering
 
 
 
-    public static void filtorAll01(string destination01, string destination02, DateTime departureDateInput01, DateTime departureDateInput02, string PlaneAnswer01, int maxDurationInHours, List<Flight> flights)
+    public static void filtorAll01(string destination01, string destination02, DateTime departureDateInput01, DateTime departureDateInput02, string PlaneAnswer01, List<Flight> flights)
     {
         List<string> FilteredFlights = new List<string>();
 
         foreach (var flight in flights)
         {
-            DateTime departureDateTime;
-            DateTime arrivalDateTime;
-
-            // Parse departure and arrival date times
-            if (DateTime.TryParseExact(flight.DepartureTime, "dd-MM-yyyyTHH:mm:ss", null, DateTimeStyles.None, out departureDateTime) &&
-                DateTime.TryParseExact(flight.EstimatedTimeofArrival, "dd-MM-yyyyTHH:mm:ss", null, DateTimeStyles.None, out arrivalDateTime))
+            DateTime DatetimeDate;
+            string input = flight.DepartureDate;
+            if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
             {
-                TimeSpan duration = arrivalDateTime - departureDateTime;
-                int durationInHours = (int)duration.TotalHours;
-
-                // Check if flight meets all the criteria including duration
-                if (flight.DepartingFrom.ToLower() == destination01 &&
-                    flight.Destination.ToLower() == destination02 &&
-                    departureDateTime >= departureDateInput01 &&
-                    departureDateTime <= departureDateInput02 &&
-                    flight.Airplane.Model.ToLower() == PlaneAnswer01 &&
-                    durationInHours <= maxDurationInHours)
+                if (flight.DepartingFrom.ToLower() == destination01 && flight.Destination.ToLower() == destination02 && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01)
                 {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}\nDuration: {duration.ToString(@"hh\:mm")}");
+                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
                 }
             }
         }
-        if (FilteredFlights.Count > 0)
-        {
+        if (FilteredFlights.Count > 0){
+
             Console.WriteLine($"Found {FilteredFlights.Count} flights:");
 
-            foreach (var flight in FilteredFlights)
-            {
-                Console.WriteLine(flight);
-                Console.WriteLine("");
-            }
-        }
-        else 
+        foreach (var flight in FilteredFlights)
         {
-            Console.WriteLine($"No flights found.");
+            Console.WriteLine(flight);
+            Console.WriteLine("");
         }
+        }
+        else {Console.WriteLine($"No FLights found.");}
 
         FilteredFlights.Clear();
         return;
