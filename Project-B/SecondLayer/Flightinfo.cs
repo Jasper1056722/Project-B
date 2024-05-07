@@ -177,7 +177,7 @@ public static class Flightinfo
         flights.Add(new Flight(Destination, Country, plane, DepartingFrom, DepartureDate, DepartureTime, ArrivalTime));                                                  
     }
  
-    public static void FlightDelete(string flightNumber, List<Flight> flights)
+    public static void FlightDelete(string flightNumber, List<Flight> flights, List<Reservation> reservations)
     {
         if (string.IsNullOrEmpty(flightNumber))
         {
@@ -195,6 +195,14 @@ public static class Flightinfo
         {
             if (flight.FlightNumber == parsedFlightNumber)
             {
+
+                foreach(Reservation reservation in reservations)
+                {
+                    if(reservation.FlightForReservation == flight)
+                    {
+                        reservations.Remove(reservation);
+                    }
+                }
                 flights.Remove(flight);
                 Console.WriteLine($"Flight with number {parsedFlightNumber} deleted successfully");
                 return;
