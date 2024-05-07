@@ -11,8 +11,7 @@ public class Program
         List<Reservation> reservations = ReservationManager.LoadReservations();
 
         Account account = new();
-        
-       
+          
         Console.Title = "Flight Application";
         Thread.Sleep(2000);
         string NL = Environment.NewLine; // shortcut
