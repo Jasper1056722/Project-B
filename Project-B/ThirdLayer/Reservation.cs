@@ -11,6 +11,11 @@ public class Reservation
     private static Random random = new Random();
     public int AccountKey { get; set; }
 
+    string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
+    string RED = Console.IsOutputRedirected ? "" : "\x1b[91m";
+    string CYAN = Console.IsOutputRedirected ? "" : "\x1b[96m"; 
+
+
     public Reservation(int accountKey)
     {
         _reservationNumber = random.Next(100000, 999999);
@@ -32,6 +37,7 @@ public class Reservation
     {
         string SeatQual = "";
         bool isValidInput = false;
+        List<string> ChosenSeat = new List<string>();
 
         while (!isValidInput)
         {
@@ -73,7 +79,7 @@ public class Reservation
                 }
                 else if (flight.Airplane.Model == "Airbus 330")
                 {
-                    int selectedOptionIndex = Menu.MenuPanel("Seat Options","Please select your desired seat.",["Economy","Economy Extra Legroom", "Business"]);
+                    int selectedOptionIndex = Menu.MenuPanel("Seat Options","Please select your desired seat.",["Economy","Economy Extra Legroom", "Double seats","Economy class in front of cabin", "Club Class"]);
                     switch(selectedOptionIndex)
                     {
                         case 0:
@@ -114,15 +120,90 @@ public class Reservation
                 Seat seat1 = seatOptions[rnd.Next(seatOptions.Count)];
                 seat1.PersonInSeat = person;
                 seat1.SeatReservationNumber = ReservationNumber;
+                ChosenSeat.Add(seat1.ID);
             }
 
             Console.Clear();
             Menu.LoadingBar("Selecting seats for each person", TimeSpan.FromSeconds(4));
-
             Console.Clear();
+
+            Dictionary<string, string> TSeats = new Dictionary<string, string>();
+            if(FlightForReservation.Airplane.Model == "Boeing 737")
+            {
+                foreach (string seat in ChosenSeat)
+                {
+                    TSeats.Add(seat, $"{CYAN}O{NORMAL}");
+                }
+
+                foreach (Seat seat in FlightForReservation.Airplane.Seats)
+                {
+                    if(TSeats.ContainsKey(seat.ID))
+                    {
+
+                    }
+                    else if (seat.PersonInSeat is null)
+                    {
+                        TSeats.Add(seat.ID," ");
+                    }
+                    else
+                    {
+                        TSeats.Add(seat.ID,$"{RED}X{NORMAL}");
+                    }
+                }
+                Flightinfo.PrintPlane("Boeing 737", TSeats);
+            }
+            else if(FlightForReservation.Airplane.Model == "Airbus 330")
+            {
+                foreach (string seat in ChosenSeat)
+                {
+                    TSeats.Add(seat, $"{CYAN}O{NORMAL}");
+                }
+
+                foreach (Seat seat in FlightForReservation.Airplane.Seats)
+                {
+                    if(TSeats.ContainsKey(seat.ID))
+                    {
+
+                    }
+                    else if (seat.PersonInSeat is null)
+                    {
+                        TSeats.Add(seat.ID," ");
+                    }
+                    else
+                    {
+                        TSeats.Add(seat.ID,$"{RED}X{NORMAL}");
+                    }
+                }
+                Flightinfo.PrintPlane("Airbus 330", TSeats);
+            }
+            else if(FlightForReservation.Airplane.Model == "Boeing 787")
+            {
+                foreach (string seat in ChosenSeat)
+                {
+                    TSeats.Add(seat, $"{CYAN}O{NORMAL}");
+                }
+
+                foreach (Seat seat in FlightForReservation.Airplane.Seats)
+                {
+                    if(TSeats.ContainsKey(seat.ID))
+                    {
+
+                    }
+                    else if (seat.PersonInSeat is null)
+                    {
+                        TSeats.Add(seat.ID," ");
+                    }
+                    else
+                    {
+                        TSeats.Add(seat.ID,$"{RED}X{NORMAL}");
+                    }
+                }
+                Flightinfo.PrintPlane("Boeing 787", TSeats);
+            }
             Console.WriteLine("We have recieved your reservation");
             Console.WriteLine("Press any key to return to the menu panel");
-    } 
+            Console.ReadKey();
+        } 
     }
 
     public void AddContactInfo()
