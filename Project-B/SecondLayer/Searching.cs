@@ -101,7 +101,7 @@ public static class Searching
         }
         if (PlaneFlights.Count > 0)
         {
-            Console.WriteLine($"Found {PlaneFlights.Count} flights with Airplane: {PlaneAnswer}:");
+            Console.WriteLine($"Found {PlaneFlights.Count} flights with Airplane: {PlaneAnswer}:\n");
         }
 
         else if(PlaneFlights.Count == 0)
