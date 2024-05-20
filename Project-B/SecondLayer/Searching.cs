@@ -116,4 +116,30 @@ public static class Searching
         }
         return;
     }
+    public static string TestSearching(Action<string, List<Flight>> searchMethod, string parameter, List<Flight> flights, List<string> expectedOutput)
+    {
+        var consoleOutput = new System.IO.StringWriter();
+        Console.SetOut(consoleOutput);
+
+        searchMethod(parameter, flights);
+
+        string[] lines = consoleOutput.ToString().Trim().Split("\r\n");
+
+        bool success = true;
+        if (lines.Length != expectedOutput.Count)
+            success = false;
+        else
+        {
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (lines[i] != expectedOutput[i])
+                {
+                    success = false;
+                    break;
+                }
+            }
+        }
+
+        return success ? "Passed" : "Failed";   
+    }
 }
