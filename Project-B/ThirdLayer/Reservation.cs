@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 public class Reservation
 {
-    private int _reservationNumber;
+    public int _reservationNumber;
     public Flight FlightForReservation;
     private List<int> _takenNumbers = new List<int>();
     public int ReservationNumber { get; set; }

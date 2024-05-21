@@ -1,9 +1,21 @@
 using MailKit.Net.Smtp;
 using MimeKit;
 
-public class Mail
+public static class Mail
 {
-    public static void Mailsender(string name, string mail)
+
+    public static void GetInfo(Reservation info)
+    {
+        int reservationnumber = info._reservationNumber;
+        Person firstPerson = info.People[0];
+        string fullname = ($"{firstPerson.FirstName} {firstPerson.LastName})");
+        string BirthDate = ($"{firstPerson.BirthDate}");
+        string number = ($"{firstPerson.PhoneNumber}");
+        string mail = ($"{firstPerson.EmailAddress}");
+        Mailsender(reservationnumber , fullname, mail);
+    }
+
+    public static void Mailsender(int number, string name, string mail)
     {
         var message = new MimeMessage();
         message.From.Add(new MailboxAddress("AirPort", "airprojbgroupd@gmail.com"));
@@ -12,11 +24,11 @@ public class Mail
 
         message.Body = new TextPart("plain")
         {
-            Text = "We have recieved your reservation"// is message 
+            Text = $"We have recieved your reservation flight reservation number: {number}"// is message 
         };
 
         //unchangable is gwn die bog email setting
-        string smtpServer = "smtp.gmail.com";// smpt server van gmail
+        string smtpServer = "smtp.gmail.com";
         int port = 465;// port voor ssl
         string username = "airprojbgroupd@gmail.com";
         string password = "igss aonz gbxx dhro";//app password // normale password mail = petpetpet123#
@@ -25,18 +37,18 @@ public class Mail
         using (var client = new SmtpClient())
         {   
             Console.WriteLine("Connecting....");
-            client.Connect(smtpServer,port,true);// connect aan server
-            client.Authenticate(username,password);// logged in
+            client.Connect(smtpServer,port,true);
+            client.Authenticate(username,password);
             try
             {
                 Console.WriteLine("Sending....");
-                client.Send(message);//stuurt die message
-                client.Disconnect(true);// disconnect van die server
+                client.Send(message);
+                client.Disconnect(true);
                 Console.WriteLine("Email has been send");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to send email: {ex.ToString()}");// als error gebeurt
+                Console.WriteLine($"Failed to send email: {ex.ToString()}");
             }
         }
     }
