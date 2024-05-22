@@ -9,12 +9,13 @@ public static class Mail
         int reservationnumber = info._reservationNumber;
         Person firstPerson = info.People[0];
         string fullname = ($"{firstPerson.FirstName} {firstPerson.LastName})");
-        string destination = info.FlightForReservation.Destination;
+        string BirthDate = ($"{firstPerson.BirthDate}");
+        string number = ($"{firstPerson.PhoneNumber}");
         string mail = ($"{firstPerson.EmailAddress}");
-        Mailsender(reservationnumber, destination , fullname, mail);
+        Mailsender(reservationnumber , fullname, mail);
     }
 
-    public static void Mailsender(int number,string destination, string name, string mail)
+    public static void Mailsender(int number, string name, string mail)
     {
         var message = new MimeMessage();
         message.From.Add(new MailboxAddress("AirPort", "airprojbgroupd@gmail.com"));
@@ -23,24 +24,8 @@ public static class Mail
 
         message.Body = new TextPart("plain")
         {
-                    Text = $@"Dear {name},
-
-We are pleased to confirm your airplane reservation.
-
-Reservation Details:
-----------------------
-Reservation Number: {number}
-Destination: {destination}
-
-Thank you for choosing our services. We look forward to providing you with a pleasant travel experience.
-
-Best regards,
-The AirPort Team
-
-Contact Us:
-Email: airprojbgroupd@gmail.com"
-        };// is message 
-        
+            Text = $"We have recieved your reservation flight reservation number: {number}"// is message 
+        };
 
         //unchangable is gwn die bog email setting
         string smtpServer = "smtp.gmail.com";
