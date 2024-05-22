@@ -2,13 +2,19 @@ using System.Data.SQLite;
 using System.Globalization;
 public class Account
 {
+    private readonly string _connectionString;
+
+    public Account(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
     public bool IsLoggedIn { get; private set; }
     public bool IsAdminbool {get; private set;}
     public int Primkey {get; set; } //autoincrement key of account that was logged into
 
     public bool Addtodb(string email, string password)
     {   
-        string connectionString = @"Data Source=Accounts.db;Version=3;";
+        string connectionString = "Data Source=Accounts.db;Version=3;";
         try
         {
             using (var connection = new SQLiteConnection(connectionString))
