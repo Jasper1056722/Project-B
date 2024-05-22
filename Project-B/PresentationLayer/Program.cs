@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.SQLite;
 using System.Runtime.CompilerServices;
 using System.Globalization;
@@ -11,7 +11,8 @@ public class Program
         List<Reservation> reservations = ReservationManager.LoadReservations();
 
         Account account = new();
-          
+        
+       
         Console.Title = "Flight Application";
         Thread.Sleep(2000);
         string NL = Environment.NewLine; // shortcut
@@ -340,9 +341,22 @@ public class Program
                                                             Console.Clear();
                                                             string DestAnswer = Menu.GetString("Enter a destination to look for: ").Trim();
                                                             Console.Clear();
-                                                            Menu.LoadingBar("Looking for result with correct desitnation", TimeSpan.FromSeconds(1));
+                                                            Menu.LoadingBar("Looking for result with correct destination", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Searching.Destination(DestAnswer, flights);
+                                                            List<string> destResult = Searching.Destination(DestAnswer, flights);
+                                                            if (destResult.Count > 0)
+                                                            {
+                                                                Console.WriteLine($"Found {destResult.Count} flights to {DestAnswer}:\n");
+                                                                foreach (var flight in destResult)
+                                                                {
+                                                                    Console.WriteLine(flight);
+                                                                    Console.WriteLine("");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"No flights found with destination {DestAnswer}");
+                                                            }
                                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                                             Console.ReadKey();
                                                             break;
@@ -353,7 +367,20 @@ public class Program
                                                             Console.Clear();
                                                             Menu.LoadingBar("Looking for result with correct date", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Searching.Time(DateAnswer, flights);
+                                                            List<string> timeResult = Searching.Time(DateAnswer, flights);
+                                                            if (timeResult.Count > 0)
+                                                            {
+                                                                Console.WriteLine($"Found {timeResult.Count} flights departing on: {DateAnswer}:\n");
+                                                                foreach (var flight in timeResult)
+                                                                {
+                                                                    Console.WriteLine(flight);
+                                                                    Console.WriteLine("");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"No flights found departing on {DateAnswer}");
+                                                            }
                                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                                             Console.ReadKey();
                                                             break;
@@ -364,7 +391,20 @@ public class Program
                                                             Console.Clear();
                                                             Menu.LoadingBar("Looking for result with correct airplane model", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Searching.Airline(AirplanModelAnswer, flights);
+                                                            List<string> airResult = Searching.Airline(AirplanModelAnswer, flights);
+                                                            if (airResult.Count > 0)
+                                                            {
+                                                                Console.WriteLine($"Found {airResult.Count} flights with Airplane: {AirplanModelAnswer}:\n");
+                                                                foreach (var flight in airResult)
+                                                                {
+                                                                    Console.WriteLine(flight);
+                                                                    Console.WriteLine("");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"No flights found with airplane model {AirplanModelAnswer}");
+                                                            }
                                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                                             Console.ReadKey();
                                                             break;
@@ -375,7 +415,20 @@ public class Program
                                                             Console.Clear();
                                                             Menu.LoadingBar("Looking for result with correct flight number", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Searching.FlightNumber(AirplanNumAnswer, flights);
+                                                            List<string> numResult = Searching.FlightNumber(AirplanNumAnswer, flights);
+                                                            if (numResult.Count > 0)
+                                                            {
+                                                                Console.WriteLine($"Found {numResult.Count} flights to {AirplanNumAnswer}:\n");
+                                                                foreach (var flight in numResult)
+                                                                {
+                                                                    Console.WriteLine(flight);
+                                                                    Console.WriteLine("");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"No flights found with flightnumber {AirplanNumAnswer}");
+                                                            }
                                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                                             Console.ReadKey();
                                                             break;
@@ -417,7 +470,7 @@ public class Program
 
                                                         case 1:
                                                             Console.Clear();
-                                                            AdminFilteringState = false;
+                                                            AdminSearchingState = false;
                                                             break;
                                                     }                     
                                             }
@@ -494,9 +547,22 @@ public class Program
                                                             Console.Clear();
                                                             string DestAnswer = Menu.GetString("Enter a destination to look for: ").Trim();
                                                             Console.Clear();
-                                                            Menu.LoadingBar("Looking for result with correct desitnation", TimeSpan.FromSeconds(1));
+                                                            Menu.LoadingBar("Looking for result with correct destination", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Searching.Destination(DestAnswer, flights);
+                                                            List<string> destResult = Searching.Destination(DestAnswer, flights);
+                                                            if (destResult.Count > 0)
+                                                            {
+                                                                Console.WriteLine($"Found {destResult.Count} flights to {DestAnswer}:\n");
+                                                                foreach (var flight in destResult)
+                                                                {
+                                                                    Console.WriteLine(flight);
+                                                                    Console.WriteLine("");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"No flights found with destination {DestAnswer}");
+                                                            }
                                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                                             Console.ReadKey();
                                                             break;
@@ -507,7 +573,20 @@ public class Program
                                                             Console.Clear();
                                                             Menu.LoadingBar("Looking for result with correct date", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Searching.Time(DateAnswer, flights);
+                                                            List<string> timeResult = Searching.Time(DateAnswer, flights);
+                                                            if (timeResult.Count > 0)
+                                                            {
+                                                                Console.WriteLine($"Found {timeResult.Count} flights departing on: {DateAnswer}:\n");
+                                                                foreach (var flight in timeResult)
+                                                                {
+                                                                    Console.WriteLine(flight);
+                                                                    Console.WriteLine("");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"No flights found departing on {DateAnswer}");
+                                                            }
                                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                                             Console.ReadKey();
                                                             break;
@@ -518,7 +597,20 @@ public class Program
                                                             Console.Clear();
                                                             Menu.LoadingBar("Looking for result with correct airplane model", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Searching.Airline(AirplanModelAnswer, flights);
+                                                            List<string> airResult = Searching.Airline(AirplanModelAnswer, flights);
+                                                            if (airResult.Count > 0)
+                                                            {
+                                                                Console.WriteLine($"Found {airResult.Count} flights with Airplane: {AirplanModelAnswer}:\n");
+                                                                foreach (var flight in airResult)
+                                                                {
+                                                                    Console.WriteLine(flight);
+                                                                    Console.WriteLine("");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"No flights found with airplane model {AirplanModelAnswer}");
+                                                            }
                                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                                             Console.ReadKey();
                                                             break;
@@ -529,7 +621,20 @@ public class Program
                                                             Console.Clear();
                                                             Menu.LoadingBar("Looking for result with correct flight number", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Searching.FlightNumber(AirplanNumAnswer, flights);
+                                                            List<string> numResult = Searching.FlightNumber(AirplanNumAnswer, flights);
+                                                            if (numResult.Count > 0)
+                                                            {
+                                                                Console.WriteLine($"Found {numResult.Count} flights to {AirplanNumAnswer}:\n");
+                                                                foreach (var flight in numResult)
+                                                                {
+                                                                    Console.WriteLine(flight);
+                                                                    Console.WriteLine("");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"No flights found with flightnumber {AirplanNumAnswer}");
+                                                            }
                                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                                             Console.ReadKey();
                                                             break;
@@ -736,9 +841,22 @@ public class Program
                                             Console.Clear();
                                             string DestAnswer = Menu.GetString("Enter a destination to look for: ").Trim();
                                             Console.Clear();
-                                            Menu.LoadingBar("Looking for result with correct desitnation", TimeSpan.FromSeconds(1));
+                                            Menu.LoadingBar("Looking for result with correct destination", TimeSpan.FromSeconds(1));
                                             Console.Clear();
-                                            Searching.Destination(DestAnswer, flights);
+                                            List<string> destResult = Searching.Destination(DestAnswer, flights);
+                                            if (destResult.Count > 0)
+                                            {
+                                                Console.WriteLine($"Found {destResult.Count} flights to {DestAnswer}:\n");
+                                                foreach (var flight in destResult)
+                                                {
+                                                    Console.WriteLine(flight);
+                                                    Console.WriteLine("");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine($"No flights found with destination {DestAnswer}");
+                                            }
                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                             Console.ReadKey();
                                             break;
@@ -749,7 +867,20 @@ public class Program
                                             Console.Clear();
                                             Menu.LoadingBar("Looking for result with correct date", TimeSpan.FromSeconds(1));
                                             Console.Clear();
-                                            Searching.Time(DateAnswer, flights);
+                                            List<string> timeResult = Searching.Time(DateAnswer, flights);
+                                            if (timeResult.Count > 0)
+                                            {
+                                                Console.WriteLine($"Found {timeResult.Count} flights departing on: {DateAnswer}:\n");
+                                                foreach (var flight in timeResult)
+                                                {
+                                                    Console.WriteLine(flight);
+                                                    Console.WriteLine("");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine($"No flights found departing on {DateAnswer}");
+                                            }
                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                             Console.ReadKey();
                                             break;
@@ -760,7 +891,20 @@ public class Program
                                             Console.Clear();
                                             Menu.LoadingBar("Looking for result with correct airplane model", TimeSpan.FromSeconds(1));
                                             Console.Clear();
-                                            Searching.Airline(AirplanModelAnswer, flights);
+                                            List<string> airResult = Searching.Airline(AirplanModelAnswer, flights);
+                                            if (airResult.Count > 0)
+                                            {
+                                                Console.WriteLine($"Found {airResult.Count} flights with Airplane: {AirplanModelAnswer}:\n");
+                                                foreach (var flight in airResult)
+                                                {
+                                                    Console.WriteLine(flight);
+                                                    Console.WriteLine("");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine($"No flights found with airplane model {AirplanModelAnswer}");
+                                            }
                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                             Console.ReadKey();
                                             break;
@@ -771,10 +915,24 @@ public class Program
                                             Console.Clear();
                                             Menu.LoadingBar("Looking for result with correct flight number", TimeSpan.FromSeconds(1));
                                             Console.Clear();
-                                            Searching.FlightNumber(AirplanNumAnswer, flights);
+                                            List<string> numResult = Searching.FlightNumber(AirplanNumAnswer, flights);
+                                            if (numResult.Count > 0)
+                                            {
+                                                Console.WriteLine($"Found {numResult.Count} flights to {AirplanNumAnswer}:\n");
+                                                foreach (var flight in numResult)
+                                                {
+                                                    Console.WriteLine(flight);
+                                                    Console.WriteLine("");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.WriteLine($"No flights found with flightnumber {AirplanNumAnswer}");
+                                            }
                                             Console.WriteLine("Enter a key to go back to the searching menu");
                                             Console.ReadKey();
                                             break;
+
                                         case 4:
                                             Console.Clear();
                                             GuestSearchingState = false;
