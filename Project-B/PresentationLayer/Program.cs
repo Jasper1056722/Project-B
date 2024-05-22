@@ -7,10 +7,12 @@ public class Program
     static void Main()
     {
         Menu.StartMenu();
+
         List<Flight> flights = Flight.LoadJson();
         List<Reservation> reservations = ReservationManager.LoadReservations();
 
-        Account account = new();
+        string connectionString = "Data Source=Accounts.db;Version=3;";
+        Account account = new Account(connectionString);
         
        
         Console.Title = "Flight Application";
