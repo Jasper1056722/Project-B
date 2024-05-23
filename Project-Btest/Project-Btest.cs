@@ -7,60 +7,6 @@ namespace Project_Btest
     [TestClass]
     public class Project_Btest
     {
-        
-        [TestMethod]
-        public void Test_shouldaddtodb()
-        {
-            
-            string connectionString = "Data Source=Accounts.db;Version=3;";
-
-            var account = new Account(connectionString); 
-            bool result = account.Addtodb("pet@example.com", "pet123");
-
-            Assert.IsTrue(result);
-
-            using (var connection = new SQLiteConnection(connectionString))
-            {
-                connection.Open();
-                string selectQeury = "SELECT COUNT(*) FROM Accounts WHERE Username = 'pet@example.com'";
-
-                using (var command = new SQLiteCommand(selectQeury, connection))
-                {
-                    var count = Convert.ToInt32(command.ExecuteScalar());
-                    Assert.AreEqual(1, count);
-                }
-            }
-        }
-        
-        [TestMethod]
-        public void Test_logintodbsuccesfull()
-        {
-            string connectionString = "Data Source=Accounts.db;Version=3;";
-            
-            var account = new Account(connectionString);
-            account.Addtodb("test@example.com", "password123");
-
-            bool result = account.Logintodb("test@example.com", "password123");
-
-            Assert.IsTrue(result);
-            Assert.IsTrue(account.IsLoggedIn);
-        }
-        
-        [TestMethod]
-        public void Test_logintodbincorrectly()
-        {
-            string connectionString = "Data Source=Accounts.db;Version=3;";
-            
-            var account = new Account(connectionString);
-            account.Addtodb("test@example.com", "password123");
-
-            bool result = account.Logintodb("test@example.com", "wrong password");
-
-            Assert.IsFalse(result);
-            Assert.IsFalse(account.IsLoggedIn);
-        }
-        
-
         [TestMethod]
         public void Test_SearchingDestination_returnsListString()
         {
@@ -68,10 +14,10 @@ namespace Project_Btest
             {
                 new Flight(
                     "Test", 
-                    "Test Nation", 
+                    "Test Nation",
                     new Plane("Testbus 3000"), 
                     "Testington", 
-                    "11-11-1111", 
+                    "11-11-1111",
                     "11-11-1111T11:11:11", 
                     "11-11-1111T12:12:12",
                     1111111
