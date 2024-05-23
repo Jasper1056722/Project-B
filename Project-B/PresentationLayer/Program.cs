@@ -735,6 +735,7 @@ public class Program
                                                 reservations.Add(reservation);
                                             }
                                             Menu.LoadingBar("Saving reservation", TimeSpan.FromSeconds(1));
+                                            Mail.GetInfo(reservation);
                                             break;
 
                                         case 3:
