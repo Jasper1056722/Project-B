@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Data.SQLite;
 using System.Runtime.CompilerServices;
 using System.Globalization;
@@ -770,11 +770,15 @@ public class Program
                                         case 6:
                                             Console.Clear();
                                             ReservationManager.DisplayReservations(reservationaccountlistflights);
-                                            string reservationNumberUser = Menu.GetString("Enter reservationnumber: ");
-                                            while (!reservationaccountlistflights.Any(reservation => reservation.ReservationNumber.ToString() == reservationNumberUser))
+                                            string reservationNumberUser = Menu.GetString("Enter reservation number (or 'q' to go back): ");
+                                            while (reservationNumberUser != "q" && !reservationaccountlistflights.Any(reservation => reservation.ReservationNumber.ToString() == reservationNumberUser))
                                             {
                                                 Console.WriteLine("Incorrect input!");
-                                                reservationNumberUser = Menu.GetString("Enter reservationnumber: ");
+                                                reservationNumberUser = Menu.GetString("Enter reservation number (or 'q' to go back): ");
+                                            }
+                                            if (reservationNumberUser == "q")
+                                            {
+                                                break;
                                             }
                                             int reservationNumberUserInt = int.Parse(reservationNumberUser);
                                             Reservation.RemoveReservation(flights, reservations, reservationaccountlistflights, reservationNumberUserInt);
