@@ -10,6 +10,17 @@ public class Program
 
         List<Flight> flights = Flight.LoadJson();
         List<Reservation> reservations = ReservationManager.LoadReservations();
+        flights = flights.OrderBy(flight => flight.DepartureTime).ToList();
+        flights.RemoveAll(flight => flight.DepartureTime < DateTime.Now); 
+
+        foreach(Flight flight1 in flights)
+        {
+            foreach(Seat seat in flight1.Airplane.Seats)
+            {
+                seat.PersonInSeat = null;
+                seat.SeatReservationNumber = 0;
+            }
+        }
 
         string connectionString = "Data Source=Accounts.db;Version=3;";
         Account account = new Account(connectionString);
