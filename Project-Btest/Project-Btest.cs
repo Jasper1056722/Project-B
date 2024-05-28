@@ -7,6 +7,7 @@ namespace Project_Btest
     [TestClass]
     public class Project_Btest
     {
+
         [TestMethod]
         public void Test_SearchingDestination_returnsListString()
         {
@@ -31,9 +32,9 @@ namespace Project_Btest
 
             List<string> Trost01 = Searching.Destination(destination, flights);
             
-            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11/11/1111 11:11:11 AM\nEstimated time of Arrival: 11/11/1111 12:12:12 PM\n";
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
 
-            Assert.AreEqual(Trost01[0].Trim(), Expected.Trim());
+            Assert.AreEqual(Expected.Trim(), Trost01[0].Trim());
         }
 
         [TestMethod]
@@ -60,9 +61,9 @@ namespace Project_Btest
 
             List<string> Trost02 = Searching.FlightNumber(flightNumber, flights);
             
-            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11/11/1111 11:11:11 AM\nEstimated time of Arrival: 11/11/1111 12:12:12 PM\n";
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
 
-            Assert.AreEqual(Trost02[0].Trim(), Expected.Trim());
+            Assert.AreEqual(Expected.Trim(), Trost02[0].Trim());
         }
 
         [TestMethod]
@@ -89,9 +90,9 @@ namespace Project_Btest
 
             List<string> Trost03 = Searching.Time(departureDate, flights);
             
-            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11/11/1111 11:11:11 AM\nEstimated time of Arrival: 11/11/1111 12:12:12 PM\n";
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
 
-            Assert.AreEqual(Trost03[0].Trim(), Expected.Trim());
+            Assert.AreEqual(Expected.Trim(), Trost03[0].Trim());
         }
 
         [TestMethod]
@@ -118,9 +119,9 @@ namespace Project_Btest
 
             List<string> Trost04 = Searching.Airline(airplane, flights);
             
-            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11/11/1111 11:11:11 AM\nEstimated time of Arrival: 11/11/1111 12:12:12 PM\n";
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
 
-            Assert.AreEqual(Trost04[0].Trim(), Expected.Trim());
+            Assert.AreEqual(Expected.Trim(), Trost04[0].Trim());
         }
         
         [TestMethod]

@@ -13,7 +13,7 @@ public static class Mail
         string mail = ($"{firstPerson.EmailAddress}");
         Mailsender(reservationnumber, destination , fullname, mail);
     }
-
+    
     public static void Mailsender(int number,string destination, string name, string mail)
     {
         var message = new MimeMessage();
