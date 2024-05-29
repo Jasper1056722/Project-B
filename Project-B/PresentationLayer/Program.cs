@@ -10,18 +10,6 @@ public class Program
 
         List<Flight> flights = Flight.LoadJson();
         List<Reservation> reservations = ReservationManager.LoadReservations();
-        flights = flights.OrderBy(flight => flight.DepartureTime).ToList();
-        flights.RemoveAll(flight => flight.DepartureTime < DateTime.Now); 
-
-        foreach(Flight flight1 in flights)
-        {
-            foreach(Seat seat in flight1.Airplane.Seats)
-            {
-                seat.PersonInSeat = null;
-                seat.SeatReservationNumber = 0;
-            }
-        }
-
         string connectionString = "Data Source=Accounts.db;Version=3;";
         Account account = new Account(connectionString);
         
@@ -543,7 +531,7 @@ public class Program
                                 bool UserPanelState = true;
                                 while(UserPanelState)
                                 {
-                                    int UserPanelIndex = Menu.MenuPanel("User Menu","Here u can", ["Search for a flight", "Filter for flights", "Make a reservation","Change reservation", "Display all flights", "See reservations", "Remove reservation", "logout", "Quit Program"]);
+                                    int UserPanelIndex = Menu.MenuPanel("User Menu","Here u can", ["Search for a flight", "Filter for flights", "Make a reservation","Display all flights", "See reservations", "Remove reservation", "logout", "Quit Program"]);
 
                                     switch(UserPanelIndex)
                                     {
@@ -748,17 +736,7 @@ public class Program
                                             Menu.LoadingBar("Saving reservation", TimeSpan.FromSeconds(1));
                                             Mail.GetInfo(reservation);
                                             break;
-
                                         case 3:
-                                            Console.WriteLine("Change reservation");
-                                            ReservationManager.DisplayReservations(reservationaccountlistflights);
-                                            Console.WriteLine("What is the flightnumber of the flight you want to change?");
-                                            string flightNumber = Console.ReadLine();
-                                            Flightinfo.UpdateInfo(flightNumber, flights);
-                                            Console.ReadKey();
-                                            break;
-
-                                        case 4:
                                             Console.Clear();
                                             Menu.LoadingBar("Loading flights", TimeSpan.FromSeconds(1));
                                             Console.Clear();
@@ -769,7 +747,7 @@ public class Program
                                             Console.Clear();
                                             break;
                                         
-                                        case 5:
+                                        case 4:
                                             Console.Clear();
                                             Menu.LoadingBar("Loading Reservations", TimeSpan.FromSeconds(1));
 
@@ -778,7 +756,7 @@ public class Program
                                             Console.ReadKey();
                                             break;
                                         
-                                        case 6:
+                                        case 5:
                                             Console.Clear();
                                             ReservationManager.DisplayReservations(reservationaccountlistflights);
                                             string reservationNumberUser = Menu.GetString("Enter reservation number (or 'q' to go back): ");
@@ -792,19 +770,27 @@ public class Program
                                                 break;
                                             }
                                             int reservationNumberUserInt = int.Parse(reservationNumberUser);
-                                            Reservation.RemoveReservation(flights, reservations, reservationaccountlistflights, reservationNumberUserInt);
+
+                                            string IsRemoved = Reservation.RemoveReservation(flights, reservations, reservationaccountlistflights, reservationNumberUserInt);
                                             Console.Clear();
+                                            if(IsRemoved == "Not Removed")
+                                            {
+                                                Console.WriteLine("Its not possible to cancel a reservation 24 hours or less before the flight, press a key to return to the menu");
+                                                Console.ReadKey();
+                                                Console.Clear();
+                                                break;
+                                            }
                                             Menu.LoadingBar("Removing reservation", TimeSpan.FromSeconds(2));
                                             Console.Clear();
                                             break;
 
-                                        case 7:
+                                        case 6:
                                             Menu.LoadingBar("Logging out", TimeSpan.FromSeconds(2));
                                             account.logout();
                                             UserPanelState = false;
                                             break;
 
-                                        case 8:
+                                        case 7:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Flight.WriteToJson(flights);

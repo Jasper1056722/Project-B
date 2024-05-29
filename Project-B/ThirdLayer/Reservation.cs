@@ -548,8 +548,15 @@ public class Reservation
         }
     }
 
-    public static void RemoveReservation(List<Flight> flights, List<Reservation> reservations, int reservationnumber)
+    public static string RemoveReservation(List<Flight> flights, List<Reservation> reservations, int reservationnumber)
     {
+        foreach (Reservation reservation in reservations)
+        {
+            if(reservation.ReservationNumber == reservationnumber && DateTime.Now.AddHours(24) <= reservation.FlightForReservation.DepartureTime)
+            {
+                return "Not Removed";
+            }
+        }
         foreach (var seat in flights.SelectMany(flight => flight.Airplane.Seats))
         {
             if (seat.SeatReservationNumber == reservationnumber)
@@ -559,10 +566,18 @@ public class Reservation
             }
         }
         reservations.RemoveAll(reservation => reservation.ReservationNumber == reservationnumber);
+        return "Is Removed";
     }
 
-    public static void RemoveReservation(List<Flight> flights, List<Reservation> reservations, List<Reservation> reservationsUser, int reservationnumber)
+    public static string RemoveReservation(List<Flight> flights, List<Reservation> reservations, List<Reservation> reservationsUser, int reservationnumber)
     {
+        foreach (Reservation reservation in reservations)
+        {
+            if(reservation.ReservationNumber == reservationnumber && DateTime.Now.AddHours(24) >= reservation.FlightForReservation.DepartureTime)
+            {
+                return "Not Removed";
+            }
+        }
         foreach (var seat in flights.SelectMany(flight => flight.Airplane.Seats))
         {
             if (seat.SeatReservationNumber == reservationnumber)
@@ -573,5 +588,6 @@ public class Reservation
         }
         reservations.RemoveAll(reservation => reservation.ReservationNumber == reservationnumber);
         reservationsUser.RemoveAll(reservation => reservation.ReservationNumber == reservationnumber);
+        return "Is Removed";
     }
 }
