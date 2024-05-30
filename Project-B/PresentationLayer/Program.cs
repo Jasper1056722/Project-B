@@ -701,40 +701,55 @@ public class Program
                                             
                                             if (AmountPersons == 1)
                                             {
-                                                reservation.AddContactInfo();
-
-                                                bool isValidChoice = false;
-                                                while (!isValidChoice)
+                                                if (reservation.AddContactInfo())
                                                 {
-                                                    int SearchingOptionIndex = Menu.MenuPanel("Seat options", "Do you want to select your seat or get it random?",["Random seat","Select seat"]);
-                                                    switch (SearchingOptionIndex)
+                                                    bool isValidChoice = false;
+                                                    while (!isValidChoice)
                                                     {
-                                                        case 0:
-                                                            reservation.ReserveRandomSeat(reservation.FlightForReservation);
-                                                            isValidChoice = true;
-                                                            break;
-                                                        case 1:
-                                                            reservation.SelectSeat();
-                                                            isValidChoice = true;
-                                                            break;
-                                                    }   
+                                                        int SearchingOptionIndex = Menu.MenuPanel("Seat options", "Do you want to select your seat or get it random?", new[] { "Random seat", "Select seat" });
+                                                        switch (SearchingOptionIndex)
+                                                        {
+                                                            case 0:
+                                                                reservation.ReserveRandomSeat(reservation.FlightForReservation);
+                                                                isValidChoice = true;
+                                                                break;
+                                                            case 1:
+                                                                reservation.SelectSeat();
+                                                                isValidChoice = true;
+                                                                break;
+                                                        }
+                                                    }
+                                                    reservationaccountlistflights.Add(reservation);
+                                                    reservations.Add(reservation);
                                                 }
-                                                reservationaccountlistflights.Add(reservation);
-                                                reservations.Add(reservation);
+                                                else
+                                                {
+                                                    Console.WriteLine("Operation canceled.");
+                                                }
                                             }
-
                                             else if (AmountPersons > 1)
                                             {
+                                                bool allContactsAdded = true;
                                                 for (int i = 0; i < AmountPersons; i++)
                                                 {
-                                                    reservation.AddContactInfo();
+                                                    if (!reservation.AddContactInfo())
+                                                    {
+                                                        allContactsAdded = false;
+                                                        break;
+                                                    }
                                                 }
-                                                reservation.SelectSeat();
-                                                reservationaccountlistflights.Add(reservation);
-                                                reservations.Add(reservation);
+
+                                                if (allContactsAdded)
+                                                {
+                                                    reservation.SelectSeat();
+                                                    reservationaccountlistflights.Add(reservation);
+                                                    reservations.Add(reservation);
+                                                }
+                                                else
+                                                {
+                                                    Console.WriteLine("Operation canceled.");
+                                                }
                                             }
-                                            Menu.LoadingBar("Saving reservation", TimeSpan.FromSeconds(1));
-                                            Mail.GetInfo(reservation);
                                             break;
                                         case 3:
                                             Console.Clear();

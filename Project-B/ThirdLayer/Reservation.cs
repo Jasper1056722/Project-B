@@ -206,17 +206,18 @@ public class Reservation
         } 
     }
 
-    public void AddContactInfo()
+    public bool AddContactInfo()
     {
         Console.Clear();
         int count = People.Count + 1;
-        Console.WriteLine($"Please enter contact information for person {count}: ");
+        Console.WriteLine($"Please enter contact information for person {count} (or 'q' to quit): ");
         Thread.Sleep(2500);
 
         string firstName;
         do
         {
             firstName = Menu.GetString("First name: ");
+            if (firstName.ToLower() == "q") return false;
 
             if(!string.IsNullOrEmpty(firstName))
             {
@@ -234,6 +235,7 @@ public class Reservation
         do
         {
             lastName = Menu.GetString("Last name: ");
+            if (lastName.ToLower() == "q") return false;
 
             if (!string.IsNullOrEmpty(lastName))
             {
@@ -251,6 +253,8 @@ public class Reservation
         do
         {
             birthDate = Menu.GetString("Birth Date (DD-MM-YYYY): ");
+            if (birthDate.ToLower() == "q") return false;
+
             if (!Validator.IsDate(birthDate))
             {
                 Console.WriteLine("Invalid birth date format.");
@@ -263,6 +267,7 @@ public class Reservation
         {
             phoneNumber = Menu.GetString("Phone Number (7 to 15 digits, optionally starting with '+'): ");
             phoneNumber = phoneNumber.TrimStart('+');
+            if (phoneNumber.ToLower() == "q") return false;
             
             if (string.IsNullOrEmpty(phoneNumber))
             {
@@ -279,6 +284,8 @@ public class Reservation
         do
         {
             emailAddress = Menu.GetString("Email Address: ");
+            if (emailAddress.ToLower() == "q") return false;
+
             if (!emailAddress.Contains("@"))
             {
                 Console.WriteLine("Invalid email address. Please enter a valid email address.");
@@ -294,6 +301,7 @@ public class Reservation
             EmailAddress = emailAddress
         };
         People.Add(person);
+        return true;
         Console.Clear();
     }
 
