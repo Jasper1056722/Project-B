@@ -366,7 +366,8 @@ public class Reservation
         string CYAN = Console.IsOutputRedirected ? "" : "\x1b[96m"; 
 
         Dictionary<string, string> Seats = new Dictionary<string, string>();
-        List<string> ChosenSeat = new List<string>();
+        List<Seat> ChosenSeat = new List<Seat>();
+        int price = 0;
 
         if(FlightForReservation.Airplane.Model == "Boeing 737")
         {
@@ -437,7 +438,7 @@ public class Reservation
                                 seat.PersonInSeat = person;
                                 seat.SeatReservationNumber = ReservationNumber;
                                 Console.WriteLine($"Selected seat {seat.ID} for {person.FirstName} {person.LastName}");
-                                ChosenSeat.Add(seat.ID);
+                                ChosenSeat.Add(seat);
                                 InLoop = false;
                             }
                             else
@@ -458,9 +459,9 @@ public class Reservation
         Dictionary<string, string> TSeats = new Dictionary<string, string>();
         if(FlightForReservation.Airplane.Model == "Boeing 737")
         {
-            foreach (string seat in ChosenSeat)
+            foreach (Seat seat in ChosenSeat)
             {
-                TSeats.Add(seat, $"{CYAN}O{NORMAL}");
+                TSeats.Add(seat.ID, $"{CYAN}O{NORMAL}");
             }
 
             foreach (Seat seat in FlightForReservation.Airplane.Seats)
@@ -476,15 +477,27 @@ public class Reservation
                 else
                 {
                     TSeats.Add(seat.ID,$"{RED}X{NORMAL}");
+                }
+            }
+
+            foreach (Seat seat in ChosenSeat)
+            {
+                if (seat.Quality == "Economy Class")
+                {
+                    price = price + seat.Price;
+                }
+                else if(seat.Quality == "Economy extra leg room")
+                {
+                    price = price + seat.Price;
                 }
             }
             Flightinfo.PrintPlane("Boeing 737", TSeats);
         }
         else if(FlightForReservation.Airplane.Model == "Airbus 330")
         {
-            foreach (string seat in ChosenSeat)
+            foreach (Seat seat in ChosenSeat)
             {
-                TSeats.Add(seat, $"{CYAN}O{NORMAL}");
+                TSeats.Add(seat.ID, $"{CYAN}O{NORMAL}");
             }
 
             foreach (Seat seat in FlightForReservation.Airplane.Seats)
@@ -500,15 +513,35 @@ public class Reservation
                 else
                 {
                     TSeats.Add(seat.ID,$"{RED}X{NORMAL}");
+                }
+            }
+
+            foreach (Seat seat in ChosenSeat)
+            {
+                if (seat.Quality == "Economy Class")
+                {
+                    price = price + seat.Price;
+                }
+                else if(seat.Quality == "Economy extra leg room")
+                {
+                    price = price + seat.Price;
+                }
+                else if(seat.Quality == "Club Class")
+                {
+                    price = price + seat.Price;
+                }
+                else if(seat.Quality == "Double seat")
+                {
+                    price = price + seat.Price;
                 }
             }
             Flightinfo.PrintPlane("Airbus 330", TSeats);
         }
         else if(FlightForReservation.Airplane.Model == "Boeing 787")
         {
-            foreach (string seat in ChosenSeat)
+            foreach (Seat seat in ChosenSeat)
             {
-                TSeats.Add(seat, $"{CYAN}O{NORMAL}");
+                TSeats.Add(seat.ID, $"{CYAN}O{NORMAL}");
             }
 
             foreach (Seat seat in FlightForReservation.Airplane.Seats)
@@ -524,6 +557,22 @@ public class Reservation
                 else
                 {
                     TSeats.Add(seat.ID,$"{RED}X{NORMAL}");
+                }
+            }
+
+            foreach (Seat seat in ChosenSeat)
+            {
+                if (seat.Quality == "Economy Class")
+                {
+                    price = price + seat.Price;
+                }
+                else if(seat.Quality == "Economy extra leg room")
+                {
+                    price = price + seat.Price;
+                }
+                else if(seat.Quality == "Business Class")
+                {
+                    price = price + seat.Price;
                 }
             }
             Flightinfo.PrintPlane("Boeing 787", TSeats);
@@ -535,15 +584,17 @@ public class Reservation
             case 0:
                 Console.Clear();
                 Console.WriteLine("We have recieved your reservation");
+                Console.WriteLine($"The Total cost for the seats is: ${price}");
                 Console.WriteLine("Press any key to return to the menu panel");
+                Console.ReadKey();
                 break;
             
             case 1:
-                foreach (string seat in ChosenSeat)
+                foreach (Seat seat in ChosenSeat)
                 {
                     foreach (Seat tseat in FlightForReservation.Airplane.Seats)
                         {
-                            if (tseat.ID == seat)
+                            if (tseat.ID == seat.ID)
                             {
                                 tseat.PersonInSeat = null;
                                 tseat.SeatReservationNumber = 0;
