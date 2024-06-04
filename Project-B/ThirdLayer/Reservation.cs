@@ -296,13 +296,16 @@ public class Reservation
             }
         } while (!emailAddress.Contains("@"));
         
+        FoodPackage SelectedPackage = GetSelectedPackage();
+
         Person person = new Person
         {
             FirstName = firstName,
             LastName = lastName,
             BirthDate = birthDate,
             PhoneNumber = phoneNumber,
-            EmailAddress = emailAddress
+            EmailAddress = emailAddress,
+            FoodOption = SelectedPackage
         };
         People.Add(person);
         return true;
@@ -687,4 +690,41 @@ public class Reservation
         reservationsUser.RemoveAll(reservation => reservation.ReservationNumber == reservationnumber);
         return "Is Removed";
     }
+
+    public FoodPackage GetSelectedPackage()
+    {
+        FoodPackage package1 = new FoodPackage("Basic Package", 0.00);
+        FoodPackage package2 = new FoodPackage("Premium Package", 15.00);
+        FoodPackage package3 = new FoodPackage("Deluxe Package", 25.00);
+        FoodPackage selectedPackage = package1;
+        Console.Clear();
+        Console.WriteLine("A free meal package is included in the reservation");
+        Console.Write("Would you like to upgrade from Basic Package? \n1. Yes\n2. No ");
+        string upgradeChoice = Console.ReadLine();
+
+        if (upgradeChoice == "1")
+        {
+            Console.Clear();
+            Console.WriteLine("Upgrade Options:");
+            Console.WriteLine("1. " + package2);
+            Console.WriteLine("2. " + package3);
+            int choice = Convert.ToInt32(Console.ReadLine());
+            switch (choice)
+            {
+                case 1:
+                    selectedPackage = package2;
+                    break;
+                case 2:
+                    selectedPackage = package3;
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice! Keeping Basic Package.");
+                    break;
+            }
+        }
+        Console.WriteLine($"You have reserved the following package: {selectedPackage.ToString()}");
+        Thread.Sleep(1500);
+        return selectedPackage;
+    }
+
 }
