@@ -335,7 +335,37 @@ public class Reservation
 
     public void SelectFlight(List<Flight> flights)
     {
-        Flightinfo.DisplayFlights(flights);
+        List<Flight> newflights = new List<Flight>();
+        //ask for destination and date before showing all the flights
+        Console.Clear();
+
+        bool Bool = true;
+        while(Bool)
+        { 
+            Console.WriteLine("Please assign your desired destination");
+            string destination = Console.ReadLine();
+
+            foreach (Flight flight in flights)
+            {
+                if (flight.Destination == destination)
+                {
+                    newflights.Add(flight);
+                }
+            }
+
+            if (newflights.Count > 0)
+            {
+                Bool = false;
+            }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Make sure to enter a valid destination");
+                Thread.Sleep(2500);
+            }
+        }
+
+        Flightinfo.DisplayFlights(newflights);
 
         while(true)
         {
