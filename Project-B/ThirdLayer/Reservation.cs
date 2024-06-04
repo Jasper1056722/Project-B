@@ -127,6 +127,10 @@ public class Reservation
             Menu.LoadingBar("Selecting seats for each person", TimeSpan.FromSeconds(4));
             Console.Clear();
 
+            List<Flight> flights1 = new List<Flight>();
+            flights1.Add(FlightForReservation);
+            Console.WriteLine(Flightinfo.ReturnFlights(flights1));
+
             Dictionary<string, string> TSeats = new Dictionary<string, string>();
             if(FlightForReservation.Airplane.Model == "Boeing 737")
             {
@@ -399,6 +403,10 @@ public class Reservation
         List<Seat> ChosenSeat = new List<Seat>();
         int price = 0;
 
+        List<Flight> flights1 = new List<Flight>();
+        flights1.Add(FlightForReservation);
+        Console.WriteLine(Flightinfo.ReturnFlights(flights1));
+
         if(FlightForReservation.Airplane.Model == "Boeing 737")
         {
             foreach (Seat seat in FlightForReservation.Airplane.Seats)
@@ -453,7 +461,7 @@ public class Reservation
 
             while (InLoop)
             {
-                Console.WriteLine("Select a seat ID");
+                Console.WriteLine("Select a seat ID (X00)");
                 seatID = Console.ReadLine();
                 bool seatExists = FlightForReservation.Airplane.Seats.Any(seat => seat.ID == seatID);
 
@@ -608,7 +616,7 @@ public class Reservation
             Flightinfo.PrintPlane("Boeing 787", TSeats);
         }
 
-        int SearchingOptionIndex = Menu.MenuPanel("Confirmation", "Enter yes if you are happy with your chosen seats", ["Yes","No"], Flightinfo.GetPlane(FlightForReservation.Airplane.Model, TSeats));
+        int SearchingOptionIndex = Menu.MenuPanel("Confirmation", "Enter yes if you are happy with your chosen seats", ["Yes","No"], Flightinfo.ReturnFlights(flights1), Flightinfo.GetPlane(FlightForReservation.Airplane.Model, TSeats));
         switch (SearchingOptionIndex)
         {
             case 0:

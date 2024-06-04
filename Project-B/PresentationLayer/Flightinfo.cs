@@ -338,7 +338,7 @@ public static class Flightinfo
      \  \  |__                                                                                                                                      ______|   /
       \    |  |                                                   C {BLUE}[{Seats["C16"]}][{Seats["C17"]}][{Seats["C18"]}][{Seats["C19"]}][{Seats["C20"]}][{Seats["C21"]}][{Seats["C22"]}]{NORMAL}[{Seats["C23"]}][{Seats["C24"]}][{Seats["C25"]}] _       {BLUE}[{Seats["C27"]}{BLUE}]{NORMAL}[{Seats["C28"]}][{Seats["C29"]}][{Seats["C30"]}][{Seats["C31"]}][{Seats["C32"]}][{Seats["C33"]}][{Seats["C34"]}][{Seats["C35"]}][{Seats["C36"]}]|  _       |        /
        \___| G|       | B {YELLOW}[{Seats["B1"]}{YELLOW}]  [{Seats["B2"]}{YELLOW}]  [{Seats["B3"]}{YELLOW}]{NORMAL}  | W |   | {YELLOW}[{Seats["B4"]}{YELLOW}]  [{Seats["B5"]}{YELLOW}]  [{Seats["B6"]}{YELLOW}]{NORMAL}| B {BLUE}[{Seats["B16"]}{BLUE}][{Seats["B17"]}{BLUE}][{Seats["B18"]}{BLUE}][{Seats["B19"]}{BLUE}][{Seats["B20"]}{BLUE}][{Seats["B21"]}{BLUE}][{Seats["B22"]}{BLUE}]{NORMAL}[{Seats["B23"]}][{Seats["B24"]}][{Seats["B25"]}]|w|      {BLUE}[{Seats["B27"]}{BLUE}]{NORMAL}[{Seats["B28"]}][{Seats["B29"]}][{Seats["B30"]}][{Seats["B31"]}][{Seats["B32"]}][{Seats["B33"]}][{Seats["B34"]}][{Seats["B35"]}][{Seats["B36"]}]| |w|      |       /
-           \__|_      | A {YELLOW}[{Seats["A1"]}{YELLOW}]  [{Seats["A2"]}{YELLOW}]  [{Seats["A3"]}{YELLOW}]{NORMAL}  | C |   | {YELLOW}[{Seats["A4"]}{YELLOW}]  [{Seats["A5"]}{YELLOW}]  [{Seats["A6"]}{YELLOW}{NORMAL}| A {BLUE}[{Seats["A16"]}{BLUE}][{Seats["A17"]}{BLUE}][{Seats["A18"]}{BLUE}][{Seats["A19"]}{BLUE}][{Seats["A20"]}{BLUE}][{Seats["A21"]}{BLUE}][{Seats["A22"]}{BLUE}]{NORMAL}[{Seats["A23"]}][{Seats["A24"]}][{Seats["A25"]}]|c|      [{Seats["A27"]}][{Seats["A28"]}][{Seats["A29"]}][{Seats["A30"]}][{Seats["A31"]}][{Seats["A32"]}][{Seats["A33"]}][{Seats["A34"]}][{Seats["A35"]}][{Seats["A36"]}]| |c|      |      /
+           \__|_      | A {YELLOW}[{Seats["A1"]}{YELLOW}]  [{Seats["A2"]}{YELLOW}]  [{Seats["A3"]}{YELLOW}]{NORMAL}  | C |   | {YELLOW}[{Seats["A4"]}{YELLOW}]  [{Seats["A5"]}{YELLOW}]  [{Seats["A6"]}{YELLOW}]{NORMAL}| A {BLUE}[{Seats["A16"]}{BLUE}][{Seats["A17"]}{BLUE}][{Seats["A18"]}{BLUE}][{Seats["A19"]}{BLUE}][{Seats["A20"]}{BLUE}][{Seats["A21"]}{BLUE}][{Seats["A22"]}{BLUE}]{NORMAL}[{Seats["A23"]}][{Seats["A24"]}][{Seats["A25"]}]|c|      [{Seats["A27"]}][{Seats["A28"]}][{Seats["A29"]}][{Seats["A30"]}][{Seats["A31"]}][{Seats["A32"]}][{Seats["A33"]}][{Seats["A34"]}][{Seats["A35"]}][{Seats["A36"]}]| |c|      |      /
                 \_!________1____2____3________!_____4____5____6______16_17_18_19_20_21_22_23_24_25______!__27_28_29_30_31_32_33_34_35_36_37_38____!_|_____/
                                                        \                                            \  
                 [ ] = empty seats                       \                                            \
@@ -441,7 +441,7 @@ public static class Flightinfo
      \  \  |__                                                                                                                                      ______|   /
       \    |  |                                                   C {BLUE}[{Seats["C16"]}][{Seats["C17"]}][{Seats["C18"]}][{Seats["C19"]}][{Seats["C20"]}][{Seats["C21"]}][{Seats["C22"]}]{NORMAL}[{Seats["C23"]}][{Seats["C24"]}][{Seats["C25"]}] _       {BLUE}[{Seats["C27"]}{BLUE}]{NORMAL}[{Seats["C28"]}][{Seats["C29"]}][{Seats["C30"]}][{Seats["C31"]}][{Seats["C32"]}][{Seats["C33"]}][{Seats["C34"]}][{Seats["C35"]}][{Seats["C36"]}]|  _       |        /
        \___| G|       | B {YELLOW}[{Seats["B1"]}{YELLOW}]  [{Seats["B2"]}{YELLOW}]  [{Seats["B3"]}{YELLOW}]{NORMAL}  | W |   | {YELLOW}[{Seats["B4"]}{YELLOW}]  [{Seats["B5"]}{YELLOW}]  [{Seats["B6"]}{YELLOW}]{NORMAL}| B {BLUE}[{Seats["B16"]}{BLUE}][{Seats["B17"]}{BLUE}][{Seats["B18"]}{BLUE}][{Seats["B19"]}{BLUE}][{Seats["B20"]}{BLUE}][{Seats["B21"]}{BLUE}][{Seats["B22"]}{BLUE}]{NORMAL}[{Seats["B23"]}][{Seats["B24"]}][{Seats["B25"]}]|w|      {BLUE}[{Seats["B27"]}{BLUE}]{NORMAL}[{Seats["B28"]}][{Seats["B29"]}][{Seats["B30"]}][{Seats["B31"]}][{Seats["B32"]}][{Seats["B33"]}][{Seats["B34"]}][{Seats["B35"]}][{Seats["B36"]}]| |w|      |       /
-           \__|_      | A {YELLOW}[{Seats["A1"]}{YELLOW}]  [{Seats["A2"]}{YELLOW}]  [{Seats["A3"]}{YELLOW}]{NORMAL}  | C |   | {YELLOW}[{Seats["A4"]}{YELLOW}]  [{Seats["A5"]}{YELLOW}]  [{Seats["A6"]}{YELLOW}{NORMAL}| A {BLUE}[{Seats["A16"]}{BLUE}][{Seats["A17"]}{BLUE}][{Seats["A18"]}{BLUE}][{Seats["A19"]}{BLUE}][{Seats["A20"]}{BLUE}][{Seats["A21"]}{BLUE}][{Seats["A22"]}{BLUE}]{NORMAL}[{Seats["A23"]}][{Seats["A24"]}][{Seats["A25"]}]|c|      [{Seats["A27"]}][{Seats["A28"]}][{Seats["A29"]}][{Seats["A30"]}][{Seats["A31"]}][{Seats["A32"]}][{Seats["A33"]}][{Seats["A34"]}][{Seats["A35"]}][{Seats["A36"]}]| |c|      |      /
+           \__|_      | A {YELLOW}[{Seats["A1"]}{YELLOW}]  [{Seats["A2"]}{YELLOW}]  [{Seats["A3"]}{YELLOW}]{NORMAL}  | C |   | {YELLOW}[{Seats["A4"]}{YELLOW}]  [{Seats["A5"]}{YELLOW}]  [{Seats["A6"]}{YELLOW}]{NORMAL}| A {BLUE}[{Seats["A16"]}{BLUE}][{Seats["A17"]}{BLUE}][{Seats["A18"]}{BLUE}][{Seats["A19"]}{BLUE}][{Seats["A20"]}{BLUE}][{Seats["A21"]}{BLUE}][{Seats["A22"]}{BLUE}]{NORMAL}[{Seats["A23"]}][{Seats["A24"]}][{Seats["A25"]}]|c|      [{Seats["A27"]}][{Seats["A28"]}][{Seats["A29"]}][{Seats["A30"]}][{Seats["A31"]}][{Seats["A32"]}][{Seats["A33"]}][{Seats["A34"]}][{Seats["A35"]}][{Seats["A36"]}]| |c|      |      /
                 \_!________1____2____3________!_____4____5____6______16_17_18_19_20_21_22_23_24_25______!__27_28_29_30_31_32_33_34_35_36_37_38____!_|_____/
                                                        \                                            \  
                 [ ] = empty seats                       \                                            \
@@ -451,5 +451,42 @@ public static class Flightinfo
         }
 
         return picture;
+    }
+
+    public static string ReturnFlights(List<Flight> flights)
+    {
+        Console.ForegroundColor = ConsoleColor.White;
+        StringBuilder flightsString = new StringBuilder();
+
+        // Find the maximum length for each component
+        int maxFlightNumberLength = flights.Max(f => f.FlightNumber.ToString().Length);
+        int maxDestinationLength = flights.Max(f => f.Destination.Length);
+        int maxCountryLength = flights.Max(f => f.Country.Length);
+        int maxDepartingFromLength = flights.Max(f => f.DepartingFrom.Length);
+
+        // Calculate the maximum length for DateTime components
+        int maxDepartureTimeLength = flights.Max(f => f.DepartureTime.ToString().Length);
+        int maxEstimatedTimeLength = flights.Max(f => f.EstimatedTimeofArrival.ToString().Length);
+
+        foreach (Flight flight in flights)
+        {
+            string flightinfo = $"\u001b[1;37m| Flightnumber: {flight.FlightNumber.ToString().PadRight(maxFlightNumberLength)} | Destination: {flight.Destination.PadRight(maxDestinationLength)} | Country: {flight.Country.PadRight(maxCountryLength)} | DepartingFrom: {flight.DepartingFrom.PadRight(maxDepartingFromLength)} | DepartureTime: {flight.DepartureTime.ToString().PadRight(maxDepartureTimeLength)} | Estimated time of arrival: {flight.EstimatedTimeofArrival.ToString().PadRight(maxEstimatedTimeLength)} |\u001b[0m\n";
+
+            flightsString.Append(flightinfo);
+        }
+
+
+        if (flightsString.Length > 0)
+        {
+            flightsString.Length--; // Remove the last character (newline)
+        }
+
+        string String = @$"
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+{flightsString}
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        ";
+
+        return String;
     }
 }

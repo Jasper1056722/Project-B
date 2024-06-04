@@ -698,6 +698,9 @@ public class Program
                                                 AmountPersonsString = Menu.GetString("How many seats do you want to reserve: ").Trim();
                                             }
                                             int AmountPersons = Convert.ToInt32(AmountPersonsString);
+
+                                            List<Flight> flights1 = new List<Flight>();
+                                            flights1.Add(reservation.FlightForReservation);
                                             
                                             if (AmountPersons == 1)
                                             {
@@ -706,7 +709,7 @@ public class Program
                                                     bool isValidChoice = false;
                                                     while (!isValidChoice)
                                                     {
-                                                        int SearchingOptionIndex = Menu.MenuPanel("Seat options", "Do you want to select your seat or get it random?", new[] { "Random seat", "Select seat" });
+                                                        int SearchingOptionIndex = Menu.MenuPanel("Seat options", "Do you want to select your seat or get it random?", new[] { "Random seat", "Select seat" }, Flightinfo.ReturnFlights(flights1));
                                                         switch (SearchingOptionIndex)
                                                         {
                                                             case 0:
