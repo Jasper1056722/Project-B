@@ -276,25 +276,21 @@ public static class Filtering
 
     public static void filtorAll01(string destination01, string destination02, DateTime departureDateInput01, DateTime departureDateInput02, string PlaneAnswer01, List<Flight> flights)
     {
-        List<string> FilteredFlights = new List<string>();
+        var filteredFlights = flights
+            .Where(flight => DateTime.TryParseExact(flight.DepartureDate, "dd-MM-yyyy", null, DateTimeStyles.None, out DateTime datetimeDate)
+                            && flight.DepartingFrom.Equals(destination01, StringComparison.OrdinalIgnoreCase)
+                            && flight.Destination.Equals(destination02, StringComparison.OrdinalIgnoreCase)
+                            && datetimeDate >= departureDateInput01
+                            && datetimeDate <= departureDateInput02
+                            && flight.Airplane.Model.Equals(PlaneAnswer01, StringComparison.OrdinalIgnoreCase))
+            .Select(flight => $"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}")
+            .ToList();
 
-        foreach (var flight in flights)
-        {
-            DateTime DatetimeDate;
-            string input = flight.DepartureDate;
-            if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
-            {
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-            }
-        }
-        if (FilteredFlights.Count > 0){
+        if (filteredFlights.Count > 0){
 
-            Console.WriteLine($"Found {FilteredFlights.Count} flights:");
+            Console.WriteLine($"Found {filteredFlights.Count} flights:");
 
-        foreach (var flight in FilteredFlights)
+        foreach (var flight in filteredFlights)
         {
             Console.WriteLine(flight);
             Console.WriteLine("");
@@ -302,7 +298,7 @@ public static class Filtering
         }
         else {Console.WriteLine($"No FLights found.");}
 
-        FilteredFlights.Clear();
+        filteredFlights.Clear();
         return;
     }
 
