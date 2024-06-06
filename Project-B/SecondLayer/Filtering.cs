@@ -316,11 +316,7 @@ public static class Filtering
             string input = flight.DepartureDate;
             if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
             {
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
+                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower()))
                 {
                     FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
                 }
@@ -352,15 +348,7 @@ public static class Filtering
             string input = flight.DepartureDate;
             if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
             {
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower())
+                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower()))
                 {
                     FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
                 }
@@ -447,11 +435,7 @@ public static class Filtering
 
         foreach (var flight in flights)
         {
-            if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-            {
-                FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-            }
-            if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
+            if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower()))
             {
                 FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
             }
@@ -478,15 +462,7 @@ public static class Filtering
 
         foreach (var flight in flights)
         {
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower())
+                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower()))
                 {
                     FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
                 }
@@ -549,11 +525,7 @@ public static class Filtering
             string input = flight.DepartureDate;
             if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
             {
-                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
+                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower()))
                 {
                     FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
                 }
@@ -585,15 +557,7 @@ public static class Filtering
             string input = flight.DepartureDate;
             if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
             {
-                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower())
+                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower()))
                 {
                     FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
                 }
@@ -617,30 +581,24 @@ public static class Filtering
 
     public static void filtorAllprice01(string destination01, string destination02, DateTime departureDateInput01, DateTime departureDateInput02, string PlaneAnswer01, string maxPrice, List<Flight> flights)
     {
-        List<string> FilteredFlights = new List<string>();
         int maxPriceValue = int.Parse(maxPrice);
 
-        foreach (var flight in flights)
-        {
-            DateTime DatetimeDate;
-            string input = flight.DepartureDate;
-            if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
-            {
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                    if (seatsUnderMaxPrice)
-                    {
-                        FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                    }
-                }
-            }
-        }
-        if (FilteredFlights.Count > 0){
+        var filteredFlights = flights
+            .Where(flight => DateTime.TryParseExact(flight.DepartureDate, "dd-MM-yyyy", null, DateTimeStyles.None, out DateTime datetimeDate)
+                            && flight.DepartingFrom.Equals(destination01, StringComparison.OrdinalIgnoreCase)
+                            && flight.Destination.Equals(destination02, StringComparison.OrdinalIgnoreCase)
+                            && datetimeDate >= departureDateInput01
+                            && datetimeDate <= departureDateInput02
+                            && flight.Airplane.Model.Equals(PlaneAnswer01, StringComparison.OrdinalIgnoreCase)
+                            && flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue))
+            .Select(flight => $"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}")
+            .ToList();
 
-            Console.WriteLine($"Found {FilteredFlights.Count} flights:");
+        if (filteredFlights.Count > 0){
 
-        foreach (var flight in FilteredFlights)
+            Console.WriteLine($"Found {filteredFlights.Count} flights:");
+
+        foreach (var flight in filteredFlights)
         {
             Console.WriteLine(flight);
             Console.WriteLine("");
@@ -648,7 +606,7 @@ public static class Filtering
         }
         else {Console.WriteLine($"No FLights found.");}
 
-        FilteredFlights.Clear();
+        filteredFlights.Clear();
         return;
     }
 
@@ -663,16 +621,7 @@ public static class Filtering
             string input = flight.DepartureDate;
             if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
             {
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                    if (seatsUnderMaxPrice)
-                    {
-                        FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                    }
-                }
-
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
+                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower()))
                 {
                     bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
                     if (seatsUnderMaxPrice)
@@ -709,25 +658,7 @@ public static class Filtering
             string input = flight.DepartureDate;
             if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
             {
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                    if (seatsUnderMaxPrice)
-                    {
-                        FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                    }
-                }
-
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
-                {
-                    bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                    if (seatsUnderMaxPrice)
-                    {
-                        FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                    }
-                }
-
-                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower())
+                if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower()))
                 {
                     bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
                     if (seatsUnderMaxPrice)
@@ -792,15 +723,7 @@ public static class Filtering
 
         foreach (var flight in flights)
         {
-            if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-            {
-                bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                if (seatsUnderMaxPrice)
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-            }
-            if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
+            if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower()))
             {
                 bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
                 if (seatsUnderMaxPrice)
@@ -832,23 +755,7 @@ public static class Filtering
 
         foreach (var flight in flights)
         {
-            if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-            {
-                bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                if (seatsUnderMaxPrice)
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-            }
-            if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
-            {
-                bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                if (seatsUnderMaxPrice)
-                {
-                    FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-            }
-            if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower())
+            if (flight.DepartingFrom.ToLower() == destination01.ToLower() && flight.Destination.ToLower() == destination02.ToLower() && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower()))
             {
                 bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
                 if (seatsUnderMaxPrice)
@@ -958,15 +865,7 @@ public static class Filtering
             string input = flight.DepartureDate;
             if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
             {
-                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                    if (seatsUnderMaxPrice)
-                    {
-                        FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                    }
-                }
-                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
+                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower()))
                 {
                     bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
                     if (seatsUnderMaxPrice)
@@ -1003,23 +902,7 @@ public static class Filtering
             string input = flight.DepartureDate;
             if (DateTime.TryParseExact(input, "dd-MM-yyyy", null, DateTimeStyles.None, out DatetimeDate))
             {
-                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-                {
-                    bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                    if (seatsUnderMaxPrice)
-                    {
-                        FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                    }
-                }
-                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
-                {
-                    bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                    if (seatsUnderMaxPrice)
-                    {
-                        FilteredFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                    }
-                }
-                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower())
+                if (DatetimeDate >= departureDateInput01 && DatetimeDate <= departureDateInput02 && (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower()))
                 {
                     bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
                     if (seatsUnderMaxPrice)
@@ -1117,15 +1000,7 @@ public static class Filtering
 
         foreach (var flight in flights)
         {
-            if (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-            {
-                bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                if (seatsUnderMaxPrice)
-                {
-                    FilterPlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-            }
-            if (flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
+            if (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
             {
                 bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
                 if (seatsUnderMaxPrice)
@@ -1157,23 +1032,7 @@ public static class Filtering
 
         foreach (var flight in flights)
         {
-            if (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-            {
-                bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                if (seatsUnderMaxPrice)
-                {
-                    FilterPlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-            }
-            if (flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
-            {
-                bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
-                if (seatsUnderMaxPrice)
-                {
-                    FilterPlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-                }
-            }
-            if (flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower())
+            if (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower())
             {
                 bool seatsUnderMaxPrice = flight.Airplane.Seats.Any(seat => seat.Price > 0 && seat.Price <= maxPriceValue);
                 if (seatsUnderMaxPrice)
@@ -1358,11 +1217,7 @@ public static class Filtering
 
         foreach (var flight in flights)
         {
-            if (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-            {
-                FilterPlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-            }
-            if (flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
+            if (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
             {
                 FilterPlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
             }
@@ -1390,15 +1245,7 @@ public static class Filtering
 
         foreach (var flight in flights)
         {
-            if (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower())
-            {
-                FilterPlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-            }
-            if (flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower())
-            {
-                FilterPlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
-            }
-            if (flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower())
+            if (flight.Airplane.Model.ToLower() == PlaneAnswer01.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer02.ToLower() || flight.Airplane.Model.ToLower() == PlaneAnswer03.ToLower())
             {
                 FilterPlaneFlights.Add($"Flight {flight.FlightNumber}:\nDestination: {flight.Destination}\nCountry: {flight.Country}\nAirplane: {flight.Airplane.Model}\nDeparting from: {flight.DepartingFrom}\nDeparture date: {flight.DepartureDate}\nDeparture time: {flight.DepartureTime}\nEstimated time of Arrival: {flight.EstimatedTimeofArrival}");
             }
