@@ -464,7 +464,20 @@ public class Program
                                                             Console.Clear();
                                                             Menu.LoadingBar("Looking for result with filter", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Filtering.filtorSort(destination01, destination02, input01, input02, planeAnswer01, planeAnswer02, planeAnswer03, maxPrice, flights);
+                                                            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, input01, input02, planeAnswer01, planeAnswer02, planeAnswer03, maxPrice, flights);
+                                                            if (filteredFlights.Count > 0)
+                                                            {
+                                                                Console.WriteLine($"Found {filteredFlights.Count} flights:\n");
+                                                                foreach (var flight in filteredFlights)
+                                                                {
+                                                                    Console.WriteLine(flight);
+                                                                    Console.WriteLine("");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"No flights found.");
+                                                            }
                                                             Console.WriteLine("Enter a key to go back to the filtering menu");
                                                             Console.ReadKey();
                                                             break;
@@ -670,7 +683,20 @@ public class Program
                                                             Console.Clear();
                                                             Menu.LoadingBar("Looking for result with filter", TimeSpan.FromSeconds(1));
                                                             Console.Clear();
-                                                            Filtering.filtorSort(destination01, destination02, input01, input02, planeAnswer01, planeAnswer02, planeAnswer03, maxPrice, flights);
+                                                            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, input01, input02, planeAnswer01, planeAnswer02, planeAnswer03, maxPrice, flights);
+                                                            if (filteredFlights.Count > 0)
+                                                            {
+                                                                Console.WriteLine($"Found {filteredFlights.Count} flights:\n");
+                                                                foreach (var flight in filteredFlights)
+                                                                {
+                                                                    Console.WriteLine(flight);
+                                                                    Console.WriteLine("");
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                Console.WriteLine($"No flights found.");
+                                                            }
                                                             Console.WriteLine("Enter a key to go back to the filtering menu");
                                                             Console.ReadKey();
                                                             break;
