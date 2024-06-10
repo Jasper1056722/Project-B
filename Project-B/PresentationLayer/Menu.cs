@@ -117,6 +117,44 @@ public static class Menu
         return password;
     }
 
+    public static string GetString(string prompt, string suffix, int padLeft)
+    {
+        Console.Write(prompt);
+        string input = "";
+        ConsoleKeyInfo key;
+
+        // Initial display of the suffix with padding
+        Console.Write(new string(' ', padLeft) + suffix);
+        Console.SetCursorPosition(prompt.Length, Console.CursorTop);
+
+        do
+        {
+            key = Console.ReadKey(true);
+
+            if (key.Key != ConsoleKey.Enter && key.Key != ConsoleKey.Backspace)
+            {
+                input += key.KeyChar;
+                Console.Write(key.KeyChar + new string(' ', padLeft - input.Length) + suffix);
+
+                // Move the cursor back to allow more input before the suffix
+                Console.SetCursorPosition(prompt.Length + input.Length, Console.CursorTop);
+            }
+            else if (key.Key == ConsoleKey.Backspace && input.Length > 0)
+            {
+                input = input.Substring(0, input.Length - 1);
+
+                // Clear the character, padding, and suffix
+                Console.SetCursorPosition(prompt.Length + input.Length, Console.CursorTop);
+                Console.Write(" " + new string(' ', padLeft - input.Length) + suffix + " ");
+                Console.SetCursorPosition(prompt.Length + input.Length, Console.CursorTop);
+            }
+        } while (key.Key != ConsoleKey.Enter);
+
+        Console.WriteLine();
+
+        return input;
+    }
+
     public static void LoadingBar(string loadingString, TimeSpan duration)
     {
         int maxDots = 5; // Maximum number of dots

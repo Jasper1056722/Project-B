@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-public class Flight
+public class Flight : IEquatable<Flight>, IComparable<Flight>
 {
     public int FlightNumber { get; set; }
     public string Destination { get; set; }
@@ -101,4 +101,52 @@ public class Flight
         }
         return true;
     }
+
+    public bool Equals(Flight flight)
+    {
+        if(flight is null)
+        {
+            return false;
+        }
+        else if(FlightNumber == flight.FlightNumber && DepartureDate == flight.DepartureDate && Destination == flight.Destination)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if(obj is Flight flight) return Equals(flight);
+        return false;
+    }
+
+    public int CompareTo(Flight other)
+    {
+        if(other is null) return 1;
+        return Destination.CompareTo(other.Destination);
+    }
+
+    public static bool operator ==(Flight flight1, Flight flight2)
+    {
+        if(flight1 is null && flight2 is null)
+        {
+            return true;
+        }
+        else if(flight1 is null || flight2 is null)
+        {
+            return false;
+        }
+        return flight1.Equals(flight2);
+    }
+
+    public static bool operator !=(Flight flight, Flight flight2)
+    {
+        return !(flight == flight2);
+    }
+
+
 }
