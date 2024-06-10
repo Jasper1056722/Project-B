@@ -295,19 +295,83 @@ public class Reservation
                 Console.WriteLine("Invalid email address. Please enter a valid email address.");
             }
         } while (!emailAddress.Contains("@"));
+
+        Console.Clear();
+        string ageInput;
+        int age;
+        do
+        {
+            ageInput = Menu.GetString("Age: ");
+            if (ageInput.ToLower() == "q") return false;
+
+            if (!int.TryParse(ageInput, out age) || age < 0 || age > 150)
+            {
+                Console.WriteLine("Invalid age. Please enter a valid age between 0 and 150.");
+            }
+        } while (!int.TryParse(ageInput, out age) || age < 0 || age > 150);
         
         FoodPackage SelectedPackage = GetSelectedPackage();
-
-        Person person = new Person
+        
+        if(age < 18)
         {
-            FirstName = firstName,
-            LastName = lastName,
-            BirthDate = birthDate,
-            PhoneNumber = phoneNumber,
-            EmailAddress = emailAddress,
-            FoodOption = SelectedPackage
-        };
-        People.Add(person);
+            Child child = new Child
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                BirthDate = birthDate,
+                PhoneNumber = phoneNumber,
+                EmailAddress = emailAddress,
+                FoodOption = SelectedPackage,
+                Age = age,
+                IsChild = true
+            };
+            People.Add(child);
+        }
+        else if (age >= 67)
+        {
+            Senior senior = new Senior
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                BirthDate = birthDate,
+                PhoneNumber = phoneNumber,
+                EmailAddress = emailAddress,
+                FoodOption = SelectedPackage,
+                Age = age,
+                IsSenior = true
+            };
+            People.Add(senior);
+        }
+        else 
+        {
+            Adult adult = new Adult
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                BirthDate = birthDate,
+                PhoneNumber = phoneNumber,
+                EmailAddress = emailAddress,
+                FoodOption = SelectedPackage,
+                Age = age,
+                IsAdult = true
+            };
+            People.Add(adult);
+        }
+        // Person person = new Person
+        // {
+        //     FirstName = firstName,
+        //     LastName = lastName,
+        //     BirthDate = birthDate,
+        //     PhoneNumber = phoneNumber,
+        //     EmailAddress = emailAddress,
+        //     FoodOption = SelectedPackage
+        //     age = age
+        // };
+        // People.Add(person);
+        foreach (var person in People)
+        {
+            Console.WriteLine($"{person.FirstName} {person.LastName}, {person.GetType().Name}, Age: {person.Age}");
+        }
         return true;
         Console.Clear();
     }
