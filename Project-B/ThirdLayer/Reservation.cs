@@ -413,12 +413,12 @@ public class Reservation
         bool Bool = true;
         while(Bool)
         { 
-            Console.WriteLine("Please assign your desired destination");
+            Console.WriteLine("Please assign your desired country of destination");
             string destination = Console.ReadLine();
 
             foreach (Flight flight in flights)
             {
-                if (flight.Destination == destination)
+                if (flight.Country == destination)
                 {
                     newflights.Add(flight);
                 }
@@ -431,8 +431,8 @@ public class Reservation
             else
             {
                 Console.Clear();
-                Console.WriteLine("Make sure to enter a valid destination");
-                Thread.Sleep(2500);
+                Console.WriteLine("Your input was either spelled wrong or the country is not a valid destination");
+                Thread.Sleep(1000);
             }
         }
 

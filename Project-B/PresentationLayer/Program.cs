@@ -775,7 +775,23 @@ public class Program
 
                                                 if (allContactsAdded)
                                                 {
-                                                    reservation.SelectSeat();
+                                                    bool isValidChoice = false;
+                                                    while (!isValidChoice)
+                                                    {
+                                                        int SearchingOptionIndex = Menu.MenuPanel("Seat options", "Do you want to select your seat or get it random?", new[] { "Random seat", "Select seat" }, Flightinfo.ReturnFlights(flights1));
+                                                        switch (SearchingOptionIndex)
+                                                        {
+                                                            case 0:
+                                                                reservation.ReserveRandomSeat(reservation.FlightForReservation);
+                                                                isValidChoice = true;
+                                                                break;
+                                                            case 1:
+                                                                reservation.SelectSeat();
+                                                                isValidChoice = true;
+                                                                break;
+                                                        }
+                                                    }
+                                                    Mail.GetInfo(reservation);
                                                     reservationaccountlistflights.Add(reservation);
                                                     reservations.Add(reservation);
                                                 }
