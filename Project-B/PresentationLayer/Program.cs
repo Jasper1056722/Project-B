@@ -456,7 +456,7 @@ public class Program
                                                             string destination01 = Menu.GetString("Departing from: ");
                                                             string destination02 = Menu.GetString("Arriving at: ").ToLower();
                                                             Console.WriteLine("Filtering between 2 dates for the departure date");
-                                                            Time.Sleep(1);
+                                                            Thread.Sleep(1);
                                                             string input01 = Menu.GetString("First departure date (DD-MM-YYYY): ");
                                                             string input02 = Menu.GetString("Second date: ");
                                                             string planeAnswer01 = Menu.GetString("Airplane 1 (Airbus 330, Boeing 787, Boeing 737): ");
@@ -676,8 +676,8 @@ public class Program
                                                             Console.WriteLine("Fill in all the filters you want to filter for (leave blank if not):");
                                                             string destination01 = Menu.GetString("Departing from: ");
                                                             string destination02 = Menu.GetString("Arriving at: ");
-                                                            Console.WriteLine("Filtering between 2 dates for the departure date")
-                                                            Time.Sleep(1);
+                                                            Console.WriteLine("Filtering between 2 dates for the departure date");
+                                                            Thread.Sleep(1);
                                                             string input01 = Menu.GetString("First departure date (DD-MM-YYYY): ");
                                                             string input02 = Menu.GetString("Second date: ");
                                                             string planeAnswer01 = Menu.GetString("Airplane 1 (Airbus 330, Boeing 787, Boeing 737): ");
