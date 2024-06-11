@@ -542,7 +542,6 @@ namespace Project_Btest
         [TestMethod]
         public void Test_Time_returnsListString()
         {
-            (DateTime departureDateInput01, DateTime departureDateInput02, List<Flight> flights)
             var flights = new List<Flight>
             {
                 new Flight(
