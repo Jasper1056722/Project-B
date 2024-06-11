@@ -748,6 +748,7 @@ public class Program
                                                                 break;
                                                         }
                                                     }
+                                                    Mail.GetInfo(reservation);
                                                     reservationaccountlistflights.Add(reservation);
                                                     reservations.Add(reservation);
                                                 }
