@@ -1,4 +1,4 @@
-public abstract class Person
+public class Person
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -6,5 +6,4 @@ public abstract class Person
     public string PhoneNumber { get; set; }
     public string EmailAddress { get; set; }
     public FoodPackage FoodOption { get; set; }
-    public int Age { get; set; }
 }
