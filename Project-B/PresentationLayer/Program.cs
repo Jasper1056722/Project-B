@@ -484,7 +484,7 @@ public class Program
 
                                                         case 1:
                                                             Console.Clear();
-                                                            AdminSearchingState = false;
+                                                            AdminFilteringState = false;
                                                             break;
                                                     }                     
                                             }
