@@ -122,8 +122,6 @@ public static class Menu
         Console.Write(prompt);
         string input = "";
         ConsoleKeyInfo key;
-
-        // Initial display of the suffix with padding
         Console.Write(new string(' ', padLeft) + suffix);
         Console.SetCursorPosition(prompt.Length, Console.CursorTop);
 
@@ -135,15 +133,11 @@ public static class Menu
             {
                 input += key.KeyChar;
                 Console.Write(key.KeyChar + new string(' ', padLeft - input.Length) + suffix);
-
-                // Move the cursor back to allow more input before the suffix
                 Console.SetCursorPosition(prompt.Length + input.Length, Console.CursorTop);
             }
             else if (key.Key == ConsoleKey.Backspace && input.Length > 0)
             {
                 input = input.Substring(0, input.Length - 1);
-
-                // Clear the character, padding, and suffix
                 Console.SetCursorPosition(prompt.Length + input.Length, Console.CursorTop);
                 Console.Write(" " + new string(' ', padLeft - input.Length) + suffix + " ");
                 Console.SetCursorPosition(prompt.Length + input.Length, Console.CursorTop);
@@ -168,8 +162,6 @@ public static class Menu
                 Console.Write($"{loadingString}{new string('.', i)}\r");
                 Thread.Sleep(interval);
             }
-
-            // Clear the line
             Console.Write(new string(' ', Console.WindowWidth - 1) + "\r");
         }
     }

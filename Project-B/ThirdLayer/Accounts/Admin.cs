@@ -1,4 +1,5 @@
-// public class Admin : User
-// {
-//     public override void Runmenu();
-// }   
+public class Admin : User
+{
+    public string email { get; protected set; }
+    public string password { get; protected set; }
+}
