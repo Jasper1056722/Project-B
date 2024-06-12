@@ -51,15 +51,12 @@ Email: airprojbgroupd@gmail.com"
 
         using (var client = new SmtpClient())
         {   
-            Console.WriteLine("Connecting....");
             client.Connect(smtpServer,port,true);
             client.Authenticate(username,password);
             try
             {
-                Console.WriteLine("Sending....");
                 client.Send(message);
                 client.Disconnect(true);
-                Console.WriteLine("Email has been send");
             }
             catch (Exception ex)
             {

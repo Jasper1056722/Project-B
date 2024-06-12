@@ -130,8 +130,8 @@ namespace Project_Btest
             
             string connectionString = "Data Source=Accounts.db;Version=3;";
 
-            var account = new Account(connectionString); 
-            bool result = account.Addtodb("pet@example.com", "pet123");
+            var account = new User(0); 
+            bool result = User.Addtodb("pet@example.com", "pet123");
 
             Assert.IsTrue(result);
 
@@ -152,28 +152,31 @@ namespace Project_Btest
         public void Test_logintodbsuccesfull()
         {
             string connectionString = "Data Source=Accounts.db;Version=3;";
-            
-            var account = new Account(connectionString);
-            account.Addtodb("test@example.com", "password123");
+            bool result = false;
+            var account = new User(0);
+            User.Addtodb("test@example.com", "password123");
 
-            bool result = account.Logintodb("test@example.com", "password123");
+            if(User.Login("test@example.com", "password123") != null)
+            {
+                result = true;
+            }
 
             Assert.IsTrue(result);
-            Assert.IsTrue(account.IsLoggedIn);
         }
         
         [TestMethod]
         public void Test_logintodbincorrectly()
         {
-            string connectionString = "Data Source=Accounts.db;Version=3;";
-            
-            var account = new Account(connectionString);
-            account.Addtodb("test@example.com", "password123");
+            bool result = false;
+            var account = new User(0);
+            User.Addtodb("test@example.com", "password123");
 
-            bool result = account.Logintodb("test@example.com", "wrong password");
+            if (User.Login("test@example.com", "wrong password") == null)
+            {
+                result = true;
+            }
 
-            Assert.IsFalse(result);
-            Assert.IsFalse(account.IsLoggedIn);
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
