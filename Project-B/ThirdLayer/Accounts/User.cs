@@ -142,7 +142,7 @@ public class User
             }
 
             Console.Clear();
-            //account.Addtodb(newUserEmail, newUserPassword);
+            User.Addtodb(newUserEmail, newUserPassword);
             Menu.LoadingBar("Adding account to database", TimeSpan.FromSeconds(2));
             break;
     

@@ -16,7 +16,6 @@
             "Quality": "Business",
             "Price": 0,
             "PersonInSeat": {
-              "IsChild": true,
               "FirstName": "Oli",
               "LastName": "Vooren",
               "BirthDate": "18-07-2006",
@@ -25,8 +24,7 @@
               "FoodOption": {
                 "Name": "Deluxe Package",
                 "Price": 25.0
-              },
-              "Age": 17
+              }
             },
             "SeatReservationNumber": 212168
           },
@@ -35,7 +33,6 @@
             "Quality": "Business",
             "Price": 0,
             "PersonInSeat": {
-              "IsAdult": true,
               "FirstName": "Jap",
               "LastName": "Japjap",
               "BirthDate": "18-02-2004",
@@ -44,8 +41,7 @@
               "FoodOption": {
                 "Name": "Deluxe Package",
                 "Price": 25.0
-              },
-              "Age": 20
+              }
             },
             "SeatReservationNumber": 212168
           },
@@ -1574,7 +1570,6 @@
     },
     "People": [
       {
-        "IsChild": true,
         "FirstName": "Oli",
         "LastName": "Vooren",
         "BirthDate": "18-07-2006",
@@ -1583,11 +1578,9 @@
         "FoodOption": {
           "Name": "Deluxe Package",
           "Price": 25.0
-        },
-        "Age": 17
+        }
       },
       {
-        "IsAdult": true,
         "FirstName": "Jap",
         "LastName": "Japjap",
         "BirthDate": "18-02-2004",
@@ -1596,8 +1589,7 @@
         "FoodOption": {
           "Name": "Deluxe Package",
           "Price": 25.0
-        },
-        "Age": 20
+        }
       }
     ],
     "ReservationNumber": 212168,
