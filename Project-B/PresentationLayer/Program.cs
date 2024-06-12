@@ -55,7 +55,7 @@ public class Program
                                 bool AdminPanelState = true;
                                 while (AdminPanelState)
                                 {
-                                    int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Filter for flights", "Show all flights", "Log out", "See all reservations", "Remove a reservation", "Quit Program"]);
+                                    int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight manually", "Add a flight using file", "Remove a flight", "Change a flight", "Search a flight", "Filter for flights", "Show all flights", "Log out", "See all reservations", "Remove a reservation", "Quit Program"]);
 
                                     switch(AdminPanelIndex)
                                     {
@@ -168,6 +168,44 @@ public class Program
 
                                         case 1:
                                             Console.Clear();
+                                            int FileIndex = Menu.MenuPanel("File Selector", "What file would you want to be read?", [".csv", ".txt"]);
+                                            Console.Clear();
+
+                                            switch (FileIndex)
+                                            {
+                                                case 0:
+                                                    string filename = Menu.GetString("Name of the file: ");
+                                                    string File_Path = $"Flight_Files/CSV/{filename}.csv";
+
+                                                    foreach (string line in File.ReadLines(File_Path))
+                                                    {
+                                                        string[] Flight = line.Split(",");
+                                                        string destination = Flight[2];
+                                                        string country = Flight[3];
+                                                        string departingfrom = Flight[1];
+                                                        string departuredate = Flight[5].Split(" ")[0];
+                                                        string departuretime = Flight[5];
+                                                        DateTime Departuretime = DateTime.Parse(departuretime);
+                                                        string eta = Flight[6];
+                                                        DateTime ETA = DateTime.Parse(eta);
+                                                        plane = new Plane(Flight[4]);
+
+                                                        Flight newFlight = new(destination, country, plane, departingfrom, departuredate, "00-00-0000T00:00:00", "00-00-0000T00:00:00");
+                                                        newFlight.DepartureTime = Departuretime;
+                                                        newFlight.EstimatedTimeofArrival = ETA;
+                                                        flights.Add(newFlight);
+                                                    }
+
+                                                    Console.Clear();
+                                                    Console.WriteLine("Flights have been succesfully added.");
+                                                    Console.WriteLine("Press any key to continue");
+                                                    Console.ReadKey();
+                                                    break;
+                                            }
+                                            break;
+
+                                        case 2:
+                                            Console.Clear();
                                             string FlightNumAnswerDel = Menu.GetString("Enter a flight number to delete: ").Trim();
                                             while(!Validator.IsNotNull(FlightNumAnswerDel) || !Validator.IsAllDigits(FlightNumAnswerDel))
                                             { 
@@ -194,7 +232,7 @@ public class Program
                                             break;
                                             }
                                         
-                                        case 2:
+                                        case 3:
                                             Console.Clear();
                                             string FlightNumAnswer = Menu.GetString("Enter a flight number to look for: ").Trim();
                                             while(!Validator.IsNotNull(FlightNumAnswer) || !Validator.IsAllDigits(FlightNumAnswer))
@@ -329,7 +367,7 @@ public class Program
                                         }
                                         break;
 
-                                        case 3:
+                                        case 4:
                                             Console.Clear();
                                             bool AdminSearchingState = true;
                                             while(AdminSearchingState)
@@ -441,7 +479,7 @@ public class Program
                                             }
                                             break;
                                         
-                                        case 4:
+                                        case 5:
                                             Console.Clear();
                                             bool AdminFilteringState = true;
                                             while(AdminFilteringState)
@@ -492,7 +530,7 @@ public class Program
                                             }
                                             break;
                                         
-                                        case 5:
+                                        case 6:
                                             Console.Clear();
                                             Menu.LoadingBar("Loading flights", TimeSpan.FromSeconds(1));
                                             Console.Clear();
@@ -502,19 +540,19 @@ public class Program
                                             Console.Clear();
                                             break;
 
-                                        case 6:
+                                        case 7:
                                             Menu.LoadingBar("Logging out", TimeSpan.FromSeconds(2));
                                             account.logout();
                                             AdminPanelState = false;
                                             break;
 
-                                        case 7:
+                                        case 8:
                                             Console.Clear();
                                             ReservationManager.DisplayReservations(reservations);
                                             Console.ReadKey();
                                             break;
 
-                                        case 8:
+                                        case 9:
                                             Console.Clear();
                                             ReservationManager.DisplayReservations(reservations);
                                             string reservationNumberAdmin = Menu.GetString("Enter reservationnumber: ");
@@ -530,7 +568,7 @@ public class Program
                                             Console.Clear();
                                             break;
                                             
-                                        case 9:
+                                        case 10:
                                             Console.WriteLine($"{NORMAL}CLOSING THE APPLICATION{NORMAL}");
                                             Thread.Sleep(1000);
                                             Flight.WriteToJson(flights);
