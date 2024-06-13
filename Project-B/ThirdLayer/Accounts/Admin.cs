@@ -566,11 +566,28 @@ public class Admin : User
                 case 9:
                     Console.Clear();
                     ReservationManager.DisplayReservations(reservations);
-                    string reservationNumberAdmin = Menu.GetString("Enter reservationnumber: ");
+                    string reservationNumberAdmin = Menu.GetString("Enter reservationnumber (or \'q\' to exit ): ");
+                    if (reservationNumberAdmin == "q")
+                    {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
+                    }
                     while (!reservations.Any(reservation => reservation.ReservationNumber.ToString() == reservationNumberAdmin))
                     {
                         Console.WriteLine("Incorrect input!");
-                        reservationNumberAdmin = Menu.GetString("Enter reservationnumber: ");
+                        reservationNumberAdmin = Menu.GetString("Enter reservationnumber (or \'q\' to exit ): : ");
+                        if (reservationNumberAdmin == "q")
+                        {
+                            Console.Clear();
+                            Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                            break;
+                        }
+                    }
+                    if (reservationNumberAdmin == "q")
+                    {
+                        Console.Clear();
+                        break;
                     }
                     int reservationNumberAdminInt = int.Parse(reservationNumberAdmin);
                     Reservation.RemoveReservation(flights, reservations, reservationNumberAdminInt);
@@ -580,7 +597,7 @@ public class Admin : User
                     break;
                     
                 case 10:
-                    Console.WriteLine($"CLOSING THE APPLICATION");
+                    Menu.LoadingBar("Quitting application", TimeSpan.FromSeconds(2));
                     Thread.Sleep(1000);
                     Flight.WriteToJson(flights);
                     ReservationManager.WriteReservations(reservations);
