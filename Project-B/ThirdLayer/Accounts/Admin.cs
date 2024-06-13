@@ -215,91 +215,128 @@ public class Admin : User
                         case 0:
                             DateTime Departuretime = DateTime.Now;
                             DateTime ETA = DateTime.Now;
-                            string filename = Menu.GetString("Name of the file: ");
+                            string filename = "";
+                            bool AddFlight = true;
+                            filename = Menu.GetString("Name of the file: ");
+
+                            try
+                            { 
+                                string File_Path_check = $"Flight_Files/CSV/{filename}.csv";
+                                File.ReadLines(File_Path_check);
+                            }
+
+                            catch (Exception)
+                            {
+                                Console.WriteLine($"Could not find file '{filename}'");
+                                Console.WriteLine("Press any key to continue");
+                                Console.ReadKey();
+                                AddFlight = false;  
+                            }
+
                             string File_Path = $"Flight_Files/CSV/{filename}.csv";
 
-                            foreach (string line in File.ReadLines(File_Path))
+                            if(AddFlight)
                             {
-                                piece++;
-                                string[] Flight = line.Split(",");
-                                string destination = Flight[2];
-                                string country = Flight[3];
-                                string departingfrom = Flight[1];
-                                string departuredate = Flight[5].Split(" ")[0];
-                                string departuretime = Flight[5];
-                                string eta = Flight[6];
-                                plane = new Plane(Flight[4]);
-
-                                if (!(Flight[4] == "Airbus 330" || Flight[4] == "Boeing 787" || Flight[4] == "Boeing 737"))
+                                foreach (string line in File.ReadLines(File_Path))
                                 {
-                                    Error = true;
-                                        Errorcode = "PlaneType";
-                                        Errors.Add(Errorcode + " " + piece);
-                                }
+                                    piece++;
+                                    string[] Flight = line.Split(",");
+                                    string destination = Flight[2];
+                                    string country = Flight[3];
+                                    string departingfrom = Flight[1];
+                                    string departuredate = Flight[5].Split(" ")[0];
+                                    string departuretime = Flight[5];
+                                    string eta = Flight[6];
+                                    plane = new Plane(Flight[4]);
 
-                                if (departuredate.Split("-").Length == 3)
-                                {
-                                    string[] date = departuredate.Split("-");
-                                    int D = Int32.Parse(date[0]);
-                                    int M = Int32.Parse(date[1]);
-                                    int Y = Int32.Parse(date[2]);
-                                    if(!(D >= 1 && D <= 31 && M >= 1 && M <= 12 && Y >= 2024))
+                                    if (!(Flight[4] == "Airbus 330" || Flight[4] == "Boeing 787" || Flight[4] == "Boeing 737"))
+                                    {
+                                        Error = true;
+                                            Errorcode = "PlaneType";
+                                            Errors.Add(Errorcode + " > " + Flight[4] + "  " + piece);
+                                    }
+
+                                    if (departuredate.Split("-").Length == 3)
+                                    {
+                                        string[] date = departuredate.Split("-");
+                                        int D = Int32.Parse(date[0]);
+                                        int M = Int32.Parse(date[1]);
+                                        int Y = Int32.Parse(date[2]);
+                                        if(!(D >= 1 && D <= 31 && M >= 1 && M <= 12 && Y >= 2024))
+                                        {
+                                            Error = true;
+                                            Errorcode = "DateType";
+                                            Errors.Add(Errorcode + " > " + departuredate  + "  " + piece);
+                                        }
+                                    }
+                                    else
                                     {
                                         Error = true;
                                         Errorcode = "DateType";
-                                        Errors.Add(Errorcode + " " + piece);
+                                        Errors.Add(Errorcode + " > " + departuredate + "  " + piece);
                                     }
+
+                                    try
+                                    {
+                                        DateTime.ParseExact(departuretime.Split(" ")[1], "HH:mm:ss", null);
+                                    }
+                                    catch (FormatException)
+                                    {
+                                        Error = true;
+                                        Errorcode = "DateTimeType";
+                                        Errors.Add(Errorcode + " > " + departuretime.Split(" ")[1]  + "  " + piece);
+                                    }
+
+                                    try
+                                    {
+                                        ETA = DateTime.ParseExact(eta, "dd-MM-yyyy HH:mm:ss", null);
+                                    }
+                                    catch (FormatException)
+                                    {
+                                        Error = true;
+                                        Errorcode = "DateTimeType";
+                                        Errors.Add(Errorcode + " > " + eta  + "  " + piece);
+                                    }
+                                    
+                                    if(!Error)
+                                    {
+                                        Flight newFlight = new(destination, country, plane, departingfrom, departuredate, "00-00-0000T00:00:00", "00-00-0000T00:00:00");
+                                        newFlight.DepartureTime = Departuretime = DateTime.ParseExact(departuretime, "dd-MM-yyyy HH:mm:ss", null);
+                                        newFlight.EstimatedTimeofArrival = ETA;
+                                        flights.Add(newFlight);
+                                    }
+                                }
+
+                                if (Error)
+                                {
+                                    Console.Clear();
+                                    foreach (var fault in Errors)
+                                    {
+                                        string[] fault1 = fault.Split("  ");
+                                        Console.WriteLine("+-----------------------------------------------+");
+                                        Console.WriteLine($"An error occurred using file: {filename}\nOn line: {fault1[1]}\nCould not use type: {fault1[0]}");
+                                    }
+                                    Console.WriteLine("+-----------------------------------------------+");
+                                    Console.WriteLine("Press any key to continue");
+                                    Console.ReadKey();
                                 }
                                 else
                                 {
-                                    Error = true;
-                                    Errorcode = "DateType";
-                                    Errors.Add(Errorcode + " " + piece);
+                                    Console.Clear();
+                                    Console.WriteLine("Flights have been succesfully added.");
+                                    Console.WriteLine("Press any key to continue");
+                                    Console.ReadKey();
                                 }
-
-                                try
-                                {
-                                    Departuretime = DateTime.ParseExact(departuretime, "dd-MM-yyyy HH:mm:ss", null);
-                                    ETA = DateTime.ParseExact(eta, "dd-MM-yyyy HH:mm:ss", null);
-                                }
-                                catch (FormatException)
-                                {
-                                    Error = true;
-                                    Errorcode = "DateTimeType";
-                                    Errors.Add(Errorcode + " " + piece);
-                                }
-                                
-                                if(!Error)
-                                {
-                                    Flight newFlight = new(destination, country, plane, departingfrom, departuredate, "00-00-0000T00:00:00", "00-00-0000T00:00:00");
-                                    newFlight.DepartureTime = Departuretime;
-                                    newFlight.EstimatedTimeofArrival = ETA;
-                                    flights.Add(newFlight);
-                                }
-                            }
-
-                            if (Error)
-                            {
-                                Console.Clear();
-                                foreach (var fault in Errors)
-                                {
-                                    string[] fault1 = fault.Split(" ");
-                                    Console.WriteLine(fault.Split(" ")[0], fault.Split(" ")[1]);
-                                    Console.WriteLine("+-----------------------------------------------+");
-                                    Console.WriteLine($"An error occurred using file: {filename}\nOn line: {fault1[1]}\nCould not use type: {fault1[0]}");
-                                }
-                                Console.Write("+-----------------------------------------------+");
-                                Console.WriteLine("Press any key to continue");
-                                Console.ReadKey();
-                            }
-                            else
-                            {
-                                Console.Clear();
-                                Console.WriteLine("Flights have been succesfully added.");
-                                Console.WriteLine("Press any key to continue");
-                                Console.ReadKey();
                             }
                             break;
+                        
+                        case 1:
+                            {
+                                Console.WriteLine(".txt is not implemented, pls use a .csv file to add flights.");
+                                Console.WriteLine("Press any key to continue");
+                                Console.ReadKey();
+                                break;
+                            }
                     }
                     break;
 
