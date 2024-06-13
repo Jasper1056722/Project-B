@@ -157,15 +157,24 @@ public class Admin : User
                                 if (!(Flight[4] == "Airbus 330" || Flight[4] == "Boeing 787" || Flight[4] == "Boeing 737"))
                                 {
                                     Error = true;
-                                    Errorcode = "PlaneType";
-                                    break;
+                                        Errorcode = "PlaneType";
+                                        Errors.Add(Errorcode + " " + piece);
                                 }
 
-                                string[] date = departuredate.Split("-");
-                                int D = Int32.Parse(date[0]);
-                                int M = Int32.Parse(date[1]);
-                                int Y = Int32.Parse(date[2]);
-                                if(!(D >= 1 && D <= 31 && M >= 1 && M <= 12 && Y >= 2024))
+                                if (departuredate.Split("-").Length == 3)
+                                {
+                                    string[] date = departuredate.Split("-");
+                                    int D = Int32.Parse(date[0]);
+                                    int M = Int32.Parse(date[1]);
+                                    int Y = Int32.Parse(date[2]);
+                                    if(!(D >= 1 && D <= 31 && M >= 1 && M <= 12 && Y >= 2024))
+                                    {
+                                        Error = true;
+                                        Errorcode = "DateType";
+                                        Errors.Add(Errorcode + " " + piece);
+                                    }
+                                }
+                                else
                                 {
                                     Error = true;
                                     Errorcode = "DateType";
@@ -198,9 +207,12 @@ public class Admin : User
                                 Console.Clear();
                                 foreach (var fault in Errors)
                                 {
-                                    fault.Split(" ");
-                                    Console.WriteLine($"An error occurred using file: {filename}\nOn line: {fault[1]}\nCould not use type: {fault[1]}");
+                                    string[] fault1 = fault.Split(" ");
+                                    Console.WriteLine(fault.Split(" ")[0], fault.Split(" ")[1]);
+                                    Console.WriteLine("+-----------------------------------------------+");
+                                    Console.WriteLine($"An error occurred using file: {filename}\nOn line: {fault1[1]}\nCould not use type: {fault1[0]}");
                                 }
+                                Console.Write("+-----------------------------------------------+");
                                 Console.WriteLine("Press any key to continue");
                                 Console.ReadKey();
                             }
