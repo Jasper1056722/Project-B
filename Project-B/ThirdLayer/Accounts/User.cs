@@ -110,6 +110,7 @@ public class User
             Console.Clear();
             string email = Menu.GetString("Enter email: ");
             string password = Menu.GetString("Enter password: ");
+            Console.Clear();
             Menu.LoadingBar("Attempting login", TimeSpan.FromSeconds(2));
 
             currentUser = User.Login(email, password);

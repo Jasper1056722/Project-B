@@ -27,7 +27,7 @@ public class Customer : User
         List<Reservation> reservationaccountlistflights = LoadAccountsReservations(reservations);
         while(true)
         {
-            int UserPanelIndex = Menu.MenuPanel(("User Menu","Here u can"), ["Search for a flight", "Filter for flights", "Make a reservation","Display all flights", "See reservations", "Remove reservation", "logout", "Quit Program"]);
+            int UserPanelIndex = Menu.MenuPanel(("User Menu","Here u can make a reservation"), ["Search for a flight", "Filter for flights", "Make a reservation","Display all flights", "See reservations", "Remove reservation", "logout", "Quit Program"]);
 
             switch(UserPanelIndex)
             {
@@ -313,10 +313,16 @@ public class Customer : User
                     while (reservationNumberUser != "q" && !reservationaccountlistflights.Any(reservation => reservation.ReservationNumber.ToString() == reservationNumberUser))
                     {
                         Console.WriteLine("Incorrect input!");
+                        if(reservationNumberUser == "q")
+                        {
+                            break;
+                        }
                         reservationNumberUser = Menu.GetString("Enter reservation number (or 'q' to go back): ");
                     }
                     if (reservationNumberUser == "q")
                     {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
                         break;
                     }
                     int reservationNumberUserInt = int.Parse(reservationNumberUser);

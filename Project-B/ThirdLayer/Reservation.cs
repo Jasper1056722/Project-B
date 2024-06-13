@@ -221,7 +221,12 @@ public class Reservation
         do
         {
             firstName = Menu.GetString("First name: ");
-            if (firstName.ToLower() == "q") return false;
+            if (firstName.ToLower() == "q")
+            {
+                Console.Clear();
+                Menu.LoadingBar("Heading back to menu", TimeSpan.FromSeconds(3));
+                return false;
+            } 
 
             if(!string.IsNullOrEmpty(firstName))
             {
@@ -357,7 +362,7 @@ public class Reservation
 
             foreach (Flight flight in flights)
             {
-                if (flight.Country == destination)
+                if (flight.Country.ToUpper() == destination.ToUpper())
                 {
                     newflights.Add(flight);
                 }

@@ -20,7 +20,8 @@ public class Admin : User
             {
                 case 0:
                     Console.Clear();
-                    int AirplaneSelectorIndex = Menu.MenuPanel(("Airplane Model Selector", "What plane model should be used for the flight"), ["Boeing 737", "Boeing 787", "Airbus 330"]);
+                    bool InMenu = true;
+                    int AirplaneSelectorIndex = Menu.MenuPanel(("Airplane Model Selector", "What plane model should be used for the flight"), ["Boeing 737", "Boeing 787", "Airbus 330", "Head back to menu"]);
                     Console.Clear();
                     Plane plane;
 
@@ -43,65 +44,140 @@ public class Admin : User
                             Console.WriteLine("Selected Airbus 330");
                             Thread.Sleep(1000);
                             break;
+
+                        case 3:
+                            InMenu = false;
+                            plane = new Plane("Boeing 737");
+                            break;
                         
                         default:
                             plane = new Plane("Boeing 737");
                             break;
                     }
+
+                    if (!InMenu)
+                    {
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
+                    }
                     
                     Console.Clear();
-                    string AddDestination = Menu.GetString("Enter a destination for the flight: ").Trim();
+                    string AddDestination = Menu.GetString("Enter a destination for the flight (or q to exit): ").Trim();
                     while(!Validator.IsAllLetters(AddDestination.Trim()) || string.IsNullOrEmpty(AddDestination.Trim()))
                     {
                         Console.WriteLine("Destination can oly include letters, and cannot be null");
-                        AddDestination = Menu.GetString("Enter a destination for the flight: ").Trim();
+                        AddDestination = Menu.GetString("Enter a destination for the flight (or q to exit): ").Trim();
                         Console.Clear();
                     }
                     Console.Clear();
+                    if(AddDestination == "q")
+                    {
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
+                    }
 
-                    string AddCountry = Menu.GetString("Enter a country for the flight: ").Trim();
+                    string AddCountry = Menu.GetString("Enter a country for the flight (or q to exit): ").Trim();
                     while(!Validator.IsAllLetters(AddCountry.Trim()) || string.IsNullOrEmpty(AddCountry.Trim()))
                     {
                         Console.WriteLine("Country can oly include letters, and cannot be null");
-                        AddCountry = Menu.GetString("Enter a country for the flight ").Trim();
+                        AddCountry = Menu.GetString("Enter a country for the flight (or q to exit): ").Trim();
                         Console.Clear();
                     }
                     Console.Clear();
+                    if(AddCountry == "q")
+                    {
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;    
+                    }
 
-                    string AddLocationOfDeparture = Menu.GetString("Enter a location of departure for the flight: ").Trim();
+                    string AddLocationOfDeparture = Menu.GetString("Enter a location of departure for the flight (or q to exit): ").Trim();
                     while(!Validator.IsAllLetters(AddLocationOfDeparture.Trim()) || string.IsNullOrEmpty(AddLocationOfDeparture.Trim()))
                     {
                         Console.WriteLine("Location of departure can oly include letters, and cannot be null");
-                        AddLocationOfDeparture = Menu.GetString("Enter a location of departure for the flight: ").Trim();
+                        AddLocationOfDeparture = Menu.GetString("Enter a location of departure for the flight (or q to exit): ").Trim();
                         Console.Clear();
                     }
                     Console.Clear();
+                    if(AddLocationOfDeparture == "q")
+                    {
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
+                    }
 
-                    string AddDepartureDateString = Menu.GetString("Enter a departure date for the flight: ").Trim();
+                    string AddDepartureDateString = Menu.GetString("Enter a departure date for the flight (or q to exit): ").Trim();
+                    if(AddDepartureDateString == "q")
+                    {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
+                    }
                     while(!Validator.IsDate(AddDepartureDateString))
                     {
+                        if(AddDepartureDateString == "q")
+                        {
+                            break;
+                        }
                         Console.WriteLine("Invalid input, enter a date (dd-MM-yyyy)");
-                        AddDepartureDateString = Menu.GetString("Enter a departure date for the flight: ").Trim();
+                        AddDepartureDateString = Menu.GetString("Enter a departure date for the flight (or q to exit): ").Trim();
                         Console.Clear();
                     }
                     Console.Clear();
+                    if(AddDepartureDateString == "q")
+                    {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
+                    }
 
-                    string AddnewDepartureTimeString = Menu.GetString("Enter a new departure time (dd-MM-yyyy HH:mm:ss): ");
+                    string AddnewDepartureTimeString = Menu.GetString("Enter a new departure time (dd-MM-yyyy HH:mm:ss) (or q to exit): ");
+                    if(AddnewDepartureTimeString == "q")
+                    {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
+                    }
+
                     while(!Validator.IsTime(AddnewDepartureTimeString))
                     {
+                        if(AddnewDepartureTimeString == "q")
+                        {
+                            break;
+                        }
                         Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
-                        AddnewDepartureTimeString = Menu.GetString("Enter a new departure time: ");
+                        AddnewDepartureTimeString = Menu.GetString("Enter a new departure time (or q to exit): ");
                         Console.Clear();
+                    }
+                    if(AddnewDepartureTimeString == "q")
+                    {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
                     }
                     DateTime AdddateDepartureTime = DateTime.ParseExact(AddnewDepartureTimeString, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                     Console.Clear();
 
-                    string AddEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival (dd-MM-yyyy HH:mm:ss): ");
-                    while(!Validator.IsTime(AddEstimatedTimeString))
+                    string AddEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival (dd-MM-yyyy HH:mm:ss) (or q to exit): ");
+                    if(AddEstimatedTimeString == "q")
                     {
-                        Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
-                        AddEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival: ");
                         Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
+                    }
+                    while(!Validator.IsTime(AddEstimatedTimeString) || AddEstimatedTimeString == "q")
+                    {
+                        if(AddEstimatedTimeString == "q")
+                        {
+                            break;
+                        }
+                        Console.WriteLine("Invalid input, enter a time (dd-MM-yyyy HH:mm:ss)");
+                        AddEstimatedTimeString = Menu.GetString("Enter a new estimated time of arrival (or q to exit): ");
+                        Console.Clear();
+                    }
+                    if(AddEstimatedTimeString == "q")
+                    {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
                     }
                     DateTime AdddateETATime = DateTime.ParseExact(AddEstimatedTimeString, "dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                     
@@ -127,12 +203,28 @@ public class Admin : User
 
                 case 1:
                     Console.Clear();
-                    string FlightNumAnswerDel = Menu.GetString("Enter a flight number to delete: ").Trim();
+                    string FlightNumAnswerDel = Menu.GetString("Enter a flight number to delete (or q to go back): ").Trim();
+                    if(FlightNumAnswerDel == "q")
+                    {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
+                    }
                     while(!Validator.IsNotNull(FlightNumAnswerDel) || !Validator.IsAllDigits(FlightNumAnswerDel))
-                    { 
+                    {
+                        if(FlightNumAnswerDel == "q")
+                        {
+                            break;
+                        }
                         Console.WriteLine("cant be null!, and needs to be a number!");
                         FlightNumAnswerDel = Menu.GetString("Enter a flight number to delete: ").Trim();
                         Console.Clear();
+                    }
+                    if(FlightNumAnswerDel == "q")
+                    {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
                     }
                     Flight flightToRem = flights.FirstOrDefault(flight => flight.FlightNumber.ToString() == FlightNumAnswerDel);
                     if (flightToRem != null)
@@ -480,11 +572,27 @@ public class Admin : User
                 case 8:
                     Console.Clear();
                     ReservationManager.DisplayReservations(reservations);
-                    string reservationNumberAdmin = Menu.GetString("Enter reservationnumber: ");
+                    string reservationNumberAdmin = Menu.GetString("Enter reservationnumber (or q to exit): ");
+                    if(reservationNumberAdmin == "q")
+                    {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
+                    }
                     while (!reservations.Any(reservation => reservation.ReservationNumber.ToString() == reservationNumberAdmin))
                     {
+                        if(reservationNumberAdmin == "q")
+                        {
+                            break;
+                        }
                         Console.WriteLine("Incorrect input!");
                         reservationNumberAdmin = Menu.GetString("Enter reservationnumber: ");
+                    }
+                    if(reservationNumberAdmin == "q")
+                    {
+                        Console.Clear();
+                        Menu.LoadingBar(" Heading back to menu",TimeSpan.FromSeconds(1));
+                        break;
                     }
                     int reservationNumberAdminInt = int.Parse(reservationNumberAdmin);
                     Reservation.RemoveReservation(flights, reservations, reservationNumberAdminInt);
@@ -495,7 +603,6 @@ public class Admin : User
                     
                 case 9:
                     Menu.LoadingBar("Quitting application", TimeSpan.FromSeconds(2));
-                    Thread.Sleep(1000);
                     Flight.WriteToJson(flights);
                     ReservationManager.WriteReservations(reservations);
                     Environment.Exit(1);
