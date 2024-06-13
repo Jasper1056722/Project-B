@@ -31,6 +31,8 @@ public class Program
         Console.CursorVisible = false;
         List<Flight> flights = Flight.LoadJson();
         List<Reservation> reservations = ReservationManager.LoadReservations();
+        flights = flights.OrderBy(flight => flight.DepartureTime).ToList();
+        flights.RemoveAll(flight => flight.DepartureTime < DateTime.Now); 
         User myUser = new User(0);
 
         while (true){ myUser.IsMenu(ref myUser, flights, reservations); }
