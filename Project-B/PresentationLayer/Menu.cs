@@ -1,6 +1,6 @@
 public static class Menu
 {
-    public static int MenuPanel(string Title, string SubTitle, string[] options, string Towrite1 = "", string Towrite2 = "")
+    public static int MenuPanel(ValueTuple<string, string> titles, string[] options, string Towrite1 = "", string Towrite2 = "")
     {
         string NL = Environment.NewLine;
         string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
@@ -26,9 +26,9 @@ public static class Menu
             Console.WriteLine(Towrite2);
 
             Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
-            Console.WriteLine($"│     {CYAN}{Title.PadRight(56)}{NORMAL} |");
+            Console.WriteLine($"│     {CYAN}{titles.Item1.PadRight(56)}{NORMAL} |");
             Console.WriteLine($"│                                                              | ");
-            Console.WriteLine($"│     {CYAN}{SubTitle.PadRight(56)}{NORMAL} |");
+            Console.WriteLine($"│     {CYAN}{titles.Item2.PadRight(56)}{NORMAL} |");
             Console.WriteLine($"│                                                              | ");
             for (int i = 0; i < options.Length; i++)
             {
