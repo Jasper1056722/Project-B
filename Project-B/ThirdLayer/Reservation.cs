@@ -45,7 +45,9 @@ public class Reservation
             {
                 if (flight.Airplane.Model == "Boeing 737")
                 {
+                    Console.Clear();
                     int selectedOptionIndex = Menu.MenuPanel(("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}."),["Economy","Economy Extra Legroom"]);
+                    Console.Clear();
                     switch(selectedOptionIndex)
                     {
                         case 0:
@@ -60,7 +62,9 @@ public class Reservation
                 }
                 else if (flight.Airplane.Model == "Boeing 787")
                 {
+                    Console.Clear();
                     int selectedOptionIndex = Menu.MenuPanel(("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}."),["Economy","Economy Extra Legroom", "Business"]);
+                    Console.Clear();
                     switch(selectedOptionIndex)
                     {
                         case 0:
@@ -79,7 +83,9 @@ public class Reservation
                 }
                 else if (flight.Airplane.Model == "Airbus 330")
                 {
+                    Console.Clear();
                     int selectedOptionIndex = Menu.MenuPanel(("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}."),["Economy","Economy Extra Legroom", "Double seats","Economy class in front of cabin", "Club Class"]);
+                    Console.Clear();
                     switch(selectedOptionIndex)
                     {
                         case 0:
@@ -627,7 +633,9 @@ public class Reservation
             Flightinfo.PrintPlane("Boeing 787", TSeats);
         }
 
+        Console.Clear();
         int SearchingOptionIndex = Menu.MenuPanel(("Confirmation", "Enter yes if you are happy with your chosen seats"), ["Yes","No"], Flightinfo.ReturnFlights(flights1), Flightinfo.GetPlane(FlightForReservation.Airplane.Model, TSeats));
+        Console.Clear();
         switch (SearchingOptionIndex)
         {
             case 0:

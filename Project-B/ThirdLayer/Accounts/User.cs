@@ -102,7 +102,9 @@ public class User
         while (true)
         {
         
+        Console.Clear();
         int selectedOptionIndex = Menu.MenuPanel(("Login Menu", "Here u can login"), ["Login", "Sign up", "Search Flight", "Show all flights", "Quit Program"]);
+        Console.Clear();
                        
         switch (selectedOptionIndex)
         {
@@ -153,7 +155,9 @@ public class User
         bool GuestSearchingState = true;
         while(GuestSearchingState)
         {
+            Console.Clear();
             int SearchingOptionIndex = Menu.MenuPanel(("Searching options", "Choose between these 3 options"), ["Destination", "Departure Date", "Airplane Model", "Flight number", "Back to admin panel"]);
+            Console.Clear();
                 
                 switch(SearchingOptionIndex)
                 {
