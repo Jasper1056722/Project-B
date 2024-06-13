@@ -45,7 +45,7 @@ public class Reservation
             {
                 if (flight.Airplane.Model == "Boeing 737")
                 {
-                    int selectedOptionIndex = Menu.MenuPanel("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}.",["Economy","Economy Extra Legroom"]);
+                    int selectedOptionIndex = Menu.MenuPanel(("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}."),["Economy","Economy Extra Legroom"]);
                     switch(selectedOptionIndex)
                     {
                         case 0:
@@ -60,7 +60,7 @@ public class Reservation
                 }
                 else if (flight.Airplane.Model == "Boeing 787")
                 {
-                    int selectedOptionIndex = Menu.MenuPanel("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}.",["Economy","Economy Extra Legroom", "Business"]);
+                    int selectedOptionIndex = Menu.MenuPanel(("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}."),["Economy","Economy Extra Legroom", "Business"]);
                     switch(selectedOptionIndex)
                     {
                         case 0:
@@ -79,7 +79,7 @@ public class Reservation
                 }
                 else if (flight.Airplane.Model == "Airbus 330")
                 {
-                    int selectedOptionIndex = Menu.MenuPanel("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}.",["Economy","Economy Extra Legroom", "Double seats","Economy class in front of cabin", "Club Class"]);
+                    int selectedOptionIndex = Menu.MenuPanel(("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}."),["Economy","Economy Extra Legroom", "Double seats","Economy class in front of cabin", "Club Class"]);
                     switch(selectedOptionIndex)
                     {
                         case 0:
@@ -622,7 +622,7 @@ public class Reservation
             Flightinfo.PrintPlane("Boeing 787", TSeats);
         }
 
-        int SearchingOptionIndex = Menu.MenuPanel("Confirmation", "Enter yes if you are happy with your chosen seats", ["Yes","No"], Flightinfo.ReturnFlights(flights1), Flightinfo.GetPlane(FlightForReservation.Airplane.Model, TSeats));
+        int SearchingOptionIndex = Menu.MenuPanel(("Confirmation", "Enter yes if you are happy with your chosen seats"), ["Yes","No"], Flightinfo.ReturnFlights(flights1), Flightinfo.GetPlane(FlightForReservation.Airplane.Model, TSeats));
         switch (SearchingOptionIndex)
         {
             case 0:

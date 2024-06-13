@@ -14,13 +14,13 @@ public class Admin : User
     {
         while (true)
         {
-            int AdminPanelIndex = Menu.MenuPanel("Admin panel", "Here u can control all the reservations and flights", ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Filter for flights", "Show all flights", "Log out", "See all reservations", "Remove a reservation", "Quit Program"]);
+            int AdminPanelIndex = Menu.MenuPanel(("Admin panel", "Here u can control all the reservations and flights"), ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Filter for flights", "Show all flights", "Log out", "See all reservations", "Remove a reservation", "Quit Program"]);
 
             switch(AdminPanelIndex)
             {
                 case 0:
                     Console.Clear();
-                    int AirplaneSelectorIndex = Menu.MenuPanel("Airplane Model Selector", "What plane model should be used for the flight", ["Boeing 737", "Boeing 787", "Airbus 330"]);
+                    int AirplaneSelectorIndex = Menu.MenuPanel(("Airplane Model Selector", "What plane model should be used for the flight"), ["Boeing 737", "Boeing 787", "Airbus 330"]);
                     Console.Clear();
                     Plane plane;
 
@@ -170,7 +170,7 @@ public class Admin : User
 
                         if (flight != null)
                         {
-                            int ChangeFlightIndex = Menu.MenuPanel("Changing Flight", $"Changing flight {flight.FlightNumber}, What do u want to change", ["Destination", "Country", "Location of departure" ,"Departure date (DD-MM-YYYY)", "Departure Time (dd-MM-yyyyTHH:mm:ss)", "Estimated Time of Arrival (dd-MM-yyyyTHH:mm:ss)", "Go back and save changes"]);
+                            int ChangeFlightIndex = Menu.MenuPanel(("Changing Flight", $"Changing flight {flight.FlightNumber}, What do u want to change"), ["Destination", "Country", "Location of departure" ,"Departure date (DD-MM-YYYY)", "Departure Time (dd-MM-yyyyTHH:mm:ss)", "Estimated Time of Arrival (dd-MM-yyyyTHH:mm:ss)", "Go back and save changes"]);
 
                             switch(ChangeFlightIndex)
                             {
@@ -293,7 +293,7 @@ public class Admin : User
                     bool AdminSearchingState = true;
                     while(AdminSearchingState)
                     {
-                        int SearchingOptionIndex = Menu.MenuPanel("Searching options", "Choose between these 3 options", ["Destination", "Departure Date", "Airplane Model", "Flight number", "Back to menu"]);
+                        int SearchingOptionIndex = Menu.MenuPanel(("Searching options", "Choose between these 3 options"), ["Destination", "Departure Date", "Airplane Model", "Flight number", "Back to menu"]);
                             
                             switch(SearchingOptionIndex)
                             {
@@ -405,7 +405,7 @@ public class Admin : User
                     bool AdminFilteringState = true;
                     while(AdminFilteringState)
                     {
-                        int SearchingOptionIndex = Menu.MenuPanel("Filtering options", "Choose between these 2 options", ["Proceed to filtering", "Back to menu"]);
+                        int SearchingOptionIndex = Menu.MenuPanel(("Filtering options", "Choose between these 2 options"), ["Proceed to filtering", "Back to menu"]);
                             
                             switch(SearchingOptionIndex)
                             {
@@ -490,7 +490,7 @@ public class Admin : User
                     break;
                     
                 case 9:
-                    Console.WriteLine($"CLOSING THE APPLICATION");
+                    Menu.LoadingBar("Quitting application", TimeSpan.FromSeconds(2));
                     Thread.Sleep(1000);
                     Flight.WriteToJson(flights);
                     ReservationManager.WriteReservations(reservations);

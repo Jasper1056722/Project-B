@@ -102,7 +102,7 @@ public class User
         while (true)
         {
         
-        int selectedOptionIndex = Menu.MenuPanel("Login Menu", "Here u can login", ["Login", "Sign up", "Search Flight", "Show all flights", "Quit Program"]);
+        int selectedOptionIndex = Menu.MenuPanel(("Login Menu", "Here u can login"), ["Login", "Sign up", "Search Flight", "Show all flights", "Quit Program"]);
                        
         switch (selectedOptionIndex)
         {
@@ -110,6 +110,7 @@ public class User
             Console.Clear();
             string email = Menu.GetString("Enter email: ");
             string password = Menu.GetString("Enter password: ");
+            Menu.LoadingBar("Attempting login", TimeSpan.FromSeconds(2));
 
             currentUser = User.Login(email, password);
             if (currentUser != null)
@@ -151,7 +152,7 @@ public class User
         bool GuestSearchingState = true;
         while(GuestSearchingState)
         {
-            int SearchingOptionIndex = Menu.MenuPanel("Searching options", "Choose between these 3 options", ["Destination", "Departure Date", "Airplane Model", "Flight number", "Back to admin panel"]);
+            int SearchingOptionIndex = Menu.MenuPanel(("Searching options", "Choose between these 3 options"), ["Destination", "Departure Date", "Airplane Model", "Flight number", "Back to admin panel"]);
                 
                 switch(SearchingOptionIndex)
                 {
@@ -270,8 +271,7 @@ public class User
                 break;
 
             case 4:
-                Console.WriteLine($"CLOSING THE APPLICATION");
-                Thread.Sleep(1000);
+                Menu.LoadingBar("Quitting application", TimeSpan.FromSeconds(2));
                 Flight.WriteToJson(flights);
                 ReservationManager.WriteReservations(reservations);
                 Environment.Exit(1);

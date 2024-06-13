@@ -82,7 +82,7 @@ public class Flight : IEquatable<Flight>, IComparable<Flight>, IFlight
         catch (Exception ex)
         {
             Console.WriteLine("An error occurred while loading JSON: " + ex.Message);
-            return new List<Flight>(); // Returning an empty list as a fallback
+            return new List<Flight>(); // if an error occurs we will just use an empty list
         }
     }
 
@@ -92,7 +92,7 @@ public class Flight : IEquatable<Flight>, IComparable<Flight>, IFlight
         {
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
-                DateFormatString = "dd-MM-yyyyTHH:mm:ss", // Customize the date format here
+                DateFormatString = "dd-MM-yyyyTHH:mm:ss",
                 Formatting = Formatting.Indented
             };
 
@@ -101,6 +101,7 @@ public class Flight : IEquatable<Flight>, IComparable<Flight>, IFlight
         }
         catch (Exception ex)
         {
+            //when it fails it just wont write to the json
             Console.WriteLine("An error occurred while writing to JSON: " + ex.Message);
         }
     }
