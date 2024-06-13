@@ -2,34 +2,27 @@ public static class Menu
 {
     public static int MenuPanel(ValueTuple<string, string> titles, string[] options, string Towrite1 = "", string Towrite2 = "")
     {
-        string NL = Environment.NewLine;
         string NORMAL = Console.IsOutputRedirected ? "" : "\x1b[39m";
-        string RED = Console.IsOutputRedirected ? "" : "\x1b[91m";
-        string GREEN = Console.IsOutputRedirected ? "" : "\x1b[92m";
-        string YELLOW = Console.IsOutputRedirected ? "" : "\x1b[93m";
-        string BLUE = Console.IsOutputRedirected ? "" : "\x1b[94m";
-        string MAGENTA = Console.IsOutputRedirected ? "" : "\x1b[95m";
         string CYAN = Console.IsOutputRedirected ? "" : "\x1b[96m";
-        string GREY = Console.IsOutputRedirected ? "" : "\x1b[97m";
-        string BOLD = Console.IsOutputRedirected ? "" : "\x1b[1m";
-        string NOBOLD = Console.IsOutputRedirected ? "" : "\x1b[22m";
-        string UNDERLINE = Console.IsOutputRedirected ? "" : "\x1b[4m";
-        string NOUNDERLINE = Console.IsOutputRedirected ? "" : "\x1b[24m";
-        string REVERSE = Console.IsOutputRedirected ? "" : "\x1b[7m";
-        string NOREVERSE = Console.IsOutputRedirected ? "" : "\x1b[27m";
+
         int selectedOptionIndex = 0;
-        while (true)
+
+        void RenderMenu()
         {
-            Console.Clear();
+            // Store the current cursor position
+            int initialCursorTop = Console.CursorTop;
+
+            // Write the menu
+            Console.SetCursorPosition(0, initialCursorTop);
 
             Console.WriteLine(Towrite1);
             Console.WriteLine(Towrite2);
 
             Console.WriteLine("┌──────────────────────────────────────────────────────────────┐");
-            Console.WriteLine($"│     {CYAN}{titles.Item1.PadRight(56)}{NORMAL} |");
-            Console.WriteLine($"│                                                              | ");
-            Console.WriteLine($"│     {CYAN}{titles.Item2.PadRight(56)}{NORMAL} |");
-            Console.WriteLine($"│                                                              | ");
+            Console.WriteLine($"│     {CYAN}{titles.Item1.PadRight(56)}{NORMAL} │");
+            Console.WriteLine($"│                                                              │");
+            Console.WriteLine($"│     {CYAN}{titles.Item2.PadRight(56)}{NORMAL} │");
+            Console.WriteLine($"│                                                              │");
             for (int i = 0; i < options.Length; i++)
             {
                 if (i == selectedOptionIndex)
@@ -45,9 +38,17 @@ public static class Menu
                     Console.WriteLine($"│ > {CYAN}{options[i]}{NORMAL}{new string(' ', 59 - options[i].Length)}│");
                 }
             }
-            Console.WriteLine($"│                                                              | ");
+            Console.WriteLine($"│                                                              │");
             Console.WriteLine("└──────────────────────────────────────────────────────────────┘");
 
+            // Move cursor back to initial position to overwrite old content
+            Console.SetCursorPosition(0, initialCursorTop);
+        }
+
+        RenderMenu();
+
+        while (true)
+        {
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
             switch (keyInfo.Key)
             {
@@ -58,9 +59,10 @@ public static class Menu
                     selectedOptionIndex = Math.Min(options.Length - 1, selectedOptionIndex + 1);
                     break;
                 case ConsoleKey.Enter:
-                    Console.Clear();
+                    Console.SetCursorPosition(0, Console.CursorTop + options.Length + 6); // Move cursor to the bottom of the menu
                     return selectedOptionIndex;
             }
+            RenderMenu();
         }
     }
 

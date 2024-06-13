@@ -27,7 +27,9 @@ public class Customer : User
         List<Reservation> reservationaccountlistflights = LoadAccountsReservations(reservations);
         while(true)
         {
+            Console.Clear();
             int UserPanelIndex = Menu.MenuPanel(("User Menu","Here u can make a reservation"), ["Search for a flight", "Filter for flights", "Make a reservation","Display all flights", "See reservations", "Remove reservation", "logout", "Quit Program"]);
+            Console.Clear();
 
             switch(UserPanelIndex)
             {
@@ -36,7 +38,9 @@ public class Customer : User
                     bool UserSearchingState = true;
                     while(UserSearchingState)
                     {
+                        Console.Clear();
                         int SearchingOptionIndex = Menu.MenuPanel(("Searching options", "Choose between these 3 options"), ["Destination", "Departure Date", "Airplane Model", "Flight number", "Back to menu"]);
+                        Console.Clear();
                             
                             switch(SearchingOptionIndex)
                             {
@@ -148,7 +152,9 @@ public class Customer : User
                     bool AdminFilteringState = true;
                     while(AdminFilteringState)
                     {
+                        Console.Clear();
                         int SearchingOptionIndex = Menu.MenuPanel(("Filtering options", "Choose between these 2 options"), ["Proceed to filtering", "Back to menu"]);
+                        Console.Clear();
                             
                             switch(SearchingOptionIndex)
                             {
@@ -224,7 +230,9 @@ public class Customer : User
                             bool isValidChoice = false;
                             while (!isValidChoice)
                             {
+                                Console.Clear();
                                 int SearchingOptionIndex = Menu.MenuPanel(("Seat options", "Do you want to select your seat or get it random?"), new[] { "Random seat", "Select seat" }, Flightinfo.ReturnFlights(flights1));
+                                Console.Clear();
                                 switch (SearchingOptionIndex)
                                 {
                                     case 0:
@@ -263,7 +271,9 @@ public class Customer : User
                             bool isValidChoice = false;
                             while (!isValidChoice)
                             {
+                                Console.Clear();
                                 int SearchingOptionIndex = Menu.MenuPanel(("Seat options", "Do you want to select your seat or get it random?"), new[] { "Random seat", "Select seat" }, Flightinfo.ReturnFlights(flights1));
+                                Console.Clear();
                                 switch (SearchingOptionIndex)
                                 {
                                     case 0:
@@ -276,7 +286,7 @@ public class Customer : User
                                         break;
                                 }
                             }
-                            Mail.GetInfo(reservation);
+                            //Mail.GetInfo(reservation);
                             reservationaccountlistflights.Add(reservation);
                             reservations.Add(reservation);
                         }
