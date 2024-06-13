@@ -7,6 +7,46 @@ namespace Project_Btest
     [TestClass]
     public class Project_Btest
     {
+        private void CreateDatabaseAndTableIfNotExist(string connectionString)
+        {
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string createTableQuery = @"
+                    CREATE TABLE IF NOT EXISTS Accounts (
+                        Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        Username TEXT NOT NULL,
+                        Password TEXT NOT NULL,
+                        IsAdmin BOOLEAN DEFAULT 0
+                    )";
+                
+                using (var command = new SQLiteCommand(createTableQuery, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void ClearAccountsTable()
+        {
+            string connectionString = "Data Source=Accounts.db;Version=3;";
+            using (var connection = new SQLiteConnection(connectionString))
+            {
+                connection.Open();
+                string clearTableQuery = "DELETE FROM Accounts";
+                
+                using (var command = new SQLiteCommand(clearTableQuery, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            ClearAccountsTable();
+        }
 
         [TestMethod]
         public void Test_SearchingDestination_returnsListString()
@@ -123,24 +163,28 @@ namespace Project_Btest
 
             Assert.AreEqual(Expected.Trim(), Trost04[0].Trim());
         }
-        
+
         [TestMethod]
         public void Test_shouldaddtodb()
         {
-            
             string connectionString = "Data Source=Accounts.db;Version=3;";
-
-            var account = new User(0); 
+            
+            // Make sure the database and table exist
+            CreateDatabaseAndTableIfNotExist(connectionString);
+            
+            // Act: Add the user to the database
             bool result = User.Addtodb("pet@example.com", "pet123");
 
+            // Assert: Check that the user was added successfully
             Assert.IsTrue(result);
 
+            // Verify that the user exists in the database
             using (var connection = new SQLiteConnection(connectionString))
             {
                 connection.Open();
-                string selectQeury = "SELECT COUNT(*) FROM Accounts WHERE Username = 'pet@example.com'";
+                string selectQuery = "SELECT COUNT(*) FROM Accounts WHERE Username = 'pet@example.com'";
 
-                using (var command = new SQLiteCommand(selectQeury, connection))
+                using (var command = new SQLiteCommand(selectQuery, connection))
                 {
                     var count = Convert.ToInt32(command.ExecuteScalar());
                     Assert.AreEqual(1, count);
