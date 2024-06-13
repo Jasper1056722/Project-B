@@ -11,7 +11,7 @@ Password: (yourname)
 Login to your account using the email and username you just made.
 
  - Go to make a reservation
- - select a destination ( Tokyo), choose a flight
+ - select a Country (Ex: Japan), choose a flight
  - Select 2 persons
  - Enter the details for the 2 persons
  - Select a desired seat for the persons
