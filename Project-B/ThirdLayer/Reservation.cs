@@ -295,11 +295,11 @@ public class Reservation
             emailAddress = Menu.GetString("Email Address: ");
             if (emailAddress.ToLower() == "q") return false;
 
-            if (!emailAddress.Contains("@"))
+            if (!Validator.IsValidEmail(emailAddress))
             {
                 Console.WriteLine("Invalid email address. Please enter a valid email address.");
             }
-        } while (!emailAddress.Contains("@"));
+        } while (!Validator.IsValidEmail(emailAddress));
 
         Console.Clear();
         
