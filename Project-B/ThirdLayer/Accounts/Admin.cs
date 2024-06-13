@@ -14,7 +14,7 @@ public class Admin : User
     {
         while (true)
         {
-            int AdminPanelIndex = Menu.MenuPanel(("Admin panel", "Here u can control all the reservations and flights"), ["Add a flight", "Remove a flight", "Change a flight", "Search a flight", "Filter for flights", "Show all flights", "Log out", "See all reservations", "Remove a reservation", "Quit Program"]);
+            int AdminPanelIndex = Menu.MenuPanel(("Admin panel", "Here u can control all the reservations and flights"), ["Add a flight manually", "Add flights with file", "Remove a flight", "Change a flight", "Search a flight", "Filter for flights", "Show all flights", "Log out", "See all reservations", "Remove a reservation", "Quit Program"]);
 
             switch(AdminPanelIndex)
             {
@@ -131,7 +131,8 @@ public class Admin : User
                     Console.Clear();
                     bool Error = false;
                     string Errorcode = "";
-                    int piece = 1;
+                    List<string> Errors = new List<string>();
+                    int piece = 0;
 
                     switch (FileIndex)
                     {
@@ -143,6 +144,7 @@ public class Admin : User
 
                             foreach (string line in File.ReadLines(File_Path))
                             {
+                                piece++;
                                 string[] Flight = line.Split(",");
                                 string destination = Flight[2];
                                 string country = Flight[3];
@@ -167,7 +169,7 @@ public class Admin : User
                                 {
                                     Error = true;
                                     Errorcode = "DateType";
-                                    break;
+                                    Errors.Add(Errorcode + " " + piece);
                                 }
 
                                 try
@@ -179,20 +181,26 @@ public class Admin : User
                                 {
                                     Error = true;
                                     Errorcode = "DateTimeType";
-                                    break;
+                                    Errors.Add(Errorcode + " " + piece);
                                 }
-
-                                Flight newFlight = new(destination, country, plane, departingfrom, departuredate, "00-00-0000T00:00:00", "00-00-0000T00:00:00");
-                                newFlight.DepartureTime = Departuretime;
-                                newFlight.EstimatedTimeofArrival = ETA;
-                                flights.Add(newFlight);
-                                piece++;
+                                
+                                if(!Error)
+                                {
+                                    Flight newFlight = new(destination, country, plane, departingfrom, departuredate, "00-00-0000T00:00:00", "00-00-0000T00:00:00");
+                                    newFlight.DepartureTime = Departuretime;
+                                    newFlight.EstimatedTimeofArrival = ETA;
+                                    flights.Add(newFlight);
+                                }
                             }
 
                             if (Error)
                             {
                                 Console.Clear();
-                                Console.WriteLine($"An error occurred using file: {filename}\nOn line: {piece}\nCould not use type: {Errorcode}");
+                                foreach (var fault in Errors)
+                                {
+                                    fault.Split(" ");
+                                    Console.WriteLine($"An error occurred using file: {filename}\nOn line: {fault[1]}\nCould not use type: {fault[1]}");
+                                }
                                 Console.WriteLine("Press any key to continue");
                                 Console.ReadKey();
                             }
