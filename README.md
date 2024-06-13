@@ -5,7 +5,7 @@ Instructions
 USE THE ARROW UP, ARROW DOWN, AND ENTER KEY TO MOVE TROUGH THE PROGRAM.
 
 Create a account
-Username: (yourname)@gmail.com
+email: (yourname)@gmail.com
 Password: (yourname)
 
 Login to your account using the email and username you just made.
@@ -20,18 +20,21 @@ Login to your account using the email and username you just made.
 Now u are back at the main menu, try take a look at the reservation u just made by selecting the see reservations option
 now it time to log out and log in to an a admin account
 
-Username: Admin
+Email: Admin
 Password: Admin123
 
 As u can see you are now logged into the admin panel, try to add a flight
 
+Model - Choose an option u want
 Destination: Tokyo
 Country: Japan
+Destination of departure : Rotterdam
 Departure Date: 25-06-2024
 Departure time 25-06-2024 12:00:00
 ETA: 25-06-2024 22:00:00
 
-when u are back add the menu and the flight is added, head to filter flights
+when u are back add the menu and the flight is added, head to search flights
+go look for the flight u just made, when the flight is shown the final thing u are gonna do is head back to the menu and filter for a flight
 
 proceed to filtering ( - for leave empty, maximum price is not yet implemented)
 
