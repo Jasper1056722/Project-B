@@ -717,5 +717,53 @@ namespace Project_Btest
 
             Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
+
+        [TestMethod]
+
+        public void Test_AllowOnlyEmails()
+        {
+            string wrong_email = "Test@testnl";
+            string correct_email = "Test@test.nl";
+
+            //Checks if correct email passes, and if wrong email doesnt pass
+            Assert.IsFalse(Validator.IsValidEmail(wrong_email));
+            Assert.IsTrue(Validator.IsValidEmail(correct_email));
+        }
+
+        [TestMethod]
+        public void Test_TimeCheck_DateCheck()
+        {
+            //check validator functions IsTime IsDate
+            string correct_time = "10-12-2024 10:00:00";
+            string wrong_time = "111-12-2024 10:00:00";
+
+            Assert.IsTrue(Validator.IsTime(correct_time));
+            Assert.IsFalse(Validator.IsTime(wrong_time));
+
+            string correct_date = "10-12-2024";
+            string wrong_date = "50-12-2024";
+
+            Assert.IsTrue(Validator.IsDate(correct_date));
+            Assert.IsFalse(Validator.IsDate(wrong_date));
+
+            //check if constructor correctly sets string to datetime object
+
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            Assert.IsTrue(flights[0].DepartureTime is DateTime);
+            Assert.IsTrue(flights[0].EstimatedTimeofArrival is DateTime);
+        }
     }
 }
