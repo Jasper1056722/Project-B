@@ -9,6 +9,7 @@ public static class Filtering
 {
     public static List<string> filtorSort(string destination01, string destination02, string input01, string input02, string planeAnswer01, string planeAnswer02, string planeAnswer03, string maxPrice, List<Flight> flights)
     {
+        List<string> Empty = new List<string>();
         DateTime departureDateInput01;
         DateTime departureDateInput02;
         if (destination02 != "" && input02 != "" && planeAnswer01 != "" && planeAnswer02 == "" && planeAnswer03 == "" && maxPrice == "")
@@ -267,7 +268,7 @@ public static class Filtering
             return Filtering.Price(maxPrice, flights);
         }
 
-        return null;
+        return Empty;
     }
 
     public static List<string> filtorAll01(string destination01, string destination02, DateTime departureDateInput01, DateTime departureDateInput02, string PlaneAnswer01, List<Flight> flights)

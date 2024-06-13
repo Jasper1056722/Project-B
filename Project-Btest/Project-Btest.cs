@@ -193,7 +193,6 @@ namespace Project_Btest
                 )
             };
 
-            string flightNumber = "1111111";
             string destination01 = "Testington";
             string destination02 = "Test";
             string departureDate01 = "11-11-1111";
@@ -213,85 +212,463 @@ namespace Project_Btest
         [TestMethod]
         public void Test_filtorAll02_returnsListString()
         {
-            (string destination01, string destination02, DateTime departureDateInput01, DateTime departureDateInput02, string PlaneAnswer01, string PlaneAnswer02, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "Testington";
+            string destination02 = "Test";
+            string departureDate01 = "11-11-1111";
+            string departureDate02 = "11-11-1111";
+            string airplane01 = "Testbus 3000";
+            string airplane02 = "boeing 737";
+            string airplane03 = "";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_filtorAll03_returnsListString()
         {
-            (string destination01, string destination02, DateTime departureDateInput01, DateTime departureDateInput02, string PlaneAnswer01, string PlaneAnswer02, string PlaneAnswer03, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "Testington";
+            string destination02 = "Test";
+            string departureDate01 = "11-11-1111";
+            string departureDate02 = "11-11-1111";
+            string airplane01 = "Testbus 3000";
+            string airplane02 = "boeing 737";
+            string airplane03 = "boeing 787";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_filtorAll10_returnsListString()
         {
-            (string destination01, string destination02, DateTime departureDateInput01, DateTime departureDateInput02, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "Testington";
+            string destination02 = "Test";
+            string departureDate01 = "11-11-1111";
+            string departureDate02 = "11-11-1111";
+            string airplane01 = "";
+            string airplane02 = "";
+            string airplane03 = "";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_filtorAll21_returnsListString()
         {
-            (string destination01, string destination02, string PlaneAnswer01, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "Testington";
+            string destination02 = "Test";
+            string departureDate01 = "";
+            string departureDate02 = "";
+            string airplane01 = "";
+            string airplane02 = "";
+            string airplane03 = "";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_filtorAll22_returnsListString()
         {
-            (string destination01, string destination02, string PlaneAnswer01, string PlaneAnswer02, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "Testington";
+            string destination02 = "Test";
+            string departureDate01 = "";
+            string departureDate02 = "";
+            string airplane01 = "Testbus 3000";
+            string airplane02 = "boeing 737";
+            string airplane03 = "";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_filtorAll23_returnsListString()
         {
-            (string destination01, string destination02, string PlaneAnswer01, string PlaneAnswer02, string PlaneAnswer03, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "Testington";
+            string destination02 = "Test";
+            string departureDate01 = "";
+            string departureDate02 = "";
+            string airplane01 = "Testbus 3000";
+            string airplane02 = "boeing 737";
+            string airplane03 = "boeing 787";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_filtorAll31_returnsListString()
         {
-            (DateTime departureDateInput01, DateTime departureDateInput02, string PlaneAnswer01, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "";
+            string destination02 = "";
+            string departureDate01 = "11-11-1111";
+            string departureDate02 = "11-11-1111";
+            string airplane01 = "Testbus 3000";
+            string airplane02 = "";
+            string airplane03 = "";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_filtorAll32_returnsListString()
         {
-            (DateTime departureDateInput01, DateTime departureDateInput02, string PlaneAnswer01, string PlaneAnswer02, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "";
+            string destination02 = "";
+            string departureDate01 = "11-11-1111";
+            string departureDate02 = "11-11-1111";
+            string airplane01 = "Testbus 3000";
+            string airplane02 = "boeing 737";
+            string airplane03 = "";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_filtorAll33_returnsListString()
         {
-            (DateTime departureDateInput01, DateTime departureDateInput02, string PlaneAnswer01, string PlaneAnswer02, string PlaneAnswer03, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "";
+            string destination02 = "";
+            string departureDate01 = "11-11-1111";
+            string departureDate02 = "11-11-1111";
+            string airplane01 = "Testbus 3000";
+            string airplane02 = "boeing 737";
+            string airplane03 = "boeing 787";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_Destination_returnsListString()
         {
-            (string destination01, string destination02, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "Testington";
+            string destination02 = "Test";
+            string departureDate01 = "";
+            string departureDate02 = "";
+            string airplane01 = "";
+            string airplane02 = "";
+            string airplane03 = "";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_Time_returnsListString()
         {
-            (DateTime departureDateInput01, DateTime departureDateInput02, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "";
+            string destination02 = "";
+            string departureDate01 = "11-11-1111";
+            string departureDate02 = "11-11-1111";
+            string airplane01 = "";
+            string airplane02 = "";
+            string airplane03 = "";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_Airline01_returnsListString()
         {
-            (string PlaneAnswer01, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "";
+            string destination02 = "";
+            string departureDate01 = "";
+            string departureDate02 = "";
+            string airplane01 = "Testbus 3000";
+            string airplane02 = "";
+            string airplane03 = "";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_Airline02_returnsListString()
         {
-            (string PlaneAnswer01, string PlaneAnswer02, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "";
+            string destination02 = "";
+            string departureDate01 = "";
+            string departureDate02 = "";
+            string airplane01 = "Testbus 3000";
+            string airplane02 = "boeing 737";
+            string airplane03 = "";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
 
         [TestMethod]
         public void Test_Airline03_returnsListString()
         {
-            (string PlaneAnswer01, string PlaneAnswer02, string PlaneAnswer03, List<Flight> flights)
+            var flights = new List<Flight>
+            {
+                new Flight(
+                    "Test", 
+                    "Test Nation", 
+                    new Plane("Testbus 3000"), 
+                    "Testington", 
+                    "11-11-1111", 
+                    "11-11-1111T11:11:11", 
+                    "11-11-1111T12:12:12",
+                    1111111
+                )
+            };
+
+            string destination01 = "";
+            string destination02 = "";
+            string departureDate01 = "";
+            string departureDate02 = "";
+            string airplane01 = "Testbus 3000";
+            string airplane02 = "boeing 737";
+            string airplane03 = "boeing 787";
+            string maxPrice = "";
+
+            List<string> filteredFlights = Filtering.filtorSort(destination01, destination02, departureDate01, departureDate02, airplane01, airplane02, airplane03, maxPrice, flights);
+            
+            string Expected = $"Flight 1111111:\nDestination: Test\nCountry: Test Nation\nAirplane: Testbus 3000\nDeparting from: Testington\nDeparture date: 11-11-1111\nDeparture time: 11-11-1111 11:11:11\nEstimated time of Arrival: 11-11-1111 12:12:12\n";
+
+            Assert.AreEqual(Expected.Trim(), filteredFlights[0].Trim());
         }
     }
 }

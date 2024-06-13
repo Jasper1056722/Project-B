@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-public class Flight : IEquatable<Flight>, IComparable<Flight>
+public class Flight : IEquatable<Flight>, IComparable<Flight>, IFlight
 {
     public int FlightNumber { get; set; }
     public string Destination { get; set; }

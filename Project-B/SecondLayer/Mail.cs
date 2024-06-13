@@ -8,7 +8,7 @@ public static class Mail
     {
         int reservationnumber = info._reservationNumber;
         Person firstPerson = info.People[0];
-        string fullname = ($"{firstPerson.FirstName} {firstPerson.LastName})");
+        string fullname = ($"{firstPerson.FirstName} {firstPerson.LastName}");
         string destination = info.FlightForReservation.Destination;
         string mail = ($"{firstPerson.EmailAddress}");
         Mailsender(reservationnumber, destination , fullname, mail);

@@ -45,7 +45,7 @@ public class Reservation
             {
                 if (flight.Airplane.Model == "Boeing 737")
                 {
-                    int selectedOptionIndex = Menu.MenuPanel("Seat Options","Please select your desired seat.",["Economy","Economy Extra Legroom"]);
+                    int selectedOptionIndex = Menu.MenuPanel("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}.",["Economy","Economy Extra Legroom"]);
                     switch(selectedOptionIndex)
                     {
                         case 0:
@@ -60,7 +60,7 @@ public class Reservation
                 }
                 else if (flight.Airplane.Model == "Boeing 787")
                 {
-                    int selectedOptionIndex = Menu.MenuPanel("Seat Options","Please select your desired seat.",["Economy","Economy Extra Legroom", "Business"]);
+                    int selectedOptionIndex = Menu.MenuPanel("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}.",["Economy","Economy Extra Legroom", "Business"]);
                     switch(selectedOptionIndex)
                     {
                         case 0:
@@ -79,7 +79,7 @@ public class Reservation
                 }
                 else if (flight.Airplane.Model == "Airbus 330")
                 {
-                    int selectedOptionIndex = Menu.MenuPanel("Seat Options","Please select your desired seat.",["Economy","Economy Extra Legroom", "Double seats","Economy class in front of cabin", "Club Class"]);
+                    int selectedOptionIndex = Menu.MenuPanel("Seat Options",$"Please select your desired seat for {person.FirstName} {person.LastName}.",["Economy","Economy Extra Legroom", "Double seats","Economy class in front of cabin", "Club Class"]);
                     switch(selectedOptionIndex)
                     {
                         case 0:
@@ -297,83 +297,22 @@ public class Reservation
         } while (!emailAddress.Contains("@"));
 
         Console.Clear();
-        string ageInput;
-        int age;
-        do
-        {
-            ageInput = Menu.GetString("Age: ");
-            if (ageInput.ToLower() == "q") return false;
-
-            if (!int.TryParse(ageInput, out age) || age < 0 || age > 150)
-            {
-                Console.WriteLine("Invalid age. Please enter a valid age between 0 and 150.");
-            }
-        } while (!int.TryParse(ageInput, out age) || age < 0 || age > 150);
         
         FoodPackage SelectedPackage = GetSelectedPackage();
         
-        if(age < 18)
+        Person person = new Person
         {
-            Child child = new Child
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                BirthDate = birthDate,
-                PhoneNumber = phoneNumber,
-                EmailAddress = emailAddress,
-                FoodOption = SelectedPackage,
-                Age = age,
-                IsChild = true
-            };
-            People.Add(child);
-        }
-        else if (age >= 67)
-        {
-            Senior senior = new Senior
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                BirthDate = birthDate,
-                PhoneNumber = phoneNumber,
-                EmailAddress = emailAddress,
-                FoodOption = SelectedPackage,
-                Age = age,
-                IsSenior = true
-            };
-            People.Add(senior);
-        }
-        else 
-        {
-            Adult adult = new Adult
-            {
-                FirstName = firstName,
-                LastName = lastName,
-                BirthDate = birthDate,
-                PhoneNumber = phoneNumber,
-                EmailAddress = emailAddress,
-                FoodOption = SelectedPackage,
-                Age = age,
-                IsAdult = true
-            };
-            People.Add(adult);
-        }
-        // Person person = new Person
-        // {
-        //     FirstName = firstName,
-        //     LastName = lastName,
-        //     BirthDate = birthDate,
-        //     PhoneNumber = phoneNumber,
-        //     EmailAddress = emailAddress,
-        //     FoodOption = SelectedPackage
-        //     age = age
-        // };
-        // People.Add(person);
-        foreach (var person in People)
-        {
-            Console.WriteLine($"{person.FirstName} {person.LastName}, {person.GetType().Name}, Age: {person.Age}");
-        }
-        return true;
+            FirstName = firstName,
+            LastName = lastName,
+            BirthDate = birthDate,
+            PhoneNumber = phoneNumber,
+            EmailAddress = emailAddress,
+            FoodOption = SelectedPackage,
+
+        };
+        People.Add(person);
         Console.Clear();
+        return true;
     }
 
     static string GetValidFlightNumber()
@@ -413,12 +352,12 @@ public class Reservation
         bool Bool = true;
         while(Bool)
         { 
-            Console.WriteLine("Please assign your desired destination");
+            Console.WriteLine("Please assign your desired country of destination");
             string destination = Console.ReadLine();
 
             foreach (Flight flight in flights)
             {
-                if (flight.Destination == destination)
+                if (flight.Country == destination)
                 {
                     newflights.Add(flight);
                 }
@@ -431,8 +370,8 @@ public class Reservation
             else
             {
                 Console.Clear();
-                Console.WriteLine("Make sure to enter a valid destination");
-                Thread.Sleep(2500);
+                Console.WriteLine("Your input was either spelled wrong or the country is not a valid destination");
+                Thread.Sleep(1000);
             }
         }
 

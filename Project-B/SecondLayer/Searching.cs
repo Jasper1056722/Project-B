@@ -6,11 +6,11 @@ using Newtonsoft.Json.Linq;
 
 public static class Searching
 {
-    public static List<string> Destination(string destinat, List<Flight> flights)
+    public static List<string> Destination<T>(string destinat, List<T> flights) where T : IFlight
     {
         List<string> DestinationFlights = new List<string>();
 
-        foreach (Flight flight in flights)
+        foreach (T flight in flights)
         {
             if (flight.Destination.ToLower() == destinat.ToLower())
             {
@@ -20,11 +20,11 @@ public static class Searching
         return DestinationFlights;
     }
 
-    public static List<string> FlightNumber(string flightnumber, List<Flight> flights)
+    public static List<string> FlightNumber<T>(string flightnumber, List<T> flights) where T : IFlight
     {
         List<string> NumFlights = new List<string>();
 
-        foreach (Flight flight in flights)
+        foreach (T flight in flights)
         {
             if (flight.FlightNumber.ToString() == flightnumber)
             {
@@ -34,11 +34,11 @@ public static class Searching
         return NumFlights;
     }
 
-    public static List<string> Time(string departureDateInput, List<Flight> flights)
+    public static List<string> Time<T>(string departureDateInput, List<T> flights) where T : IFlight
     {
         List<string> DateFlights = new List<string>();
 
-        foreach (var flight in flights)
+        foreach (T flight in flights)
         {
             if (flight.DepartureDate == departureDateInput)
             {
@@ -48,12 +48,12 @@ public static class Searching
         return DateFlights;
     }
 
-    public static List<string> Airline(string PlaneAnswer, List<Flight> flights)
+    public static List<string> Airline<T>(string PlaneAnswer, List<T> flights) where T : IFlight
     {
 
         List<string> PlaneFlights = new List<string>();
 
-        foreach (var flight in flights)
+        foreach (T flight in flights)
         {
             if (flight.Airplane.Model.ToLower() == PlaneAnswer.ToLower())
             {
