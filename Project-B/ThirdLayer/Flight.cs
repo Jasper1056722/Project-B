@@ -73,21 +73,36 @@ public class Flight : IEquatable<Flight>, IComparable<Flight>, IFlight
 
     public static List<Flight> LoadJson()
     {
-        string json = File.ReadAllText("flightObject.json");
-        List<Flight> flights = JsonConvert.DeserializeObject<List<Flight>>(json);
-        return flights;
+        try
+        {
+            string json = File.ReadAllText("flightObject.json");
+            List<Flight> flights = JsonConvert.DeserializeObject<List<Flight>>(json);
+            return flights;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred while loading JSON: " + ex.Message);
+            return new List<Flight>(); // Returning an empty list as a fallback
+        }
     }
 
     public static void WriteToJson(List<Flight> flights)
     {
-        JsonSerializerSettings settings = new JsonSerializerSettings
+        try
         {
-            DateFormatString = "dd-MM-yyyyTHH:mm:ss", // Customize the date format here
-            Formatting = Formatting.Indented
-        };
+            JsonSerializerSettings settings = new JsonSerializerSettings
+            {
+                DateFormatString = "dd-MM-yyyyTHH:mm:ss", // Customize the date format here
+                Formatting = Formatting.Indented
+            };
 
-        string json = JsonConvert.SerializeObject(flights, settings);
-        File.WriteAllText("flightObject.json", json);
+            string json = JsonConvert.SerializeObject(flights, settings);
+            File.WriteAllText("flightObject.json", json);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("An error occurred while writing to JSON: " + ex.Message);
+        }
     }
 
     public bool IsFlightFull()
