@@ -253,7 +253,7 @@ public class Admin : User
                                     {
                                         Error = true;
                                             Errorcode = "PlaneType";
-                                            Errors.Add(Errorcode + ">" + Flight[4] + "  " + piece);
+                                            Errors.Add(Errorcode + " > " + Flight[4] + "  " + piece);
                                     }
 
                                     if (departuredate.Split("-").Length == 3)
@@ -266,14 +266,14 @@ public class Admin : User
                                         {
                                             Error = true;
                                             Errorcode = "DateType";
-                                            Errors.Add(Errorcode + ">" + departuredate  + "  " + piece);
+                                            Errors.Add(Errorcode + " > " + departuredate  + "  " + piece);
                                         }
                                     }
                                     else
                                     {
                                         Error = true;
                                         Errorcode = "DateType";
-                                        Errors.Add(Errorcode + ">" + departuredate + "  " + piece);
+                                        Errors.Add(Errorcode + " > " + departuredate + "  " + piece);
                                     }
 
                                     try
@@ -284,7 +284,7 @@ public class Admin : User
                                     {
                                         Error = true;
                                         Errorcode = "DateTimeType";
-                                        Errors.Add(Errorcode + ">" + departuretime  + "  " + piece);
+                                        Errors.Add(Errorcode + " > " + departuretime.Split(" ")[1]  + "  " + piece);
                                     }
 
                                     try
@@ -295,7 +295,7 @@ public class Admin : User
                                     {
                                         Error = true;
                                         Errorcode = "DateTimeType";
-                                        Errors.Add(Errorcode + ">" + eta  + "  " + piece);
+                                        Errors.Add(Errorcode + " > " + eta  + "  " + piece);
                                     }
                                     
                                     if(!Error)
@@ -329,6 +329,14 @@ public class Admin : User
                                 }
                             }
                             break;
+                        
+                        case 1:
+                            {
+                                Console.WriteLine(".txt is not implemented, pls use a .csv file to add flights.");
+                                Console.WriteLine("Press any key to continue");
+                                Console.ReadKey();
+                                break;
+                            }
                     }
                     break;
 
