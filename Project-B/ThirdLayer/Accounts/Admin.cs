@@ -127,6 +127,88 @@ public class Admin : User
 
                 case 1:
                     Console.Clear();
+                    int FileIndex = Menu.MenuPanel(("File Selector", "What file would you want to be read?"), [".csv", ".txt"]);
+                    Console.Clear();
+                    bool Error = false;
+                    string Errorcode = "";
+                    int piece = 1;
+
+                    switch (FileIndex)
+                    {
+                        case 0:
+                            DateTime Departuretime = DateTime.Now;
+                            DateTime ETA = DateTime.Now;
+                            string filename = Menu.GetString("Name of the file: ");
+                            string File_Path = $"Flight_Files/CSV/{filename}.csv";
+
+                            foreach (string line in File.ReadLines(File_Path))
+                            {
+                                string[] Flight = line.Split(",");
+                                string destination = Flight[2];
+                                string country = Flight[3];
+                                string departingfrom = Flight[1];
+                                string departuredate = Flight[5].Split(" ")[0];
+                                string departuretime = Flight[5];
+                                string eta = Flight[6];
+                                plane = new Plane(Flight[4]);
+
+                                if (!(Flight[4] == "Airbus 330" || Flight[4] == "Boeing 787" || Flight[4] == "Boeing 737"))
+                                {
+                                    Error = true;
+                                    Errorcode = "PlaneType";
+                                    break;
+                                }
+
+                                string[] date = departuredate.Split("-");
+                                int D = Int32.Parse(date[0]);
+                                int M = Int32.Parse(date[1]);
+                                int Y = Int32.Parse(date[2]);
+                                if(!(D >= 1 && D <= 31 && M >= 1 && M <= 12 && Y >= 2024))
+                                {
+                                    Error = true;
+                                    Errorcode = "DateType";
+                                    break;
+                                }
+
+                                try
+                                {
+                                    Departuretime = DateTime.ParseExact(departuretime, "dd-MM-yyyy HH:mm:ss", null);
+                                    ETA = DateTime.ParseExact(eta, "dd-MM-yyyy HH:mm:ss", null);
+                                }
+                                catch (FormatException)
+                                {
+                                    Error = true;
+                                    Errorcode = "DateTimeType";
+                                    break;
+                                }
+
+                                Flight newFlight = new(destination, country, plane, departingfrom, departuredate, "00-00-0000T00:00:00", "00-00-0000T00:00:00");
+                                newFlight.DepartureTime = Departuretime;
+                                newFlight.EstimatedTimeofArrival = ETA;
+                                flights.Add(newFlight);
+                                piece++;
+                            }
+
+                            if (Error)
+                            {
+                                Console.Clear();
+                                Console.WriteLine($"An error occurred using file: {filename}\nOn line: {piece}\nCould not use type: {Errorcode}");
+                                Console.WriteLine("Press any key to continue");
+                                Console.ReadKey();
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Flights have been succesfully added.");
+                                Console.WriteLine("Press any key to continue");
+                                Console.ReadKey();
+                            }
+                            break;
+                    }
+                    break;
+
+                case 2:
+                    Console.Clear();
                     string FlightNumAnswerDel = Menu.GetString("Enter a flight number to delete: ").Trim();
                     while(!Validator.IsNotNull(FlightNumAnswerDel) || !Validator.IsAllDigits(FlightNumAnswerDel))
                     { 
@@ -153,7 +235,7 @@ public class Admin : User
                     break;
                     }
                 
-                case 2:
+                case 3:
                     Console.Clear();
                     string FlightNumAnswer = Menu.GetString("Enter a flight number to look for: ").Trim();
                     while(!Validator.IsNotNull(FlightNumAnswer) || !Validator.IsAllDigits(FlightNumAnswer))
@@ -288,7 +370,7 @@ public class Admin : User
                 }
                 break;
 
-                case 3:
+                case 4:
                     Console.Clear();
                     bool AdminSearchingState = true;
                     while(AdminSearchingState)
@@ -400,7 +482,7 @@ public class Admin : User
                     }
                     break;
                 
-                case 4:
+                case 5:
                     Console.Clear();
                     bool AdminFilteringState = true;
                     while(AdminFilteringState)
@@ -412,20 +494,16 @@ public class Admin : User
                                 case 0:
                                     Console.Clear();
                                     Console.WriteLine("Fill in all the filters you want to filter for (leave blank if not):");
-                                    Console.WriteLine("\n====================================================================");
-                                    string destination01 = Menu.GetString("| Departing from: ", "|", 49);
-                                    string destination02 = Menu.GetString("| Arriving at: ", "|", 52);
-                                    Console.WriteLine("|==================================================================|");
-                                    Console.WriteLine("| Filtering between 2 dates for the departure date                 |");
+                                    string destination01 = Menu.GetString("Departing from: ");
+                                    string destination02 = Menu.GetString("Arriving at: ").ToLower();
+                                    Console.WriteLine("Filtering between 2 dates for the departure date");
                                     Thread.Sleep(1);
-                                    string input01 = Menu.GetString("| First departure date (DD-MM-YYYY): ", "|", 30);
-                                    string input02 = Menu.GetString("| Second date: ", "|", 52);
-                                    Console.WriteLine("|==================================================================|");
-                                    string planeAnswer01 = Menu.GetString("| Airplane 1 (Airbus 330, Boeing 787, Boeing 737): ", "|", 16);
-                                    string planeAnswer02 = Menu.GetString("| Airplane 2 (Airbus 330, Boeing 787, Boeing 737): ", "|", 16);
-                                    string planeAnswer03 = Menu.GetString("| Airplane 3 (Airbus 330, Boeing 787, Boeing 737): ", "|", 16);
-                                    string maxPrice = Menu.GetString("| Maximum price of ticket: ", "|", 40);
-                                    Console.WriteLine("====================================================================");
+                                    string input01 = Menu.GetString("First departure date (DD-MM-YYYY): ");
+                                    string input02 = Menu.GetString("Second date: ");
+                                    string planeAnswer01 = Menu.GetString("Airplane 1 (Airbus 330, Boeing 787, Boeing 737): ");
+                                    string planeAnswer02 = Menu.GetString("Airplane 2 (Airbus 330, Boeing 787, Boeing 737): ");
+                                    string planeAnswer03 = Menu.GetString("Airplane 3 (Airbus 330, Boeing 787, Boeing 737): ");
+                                    string maxPrice = Menu.GetString("Maximum price of ticket: ");
                                     Console.Clear();
                                     Menu.LoadingBar("Looking for result with filter", TimeSpan.FromSeconds(1));
                                     Console.Clear();
@@ -455,7 +533,7 @@ public class Admin : User
                     }
                     break;
                 
-                case 5:
+                case 6:
                     Console.Clear();
                     Menu.LoadingBar("Loading flights", TimeSpan.FromSeconds(1));
                     Console.Clear();
@@ -465,19 +543,19 @@ public class Admin : User
                     Console.Clear();
                     break;
 
-                case 6:
+                case 7:
                     Menu.LoadingBar("Logging out", TimeSpan.FromSeconds(2));
                     currentUser = User.Logout();
                     Console.Clear();
                     return currentUser;
 
-                case 7:
+                case 8:
                     Console.Clear();
                     ReservationManager.DisplayReservations(reservations);
                     Console.ReadKey();
                     break;
 
-                case 8:
+                case 9:
                     Console.Clear();
                     ReservationManager.DisplayReservations(reservations);
                     string reservationNumberAdmin = Menu.GetString("Enter reservationnumber: ");
@@ -493,8 +571,8 @@ public class Admin : User
                     Console.Clear();
                     break;
                     
-                case 9:
-                    Menu.LoadingBar("Quitting application", TimeSpan.FromSeconds(2));
+                case 10:
+                    Console.WriteLine($"CLOSING THE APPLICATION");
                     Thread.Sleep(1000);
                     Flight.WriteToJson(flights);
                     ReservationManager.WriteReservations(reservations);
