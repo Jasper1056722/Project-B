@@ -668,7 +668,7 @@ public class Reservation
     {
         foreach (Reservation reservation in reservations)
         {
-            if(reservation.ReservationNumber == reservationnumber && DateTime.Now.AddHours(24) <= reservation.FlightForReservation.DepartureTime)
+            if(reservation.ReservationNumber == reservationnumber && DateTime.Now.AddHours(24) >= reservation.FlightForReservation.DepartureTime)
             {
                 return "Not Removed";
             }
